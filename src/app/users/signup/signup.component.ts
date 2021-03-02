@@ -4,11 +4,11 @@ import { CookieService } from 'ngx-cookie-service';
 import { UserserviceService } from '../userservice.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.css']
 })
-export class LoginComponent implements OnInit {
+export class SignupComponent implements OnInit {
   constructor(private user : UserserviceService) { }
 
   signupForm = new FormGroup({
