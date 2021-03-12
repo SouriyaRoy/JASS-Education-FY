@@ -37,6 +37,7 @@
                 <div *ngIf = "signupForm.get('password').touched && signupForm.get('password').invalid" class="invalid-feedback">
                     <div *ngIf = "signupForm.get('password').errors.required">Password is Required</div>
                     <div *ngIf = "signupForm.get('password').errors.minlength">Password must be of 8 characters</div>
+                    <!-- <div *ngIf = "signupForm.get('password').errors.pattern">Invalid pattern</div> -->
                 </div>
         </div>
     </div><br>
@@ -50,7 +51,15 @@
     </div><br>
     <button mat-raised-button color="accent" class="reg_button" type="submit" [disabled]="!signupForm.valid">Register</button>
 </form>
+<button mat-raised-button color="accent" style="position: relative;" routerLink = "../login">Login</button>
 </div>
+<div id="signup"></div>
+
+
+
+
+
+<main><router-outlet></router-outlet></main>
 
 
 <!-- <form>

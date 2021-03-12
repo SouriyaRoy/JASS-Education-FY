@@ -24,8 +24,19 @@ export class SignupComponent implements OnInit {
   formSubmit(data){
     if(data.middle_name=="")
       data.middle_name=null;
-    //this.user.send_registration_data(data)
+
+    if(data.security_ques=="")
+      data.security_ques=null;
+
+    if(data.security_ans=="")
+      data.security_ans=null;
+
+    // this.user.send_registration_data(data).subscribe(receive => {
+    //   if(receive['return']==true && receive['code']==100)
+    //     document.getElementById('signup').innerHTML = "User Registration Successfull"
+    // })
     console.warn(data)
+    this.user.send_registration_data(data)
   }
 
   ngOnInit(): void {

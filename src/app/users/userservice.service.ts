@@ -13,6 +13,8 @@ export class UserserviceService {
   send_registration_data(form_data){
     //let post_url = " "
     let json = JSON.stringify(form_data)
+    // let post_url = ''
+    // return this.http.post(post_url,json)
     console.warn(json)
   }
 

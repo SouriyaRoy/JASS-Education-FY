@@ -10,9 +10,10 @@ import {Router} from '@angular/router'
 export class AppComponent {
   title = 'JASS';
   active = 'top';
+
   cookieExists
-  constructor(private cookie : CookieService, 
-              private router : Router){ 
+  
+  constructor(private cookie : CookieService, private router : Router){ 
     this.cookieExists = this.cookie.check('Test')
     if (this.cookieExists) {
       console.warn("YES")

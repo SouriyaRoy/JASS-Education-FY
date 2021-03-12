@@ -1,1 +1,28 @@
-<p>Login works!</p>
+<div class="container">
+    <h2 class="pos">Login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="loginSubmit(loginForm.value)">
+        <div class="row col-sm-10">
+            <div class="col input-group">
+                <div class="input-group-text">@</div>
+                <input type="email" class="form-control" formControlName="email" placeholder="Email Address" [ngClass]="{
+            'is-invalid':loginForm.get('email').touched && loginForm.get('email').invalid}">
+                <div *ngIf="loginForm.get('email').touched && loginForm.get('email').invalid"
+                    class="invalid-feedback">
+                    <div *ngIf="loginForm.get('email').errors.required">Email is Required</div>
+                    <div *ngIf="loginForm.get('email').errors.email">Enter proper email</div>
+                </div>
+            </div>
+            <div class="col">
+                <input type="password" class="form-control" formControlName="password" placeholder="Password" [ngClass]="{
+            'is-invalid':loginForm.get('password').touched && loginForm.get('password').invalid}">
+                <div *ngIf="loginForm.get('password').touched && loginForm.get('password').invalid"
+                    class="invalid-feedback">
+                    <div *ngIf="loginForm.get('password').errors.required">Password is Required</div>
+                    <div *ngIf="loginForm.get('password').errors.minlength">Password must be of 8 characters</div>
+                    <!-- <div *ngIf = "signupForm.get('password').errors.pattern">Invalid pattern</div> -->
+                </div>
+            </div>
+        </div>
+        <button mat-raised-button color="accent" class="reg_button" type="submit" [disabled]="!loginForm.valid">Login</button>
+    </form>
+</div>

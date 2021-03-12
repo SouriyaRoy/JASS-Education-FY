@@ -1,0 +1,14 @@
+.container{
+    align-content: center;
+    padding-left: 180px;
+    margin-top: 30px;
+}
+.pos{
+    padding-left: 300px;
+}
+input.ng-invalid{
+    border-right: 5px solid red;
+}
+.reg_button{
+    margin-left: 320px;
+}
