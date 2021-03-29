@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid" style="padding-left: 200px;">
 <h2 class="pos">Sign Up</h2>
 <form [formGroup] = "signupForm" (ngSubmit)="formSubmit(signupForm.value)">
     <br>
@@ -50,8 +50,10 @@
         </div>
     </div><br>
     <button mat-raised-button color="accent" class="reg_button" type="submit" [disabled]="!signupForm.valid">Register</button>
+    &nbsp;|&nbsp;
+    <button mat-raised-button color="accent" style="position: relative;" routerLink = "../login">Login</button>
 </form>
-<button mat-raised-button color="accent" style="position: relative;" routerLink = "../login">Login</button>
+
 </div>
 <div id="signup"></div>
 

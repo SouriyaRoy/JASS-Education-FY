@@ -9,7 +9,10 @@ import { UserserviceService } from '../userservice.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  constructor(private user : UserserviceService) { }
+  constructor(private user : UserserviceService,
+              private cookieService : CookieService) { }
+
+  createCookie
 
   signupForm = new FormGroup({
     first_name : new FormControl('',[Validators.required]),
@@ -31,10 +34,13 @@ export class SignupComponent implements OnInit {
     if(data.security_ans=="")
       data.security_ans=null;
 
-    // this.user.send_registration_data(data).subscribe(receive => {
-    //   if(receive['return']==true && receive['code']==100)
-    //     document.getElementById('signup').innerHTML = "User Registration Successfull"
-    // })
+    this.user.send_registration_data(data).subscribe(receive => {
+      if(receive['return']==true)
+        document.getElementById('signup').innerHTML = "User Registration Successfull"
+      console.warn(receive['data']['hash'])
+      this.createCookie = receive['data']['hash']
+      this.cookieService.set('JASS_Cookie',this.createCookie)
+    })
     console.warn(data)
     this.user.send_registration_data(data)
   }

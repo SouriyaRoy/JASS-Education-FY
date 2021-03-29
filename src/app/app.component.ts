@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import {Router} from '@angular/router'
 
@@ -7,20 +7,22 @@ import {Router} from '@angular/router'
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'JASS';
   active = 'top';
 
   cookieExists
   
-  constructor(private cookie : CookieService, private router : Router){ 
-    this.cookieExists = this.cookie.check('Test')
-    if (this.cookieExists) {
-      console.warn("YES")
-    }else{
-      router.navigate(['users/signup'])
-    }
+  constructor(private cookie : CookieService, private router : Router){
   }
 
-
+  ngOnInit(){
+    this.cookieExists = this.cookie.check('Test')
+    if (this.cookieExists) {
+      //console.warn("YES")
+      this.router.navigate(['forum/feed'])
+    }else{
+      this.router.navigate(['forum/home'])
+    }
+  }
 }

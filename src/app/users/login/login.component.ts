@@ -8,8 +8,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms'
 })
 export class LoginComponent implements OnInit {
 
-  loginSubmit(data){
-    console.warn(data)
+  loginSubmit(formdata){
+    //console.warn(data)
+    
   }
 
   loginForm = new FormGroup({

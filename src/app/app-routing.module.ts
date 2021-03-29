@@ -9,6 +9,11 @@ const routes: Routes = [
     //lazy loading
   },
   {
+    path : 'forum', loadChildren:() => import ('./forum/forum.module')
+    .then(mod => mod.ForumModule)
+    //lazy loading
+  },
+  {
     path : 'app-cookie',
     component : CookieComponent
   }

@@ -1,0 +1,53 @@
+.circleborder {
+    width: 30px;/**alter the width and height**/
+    height: 30px;/**to change the frame size**/
+    border-radius: 150px;
+    -webkit-border-radius: 150px;
+    -moz-border-radius: 150px;
+    background: url(URL) no-repeat;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+}
+h2{
+position: absolute;
+left: 80px;
+top: 58px;
+}
+h3{
+position: absolute;
+left: 80px;
+top: 100px;
+}
+h4{
+position: absolute;
+left: 80px;
+top: 135px;
+}
+.upvote {
+position: absolute;
+top:80px;
+left:170px;
+display: block;
+width: 10%;
+border: none;
+background-color: #24ca2c;
+padding: 14px 28px;
+font-size: 16px;
+cursor: pointer;
+text-align:center;
+}
+.downvote {
+position: absolute;
+top:130px;
+left:170px;
+display: block;
+width: 10%;
+border: none;
+background-color: #c41f1f;
+padding: 14px 28px;
+font-size: 16px;
+cursor: pointer;
+text-align:center;
+}
+

@@ -1,8 +1,8 @@
-<div class="container">
-    <h2 class="pos">Login</h2>
+<div class="center">
+    <h2 class="center-text">Login</h2>
     <form [formGroup]="loginForm" (ngSubmit)="loginSubmit(loginForm.value)">
-        <div class="row col-sm-10">
-            <div class="col input-group">
+        
+            <div class="col-sm-6 input-group center">
                 <div class="input-group-text">@</div>
                 <input type="email" class="form-control" formControlName="email" placeholder="Email Address" [ngClass]="{
             'is-invalid':loginForm.get('email').touched && loginForm.get('email').invalid}">
@@ -12,7 +12,7 @@
                     <div *ngIf="loginForm.get('email').errors.email">Enter proper email</div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-sm-6 center">
                 <input type="password" class="form-control" formControlName="password" placeholder="Password" [ngClass]="{
             'is-invalid':loginForm.get('password').touched && loginForm.get('password').invalid}">
                 <div *ngIf="loginForm.get('password').touched && loginForm.get('password').invalid"
@@ -22,7 +22,7 @@
                     <!-- <div *ngIf = "signupForm.get('password').errors.pattern">Invalid pattern</div> -->
                 </div>
             </div>
-        </div>
-        <button mat-raised-button color="accent" class="reg_button" type="submit" [disabled]="!loginForm.valid">Login</button>
+        
+        <button class="center-text" mat-raised-button color="accent" class="reg_button" type="submit" [disabled]="!loginForm.valid">Login</button>
     </form>
 </div>
