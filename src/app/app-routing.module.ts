@@ -14,6 +14,10 @@ const routes: Routes = [
     //lazy loading
   },
   {
+    path : 'dashboard', loadChildren:() => import ('./dashboard/dashboard.module')
+    .then(mod => mod.DashboardModule)
+  },
+  {
     path : 'app-cookie',
     component : CookieComponent
   }

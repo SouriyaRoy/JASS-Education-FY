@@ -12,6 +12,11 @@ import { AdminComponent } from './admin/admin.component';
   imports: [
     CommonModule,
     DashboardRoutingModule
+  ],
+  exports: [
+    StudentComponent,
+    TeacherCoordinatorComponent,
+    AdminComponent
   ]
 })
 export class DashboardModule { }
