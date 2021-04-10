@@ -1,0 +1,132 @@
+<br><br>
+<div class="container">
+    <div class="create">
+        <form [formGroup]="post_form" (ngSubmit)="PostSubmit()">
+            <div class="create__head">
+                <div class="create__section">
+                    <label class="create__label">
+                        <h3>Thread Title</h3>
+                    </label>
+                    <input type="text" class="form-control" formControlName="title" placeholder="Add title">
+                </div>
+                <br>
+                <div class="create__section create__textarea">
+                    <label class="create__label">
+                        <h3>Description</h3>
+                    </label>
+                    <textarea class="form-control" formControlName="description"
+                        placeholder="Add description"></textarea>
+                </div>
+                <br>
+                <div class="create__section">
+                    <label class="create__label" for="tags">
+                        <h4>Add more</h4>
+                    </label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" (click)="enableBox1()">
+                        <label class="form-check-label">
+                            Assignment
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" (click)="enableBox2()">
+                        <label class="form-check-label">
+                            Lecture
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" (click)="enableBox3()">
+                        <label class="form-check-label">
+                            Video
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" (click)="enableBox4()">
+                        <label class="form-check-label">
+                            Forum Post
+                        </label>
+                    </div>
+                </div>
+                <br><br>
+                <!-- <div class="create__advanced" id="assignment_hide" hidden>
+                    <div class="row">
+                        <div class="col-lg-4 col-xl-4">
+                            <div class="create__section">
+                                <label class="create__label">Who can see this?</label>
+                                <div class="create__radio">
+                                    <label class="create__box">
+                                        <label class="custom-radio">
+                                            <input type="radio" name="can-see" checked="checked">
+                                            <i></i>
+                                        </label>
+                                        <span>Everyone</span>
+                                    </label>
+                                    <label class="create__box">
+                                        <label class="custom-radio">
+                                            <input type="radio" name="can-see">
+                                            <i></i>
+                                        </label>
+                                        <span>Only Friends</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-xl-3">
+                            <div class="create__section">
+                                <label class="create__label">Share on Social?</label>
+                                <div class="create__radio">
+                                    <label class="create__box">
+                                        <label class="custom-checkbox">
+                                            <input type="checkbox" name="share-social" checked="checked">
+                                            <i></i>
+                                        </label>
+                                        <i class="fa fa-facebook-square" aria-hidden="true"></i>
+                                    </label>
+                                    <label class="create__box">
+                                        <label class="custom-checkbox">
+                                            <input type="checkbox" name="share-social" checked="checked">
+                                            <i></i>
+                                        </label>
+                                        <i class="fa fa-twitter" aria-hidden="true"></i>
+                                    </label>
+                                    <label class="create__box">
+                                        <label class="custom-checkbox">
+                                            <input type="checkbox" name="share-social">
+                                            <i></i>
+                                        </label>
+                                        <i class="fa fa-google-plus" aria-hidden="true"></i>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-xl-5">
+                            <div class="create__section">
+                                <label class="create__label">Is this a Mature Thread?</label>
+                                <div class="create__radio">
+                                    <label class="create__box">
+                                        <label class="custom-radio">
+                                            <input type="radio" name="mature-thread">
+                                            <i></i>
+                                        </label>
+                                        <span>Yes</span>
+                                    </label>
+                                    <label class="create__box">
+                                        <label class="custom-radio">
+                                            <input type="radio" name="mature-thread" checked="checked">
+                                            <i></i>
+                                        </label>
+                                        <span>No</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="create__footer">
+                    <a href="#" class="btn btn-warning">Cancel</a>&nbsp;
+                    <a href="#" class="btn btn-warning">Create Thread</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

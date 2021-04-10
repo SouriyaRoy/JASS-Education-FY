@@ -18,6 +18,14 @@ const routes: Routes = [
     .then(mod => mod.DashboardModule)
   },
   {
+    path : 'subjects', loadChildren:() => import ('./subjects/subjects.module')
+    .then(mod => mod.SubjectsModule)
+  },
+  {
+    path : 'views', loadChildren:() => import ('./views/views.module')
+    .then(mod => mod.ViewsModule)
+  },
+  {
     path : 'app-cookie',
     component : CookieComponent
   }
