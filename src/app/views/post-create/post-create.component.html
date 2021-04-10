@@ -48,6 +48,48 @@
                     </div>
                 </div>
                 <br><br>
+                <div class="" id="assignment_hide" hidden>
+                    <h3><i>Assignment Details</i></h3><br>
+                    <form [formGroup]="assignment_form" (ngSubmit)="AssignSubmit()">
+                        <div class="form-group">
+                            <label>Assignment Title</label>
+                            <input type="text" class="form-control" formControlName="assignment_title">
+                        </div>
+                        <div class="form-group">
+                            <label>Assignment Description</label>
+                            <input type="text" class="form-control" formControlName="assignment_description">
+                        </div>
+                        <div class="form-group">
+                            <label>Submit Link 1</label>
+                            <input type="text" class="form-control" formControlName="assignment_link_1">
+                        </div>
+                        <div class="form-group">
+                            <label>Submit Link 2</label>
+                            <input type="text" class="form-control" formControlName="assignment_link_2">
+                        </div>
+                    </form>
+                </div><br>
+                <div class="" id="lecture_hide" hidden>
+                    <h3><i>Lecture Details</i></h3><br>
+                    <form [formGroup]="lecture_form" (ngSubmit)="LectureSubmit()">
+                        <div class="form-group">
+                            <label>Lecture Title</label>
+                            <input type="text" class="form-control" formControlName="lecture_title">
+                        </div>
+                        <div class="form-group">
+                            <label>Lecture Description</label>
+                            <input type="text" class="form-control" formControlName="lecture_description">
+                        </div>
+                        <div class="form-group">
+                            <label>Lecture Link 1</label>
+                            <input type="text" class="form-control" formControlName="lecture_link_1">
+                        </div>
+                        <div class="form-group">
+                            <label>Lecture Link 2</label>
+                            <input type="text" class="form-control" formControlName="lecture_link_2">
+                        </div>
+                    </form>
+                </div>
                 <!-- <div class="create__advanced" id="assignment_hide" hidden>
                     <div class="row">
                         <div class="col-lg-4 col-xl-4">
