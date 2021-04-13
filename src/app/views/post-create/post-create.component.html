@@ -1,7 +1,7 @@
 <br><br>
 <div class="container">
     <div class="create">
-        <form [formGroup]="post_form" (ngSubmit)="PostSubmit()">
+        <form [formGroup]="post_form" (ngSubmit)="PostSubmit(post_form.value)">
             <div class="create__head">
                 <div class="create__section">
                     <label class="create__label">
@@ -23,18 +23,18 @@
                         <h4>Add more</h4>
                     </label>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" (click)="enableBox1()">
+                        <input class="form-check-input" id="enableassignment" type="checkbox" (click)="enableBox1()" formControlName="enableassignment">
                         <label class="form-check-label">
                             Assignment
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" (click)="enableBox2()">
+                        <input class="form-check-input" type="checkbox" (click)="enableBox2()" formControlName="enablelecture">
                         <label class="form-check-label">
                             Lecture
                         </label>
                     </div>
-                    <div class="form-check">
+                    <!-- <div class="form-check">
                         <input class="form-check-input" type="checkbox" (click)="enableBox3()">
                         <label class="form-check-label">
                             Video
@@ -45,12 +45,12 @@
                         <label class="form-check-label">
                             Forum Post
                         </label>
-                    </div>
+                    </div> -->
                 </div>
                 <br><br>
                 <div class="" id="assignment_hide" hidden>
                     <h3><i>Assignment Details</i></h3><br>
-                    <form [formGroup]="assignment_form" (ngSubmit)="AssignSubmit()">
+                    <!-- <form [formGroup]="assignment_form" (ngSubmit)="AssignSubmit()"> -->
                         <div class="form-group">
                             <label>Assignment Title</label>
                             <input type="text" class="form-control" formControlName="assignment_title">
@@ -67,11 +67,11 @@
                             <label>Submit Link 2</label>
                             <input type="text" class="form-control" formControlName="assignment_link_2">
                         </div>
-                    </form>
+                    <!-- </form> -->
                 </div><br>
                 <div class="" id="lecture_hide" hidden>
                     <h3><i>Lecture Details</i></h3><br>
-                    <form [formGroup]="lecture_form" (ngSubmit)="LectureSubmit()">
+                    <!-- <form [formGroup]="lecture_form" (ngSubmit)="LectureSubmit()"> -->
                         <div class="form-group">
                             <label>Lecture Title</label>
                             <input type="text" class="form-control" formControlName="lecture_title">
@@ -88,7 +88,7 @@
                             <label>Lecture Link 2</label>
                             <input type="text" class="form-control" formControlName="lecture_link_2">
                         </div>
-                    </form>
+                    <!-- </form> -->
                 </div>
                 <!-- <div class="create__advanced" id="assignment_hide" hidden>
                     <div class="row">
@@ -164,11 +164,13 @@
                         </div>
                     </div>
                 </div> -->
-                <div class="create__footer">
-                    <a href="#" class="btn btn-warning">Cancel</a>&nbsp;
-                    <a href="#" class="btn btn-warning">Create Thread</a>
-                </div>
+                <!-- <div class="create__footer">
+                    <a class="btn btn-warning">Cancel</a>&nbsp;
+                    <a type="submit" class="btn btn-warning">Create Thread</a>
+                </div> -->
             </div>
+            <button class="btn btn-warning" type="submit">Create</button>
         </form>
     </div>
 </div>
+<br><br>

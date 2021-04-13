@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { FeedApiCallsService } from '../feed-api-calls.service';
 
 @Component({
   selector: 'app-post-create',
@@ -13,27 +15,43 @@ export class PostCreateComponent implements OnInit {
   disabledBox3 = true
   disabledBox4 = true
 
-  PostSubmit() {
-
+  PostSubmit(data){
+    console.warn(data)
+    if(data.enableassignment == true){
+      this.AssignSubmit(data.assignment_title,data.assignment_description,data.assignment_link_1,data.assignment_link_2)
+    }
+    if(data.enablelecture ==true){
+      this.LectureSubmit(data.lecture_title,data.lecture_description,data.lecture_link_1,data.lecture_link_2)
+    }
   }
-  AssignSubmit(){
-
+  AssignSubmit(title, description, link1, link2){
+    //console.warn(title, description, link1, link2)
+    this.api_call.submit_assignment_teacher(title, description, link1, link2)
+    // .subscribe(result => {
+    //   if(result['success'] == true){
+    //     this.router.navigate(['./forum/feed'])
+    //   }
+    // })
   }
-  LectureSubmit(){
-
+  LectureSubmit(title, description, link1, link2){
+    //console.warn(title, description, link1, link2)
+    this.api_call.submit_lecture_teacher(title, description, link1, link2)
+    // .subscribe(result => {
+    //   if(result['success'] == true){
+    //     this.router.navigate(['./forum/feed'])
+    //   }
+    // })
   }
 
   post_form = new FormGroup({
     title : new FormControl(),
-    description : new FormControl()
-  })
-  assignment_form = new FormGroup({
+    description : new FormControl(),
+    enableassignment : new FormControl(false),
+    enablelecture : new FormControl(false),
     assignment_title : new FormControl(),
     assignment_description : new FormControl(),
     assignment_link_1 : new FormControl(),
-    assignment_link_2 : new FormControl()
-  })
-  lecture_form = new FormGroup({
+    assignment_link_2 : new FormControl(),
     lecture_title : new FormControl(),
     lecture_description : new FormControl(),
     lecture_link_1 : new FormControl(),
@@ -41,7 +59,6 @@ export class PostCreateComponent implements OnInit {
   })
 
   enableBox1() {
-    //this.disabledBox1 = false
     let p = document.getElementById('assignment_hide');
     p.removeAttribute('hidden');
   }
@@ -58,7 +75,7 @@ export class PostCreateComponent implements OnInit {
     p.removeAttribute('hidden');
   }
 
-  constructor() { }
+  constructor(private api_call : FeedApiCallsService, private router : Router) { }
 
   ngOnInit(): void {
   }
