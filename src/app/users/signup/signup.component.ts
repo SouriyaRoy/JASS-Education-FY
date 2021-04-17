@@ -35,11 +35,15 @@ export class SignupComponent implements OnInit {
       data.security_ans=null;
 
     this.user.send_registration_data(data).subscribe(receive => {
-      if(receive['success']==true)
+      if(receive['success']==true){
         document.getElementById('signup').innerHTML = "User Registration Successfull"
+      }else{
+        document.getElementById('signup').innerHTML = "Fail"
+      }
+
       console.warn(receive['data'])
       this.createCookie = receive['data']
-      this.cookieService.set('JASS_Cookie',this.createCookie)
+      this.cookieService.set('Test',this.createCookie)
     })
     console.warn(data)
     //this.user.send_registration_data(data)

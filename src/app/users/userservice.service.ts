@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http'
+import {HttpClient, HttpHeaders} from '@angular/common/http'
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserserviceService {
-  constructor(private http : HttpClient) { }
+  constructor(private http : HttpClient, private cookie : CookieService) { }
 
-  post_url = ''
+  api_url = ''
+  auth = ''
 
   send_registration_data(form_data){
     var api_call = {
@@ -23,8 +25,43 @@ export class UserserviceService {
       }
     }
     let json = JSON.stringify(api_call)
-    //let post_url = 'http://5b554f3fbd67.ngrok.io/api/user/user/'
-    return this.http.post(this.post_url,json)
+
+    let url = 'http://'+this.api_url+'/api/user/cred/create/'
+
+    return this.http.post(url,json)
     //console.warn(json)
   }
+
+  get_user_profile_details(){
+    let cookieValue = this.cookie.get('Test')
+
+    let headers = new HttpHeaders()
+    headers = headers.set('Authorization',"Token"+" "+this.auth).set('uauth',cookieValue)
+
+    let url = 'http://'+this.api_url+'/api/user/prof/read/0'
+
+    console.warn(this.http.get(url, {headers:headers}))
+    return this.http.get(url, {headers:headers})
+    
+  }
+
+  // getData() {
+  //   let get_url = "https://jsonplaceholder.typicode.com/users/1"
+  //   return this.http.get(get_url);
+  // }
+
+  submit_user_profile_details(data){
+    let url = 'http://'+this.api_url+'/api/user/prof/edit/0'
+    var api_call = {
+      "user_profile_headline" : data.headline,
+      "user_bio" : data.bio,
+      "user_english_efficiency" : data.english,
+      "user_git_profile" : data.github,
+      "user_likedin_profile" : data.linkedin,
+      "user_profile_pic" : null,
+      "user_roll_number" : data.rollno,
+      "prime" : true
+  }
+  }
+
 }

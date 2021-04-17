@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserserviceService } from 'src/app/users/userservice.service';
 import { FeedApiCallsService } from '../feed-api-calls.service';
 
 @Component({
@@ -9,6 +10,8 @@ import { FeedApiCallsService } from '../feed-api-calls.service';
   styleUrls: ['./post-create.component.css']
 })
 export class PostCreateComponent implements OnInit {
+
+  profile_details
 
   disabledBox1 = true
   disabledBox2 = true
@@ -75,7 +78,14 @@ export class PostCreateComponent implements OnInit {
     p.removeAttribute('hidden');
   }
 
-  constructor(private api_call : FeedApiCallsService, private router : Router) { }
+  constructor(private api_call : FeedApiCallsService,
+              private router : Router,
+              private user : UserserviceService) {
+    // user.get_user_profile_details()
+    // .subscribe(result => {
+    //   this.profile_details = result
+    // })
+  }
 
   ngOnInit(): void {
   }

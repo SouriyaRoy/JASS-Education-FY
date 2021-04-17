@@ -8,8 +8,8 @@ export class UserAuthService {
 
   constructor(private http : HttpClient) { }
 
-  url = ''
-
+  api_url = ''
+  
   user_login(formdata) {
     let api_call = {
       "action" : "signin",
@@ -18,20 +18,21 @@ export class UserAuthService {
           "password" : formdata.password
       }
     }
+    let url = 'http://'+this.api_url+'/api/user/cred/create/'
     let json = JSON.stringify(api_call)
-    return this.http.post(this.url, json)
+    return this.http.post(url, json)
   }
 
-  check_admin() {
-    // let api_call 
-    // let json = JSON.stringify(api_call)
-    return this.http.get(this.url)
-  }
+  // check_admin() {
+  //   // let api_call 
+  //   // let json = JSON.stringify(api_call)
+  //   return this.http.get(this.url)
+  // }
 
-  check_coordinator_teacher(hash) {
-    let api_call
-    let json = JSON.stringify(api_call)
-    return this.http.post(this.url,json)
-  }
+  // check_coordinator_teacher(hash) {
+  //   let api_call
+  //   let json = JSON.stringify(api_call)
+  //   return this.http.post(this.url,json)
+  // }
 }
 

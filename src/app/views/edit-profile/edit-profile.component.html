@@ -1,0 +1,39 @@
+<br><br>
+<div class="container">
+    <h4 style="text-align: center; margin:auto">Edit Profile</h4><br>
+    <div class="create">
+        <form [formGroup]="profile_edit_form" (ngSubmit)="EditSubmit(profile_edit_form.value)">
+            <div class="form-group">
+                <label>Profile Headline</label>
+                <input type="text" class="form-control" formControlName="headline" placeholder="{{allDetails.data.user_profile_headline}}">
+            </div>
+            <div class="form-group">
+                <label>Your BIO</label>
+                <input type="text" class="form-control" formControlName="bio" placeholder="{{allDetails.data.user_bio}}">
+            </div>
+            <div class="form-group">
+                <label>Your English Efficiency</label>
+                <input type="text" class="form-control" formControlName="english" placeholder="{{allDetails.data.user_english_efficiency}}">
+            </div>
+            <div class="form-group">
+                <label>GITHUB link</label>
+                <input type="text" class="form-control" formControlName="github" placeholder="{{allDetails.data.user_git_profile}}">
+            </div>
+            <div class="form-group">
+                <label>LinkedIn link</label>
+                <input type="text" class="form-control" formControlName="linkedin" placeholder="{{allDetails.data.user_linkedin_profile}}">
+            </div>
+            <div class="form-group">
+                <label>Your roll number</label>
+                <input type="text" class="form-control" formControlName="rollno" placeholder="{{allDetails.data.user_roll_number}}">
+            </div>
+            <div class="form-group">
+                <label>User since</label>
+                <input type="text" class="form-control-plaintext" formControlName="user_since" placeholder="{{allDetails.data.made_date}}">
+            </div>
+            <div>
+                <button class="btn btn-warning" type="submit">Confirm Changes</button>
+            </div>
+        </form>
+    </div>
+</div>

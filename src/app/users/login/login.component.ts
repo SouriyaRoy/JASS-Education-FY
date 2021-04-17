@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { UserAuthService } from '../user-auth.service';
 
 @Component({
@@ -10,13 +12,15 @@ import { UserAuthService } from '../user-auth.service';
 export class LoginComponent implements OnInit {
 
   loginSubmit(formdata){
-    //console.warn(data)
+    console.warn(formdata)
     this.signin.user_login(formdata).subscribe(receive => {
       if(receive['success'] == true)
       {
-        this.signin.check_admin().subscribe(receive => {
-          
-        })
+        console.warn(receive)
+        this.cook.set('Test',receive['data'])
+        // this.signin.check_admin().subscribe(receive => {
+        this.router.navigate(['./forum/feed'])
+        // })
       }
     })
   }
@@ -26,7 +30,7 @@ export class LoginComponent implements OnInit {
     password : new FormControl('',[Validators.required, Validators.minLength(8)])
   })
 
-  constructor(private signin : UserAuthService) { }
+  constructor(private signin : UserAuthService, private cook : CookieService, private router : Router) { }
 
   ngOnInit(): void {
   }
