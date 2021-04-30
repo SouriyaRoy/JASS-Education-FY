@@ -7,8 +7,8 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class FeedApiCallsService {
 
-  post_url = 'ec2-13-235-0-215.ap-south-1.compute.amazonaws.com'
-  auth = '7vkteDTQL2idcPak9qBqwuFOapdZZxsKlkob4feTKtlV07ZRVcBXKKWaZ4c5025j'
+  post_url = ''
+  auth = ''
 
   submit_assignment_teacher(title, description, link1, link2) {
 
