@@ -56,3 +56,6 @@ text-align:center;
     text-align: center;
     margin: auto;
 }
+.feed-border{
+    text-align: left; border: 1px solid black; border-radius: 10px;
+}

@@ -11,8 +11,13 @@ export class FeedComponent implements OnInit {
   feed_call
 
   constructor(private feed : FeedApiCallsService) {
-    this.feed.get_feed().subscribe(res => {
+    // this.feed.get_feed().subscribe(res => {
+    //   this.feed_call = res['data']
+    //   console.log(this.feed_call)
+    // })
+    this.feed.getData().subscribe(res => {
       this.feed_call = res
+      console.log(this.feed_call)
     })
    }
 

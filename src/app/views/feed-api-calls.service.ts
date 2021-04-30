@@ -10,7 +10,10 @@ export class FeedApiCallsService {
   post_url = 'ec2-13-235-0-215.ap-south-1.compute.amazonaws.com'
   auth = '7vkteDTQL2idcPak9qBqwuFOapdZZxsKlkob4feTKtlV07ZRVcBXKKWaZ4c5025j'
 
-  submit_assignment_teacher(title, description, link1, link2) {
+
+
+
+  submit_assignment_teacher(title, description, link1, link2) { //TODO :
 
     let cookieValue = this.cookie.get('Test')
     console.warn(cookieValue)
@@ -33,7 +36,10 @@ export class FeedApiCallsService {
     return this.http.post(url, json,{headers:headers})
   }
 
-  submit_lecture_teacher(title, description, link1, link2) {
+
+
+
+  submit_lecture_teacher(title, description, link1, link2) { //TODO :
 
     let cookieValue = this.cookie.get('Test')
     console.warn(cookieValue)
@@ -56,7 +62,9 @@ export class FeedApiCallsService {
     return this.http.post(url, json,{headers:headers})
   }
 
-  get_feed(){
+
+
+  get_feed(){ //TODO :
     let cookieValue = this.cookie.get('Test')
     console.warn(cookieValue)
 
@@ -69,6 +77,26 @@ export class FeedApiCallsService {
 
     return this.http.get(url,{headers:headers})
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   // search_youtube(key,search,max){
   //   console.log(key,max,search)
   //   let y_link = "https://www.googleapis.com/youtube/v3/search?key=" + key +
@@ -76,6 +104,12 @@ export class FeedApiCallsService {
 
   //   return this.http.get(y_link)
   // }
+
+
+  getData() { //FIX: Delete this later
+    let get_url = "https://jsonplaceholder.typicode.com/todos"
+    return this.http.get(get_url)
+  }
 
   constructor(private http: HttpClient, private cookie : CookieService) { }
 }
