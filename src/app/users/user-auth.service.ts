@@ -8,8 +8,8 @@ export class UserAuthService {
 
   constructor(private http : HttpClient) { }
 
-  api_url = 'ec2-13-235-0-215.ap-south-1.compute.amazonaws.com'
-  auth = '7vkteDTQL2idcPak9qBqwuFOapdZZxsKlkob4feTKtlV07ZRVcBXKKWaZ4c5025j'
+  api_url = ''
+  auth = ''
 
   user_login(formdata) {
     let api_call = {

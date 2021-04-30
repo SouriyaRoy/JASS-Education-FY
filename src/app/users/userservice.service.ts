@@ -8,8 +8,8 @@ import { CookieService } from 'ngx-cookie-service';
 export class UserserviceService {
   constructor(private http : HttpClient, private cookie : CookieService) { }
 
-  api_url = 'ec2-13-235-0-215.ap-south-1.compute.amazonaws.com'
-  auth = '7vkteDTQL2idcPak9qBqwuFOapdZZxsKlkob4feTKtlV07ZRVcBXKKWaZ4c5025j'
+  api_url = ''
+  auth = ''
 
   send_registration_data(form_data){
     var api_call = {
