@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FeedApiCallsService } from 'src/app/views/feed-api-calls.service';
 
 @Component({
   selector: 'app-feed',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FeedComponent implements OnInit {
 
-  constructor() { }
+  feed_call
+
+  constructor(private feed : FeedApiCallsService) {
+    this.feed.get_feed().subscribe(res => {
+      this.feed_call = res
+    })
+   }
 
   ngOnInit(): void {
   }

@@ -8,8 +8,8 @@ import { CookieService } from 'ngx-cookie-service';
 export class UserserviceService {
   constructor(private http : HttpClient, private cookie : CookieService) { }
 
-  api_url = ''
-  auth = ''
+  api_url = 'ec2-13-235-0-215.ap-south-1.compute.amazonaws.com'
+  auth = '7vkteDTQL2idcPak9qBqwuFOapdZZxsKlkob4feTKtlV07ZRVcBXKKWaZ4c5025j'
 
   send_registration_data(form_data){
     var api_call = {
@@ -24,11 +24,15 @@ export class UserserviceService {
           "user_security_answer" : form_data.security_ans
       }
     }
+
+    let headers = new HttpHeaders()
+    headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json")
+
     let json = JSON.stringify(api_call)
 
     let url = 'http://'+this.api_url+'/api/user/cred/create/'
 
-    return this.http.post(url,json)
+    return this.http.post(url,json,{headers : headers})
     //console.warn(json)
   }
 
@@ -36,7 +40,7 @@ export class UserserviceService {
     let cookieValue = this.cookie.get('Test')
 
     let headers = new HttpHeaders()
-    headers = headers.set('Authorization',"Token"+" "+this.auth).set('uauth',cookieValue)
+    headers = headers.set('Authorization',"Token"+" "+this.auth).set('uauth',"Token"+" "+cookieValue)
 
     let url = 'http://'+this.api_url+'/api/user/prof/read/0'
 

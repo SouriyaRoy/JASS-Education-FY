@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient,HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +8,9 @@ export class UserAuthService {
 
   constructor(private http : HttpClient) { }
 
-  api_url = ''
-  
+  api_url = 'ec2-13-235-0-215.ap-south-1.compute.amazonaws.com'
+  auth = '7vkteDTQL2idcPak9qBqwuFOapdZZxsKlkob4feTKtlV07ZRVcBXKKWaZ4c5025j'
+
   user_login(formdata) {
     let api_call = {
       "action" : "signin",
@@ -20,7 +21,11 @@ export class UserAuthService {
     }
     let url = 'http://'+this.api_url+'/api/user/cred/create/'
     let json = JSON.stringify(api_call)
-    return this.http.post(url, json)
+
+    let headers = new HttpHeaders()
+    headers = headers.set('Authorization',"Token"+" "+this.auth)
+
+    return this.http.post(url, json, {headers : headers})
   }
 
   // check_admin() {

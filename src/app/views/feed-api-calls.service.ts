@@ -1,36 +1,81 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FeedApiCallsService {
 
-  post_url = ''
+  post_url = 'ec2-13-235-0-215.ap-south-1.compute.amazonaws.com'
+  auth = '7vkteDTQL2idcPak9qBqwuFOapdZZxsKlkob4feTKtlV07ZRVcBXKKWaZ4c5025j'
 
   submit_assignment_teacher(title, description, link1, link2) {
+
+    let cookieValue = this.cookie.get('Test')
+    console.warn(cookieValue)
+
+    let headers = new HttpHeaders()
+    headers = headers.set('Authorization',"Token"+" "+this.auth)
+                     .set('Content-Type',"application/json")
+                     .set('uauth',"Token"+" "+cookieValue)
+
     var api_call = {
       "assignment_name": title,
       "assignment_body": description,
       "assignment_external_url_1": link1,
       "assignment_external_url_2": link2
     }
-    // let json = JSON.stringify(api_call)
-    // return this.http.post(this.post_url, json)
-    console.warn(api_call)
+    let json = JSON.stringify(api_call)
+    let url = "http://"+this.post_url+"/api/content/assignment/create/"
+
+    //console.warn(api_call)
+    return this.http.post(url, json,{headers:headers})
   }
 
   submit_lecture_teacher(title, description, link1, link2) {
+
+    let cookieValue = this.cookie.get('Test')
+    console.warn(cookieValue)
+
+    let headers = new HttpHeaders()
+    headers = headers.set('Authorization',"Token"+" "+this.auth)
+                     .set('Content-Type',"application/json")
+                     .set('uauth',"Token"+" "+cookieValue)
+
     var api_call = {
       "lecture_name": title,
       "lecture_body": description,
       "lecture_external_url_1": link1,
       "lecture_external_url_2": link2
     }
-    // let json = JSON.stringify(api_call)
-    // return this.http.post(this.post_url, json)
-    console.warn(api_call)
+    let json = JSON.stringify(api_call)
+    let url = "http://"+this.post_url+"/api/content/lecture/create/"
+
+    //console.warn(api_call)
+    return this.http.post(url, json,{headers:headers})
   }
 
-  constructor(private http: HttpClient) { }
+  get_feed(){
+    let cookieValue = this.cookie.get('Test')
+    console.warn(cookieValue)
+
+    let headers = new HttpHeaders()
+    headers = headers.set('Authorization',"Token"+" "+this.auth)
+                     .set('Content-Type',"application/json")
+                     .set('uauth',"Token"+" "+cookieValue)
+
+    let url = "http://"+this.post_url+"/api/content/post/read/0"
+
+    return this.http.get(url,{headers:headers})
+  }
+  // search_youtube(key,search,max){
+  //   console.log(key,max,search)
+  //   let y_link = "https://www.googleapis.com/youtube/v3/search?key=" + key +
+  //   "&type=video&part=snippet&resultsPerPage=" + max + "&q=" + search
+
+  //   return this.http.get(y_link)
+  // }
+
+  constructor(private http: HttpClient, private cookie : CookieService) { }
 }

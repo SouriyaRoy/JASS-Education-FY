@@ -19,7 +19,7 @@ export class PostCreateComponent implements OnInit {
   disabledBox4 = true
 
   PostSubmit(data){
-    console.warn(data)
+    //console.warn(data)
     if(data.enableassignment == true){
       this.AssignSubmit(data.assignment_title,data.assignment_description,data.assignment_link_1,data.assignment_link_2)
     }
@@ -29,21 +29,21 @@ export class PostCreateComponent implements OnInit {
   }
   AssignSubmit(title, description, link1, link2){
     //console.warn(title, description, link1, link2)
-    this.api_call.submit_assignment_teacher(title, description, link1, link2)
-    // .subscribe(result => {
-    //   if(result['success'] == true){
-    //     this.router.navigate(['./forum/feed'])
-    //   }
-    // })
+    this.api_call.submit_assignment_teacher(title, description, link1, link2).subscribe(result => {
+      console.warn(result)
+      if(result['success'] == true){
+        //this.router.navigate(['./forum/feed'])
+      }
+    })
   }
   LectureSubmit(title, description, link1, link2){
     //console.warn(title, description, link1, link2)
-    this.api_call.submit_lecture_teacher(title, description, link1, link2)
-    // .subscribe(result => {
-    //   if(result['success'] == true){
-    //     this.router.navigate(['./forum/feed'])
-    //   }
-    // })
+    this.api_call.submit_lecture_teacher(title, description, link1, link2).subscribe(result => {
+      console.warn(result)
+      if(result['success'] == true){
+        //this.router.navigate(['./forum/feed'])
+      }
+    })
   }
 
   post_form = new FormGroup({

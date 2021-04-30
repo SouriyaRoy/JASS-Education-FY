@@ -45,7 +45,7 @@ export class SignupComponent implements OnInit {
       this.createCookie = receive['data']
       this.cookieService.set('Test',this.createCookie)
     })
-    console.warn(data)
+    //console.warn(data)
     //this.user.send_registration_data(data)
   }
 
