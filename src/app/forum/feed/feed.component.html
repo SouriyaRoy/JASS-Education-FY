@@ -7,11 +7,12 @@
 <button type="button" class="downvote">DOWNVOTE</button>
 <h4>Author</h4>
 </div> -->
+<br><br>
 <div *ngFor="let item of feed_call">
     <br>
     <div class="container feed-content feed-border">
         <br>
-        <a>
+        <a [routerLink] = '["/views/show-post",item.id]'>
             <div class="row">
                 <div class="col-md-8">
                     <h5>{{item.title}}</h5>

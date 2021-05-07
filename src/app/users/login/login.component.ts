@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
       if(receive['success'] == true)
       {
         console.warn(receive)
-        this.cook.set('Test',receive['data'])
+        this.cook.set('Test',receive['data']['JWT'])
         // this.signin.check_admin().subscribe(receive => {
         this.router.navigate(['./forum/feed'])
         // })

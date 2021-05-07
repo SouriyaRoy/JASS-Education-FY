@@ -6,22 +6,22 @@ import { CookieService } from 'ngx-cookie-service';
   providedIn: 'root'
 })
 export class FeedApiCallsService {
+  [x: string]: any;
 
-  post_url = ''
-  auth = ''
+  post_url = '2e3c6397754a.ngrok.io'
+  auth = 'MwNDjdPB4lJurP3EssDOJO56rhcUirJ5aW4iezSKNUGFCParIwhKhb8zz1UdVkYM'
 
+  public cookieValue = this.cookie.get('Test')
+    //console.warn(cookieValue)
+
+  public headers = new HttpHeaders()
+  headers = this.headers.set('Authorization',"Token"+" "+this.auth)
+                        .set('Content-Type',"application/json")
+                        .set('uauth',"Token"+" "+this.cookieValue)
 
 
 
   submit_assignment_teacher(title, description, link1, link2) { //TODO :
-
-    let cookieValue = this.cookie.get('Test')
-    console.warn(cookieValue)
-
-    let headers = new HttpHeaders()
-    headers = headers.set('Authorization',"Token"+" "+this.auth)
-                     .set('Content-Type',"application/json")
-                     .set('uauth',"Token"+" "+cookieValue)
 
     var api_call = {
       "assignment_name": title,
@@ -30,24 +30,15 @@ export class FeedApiCallsService {
       "assignment_external_url_2": link2
     }
     let json = JSON.stringify(api_call)
-    let url = "http://"+this.post_url+"/api/content/assignment/create/"
+    let url = "https://"+this.post_url+"/api/content/assignment/create/"
 
     //console.warn(api_call)
-    return this.http.post(url, json,{headers:headers})
+    return this.http.post(url, json,{headers:this.headers})
   }
 
 
 
-
   submit_lecture_teacher(title, description, link1, link2) { //TODO :
-
-    let cookieValue = this.cookie.get('Test')
-    console.warn(cookieValue)
-
-    let headers = new HttpHeaders()
-    headers = headers.set('Authorization',"Token"+" "+this.auth)
-                     .set('Content-Type',"application/json")
-                     .set('uauth',"Token"+" "+cookieValue)
 
     var api_call = {
       "lecture_name": title,
@@ -56,31 +47,34 @@ export class FeedApiCallsService {
       "lecture_external_url_2": link2
     }
     let json = JSON.stringify(api_call)
-    let url = "http://"+this.post_url+"/api/content/lecture/create/"
+    let url = "https://"+this.post_url+"/api/content/lecture/create/"
 
     //console.warn(api_call)
-    return this.http.post(url, json,{headers:headers})
+    return this.http.post(url, json,{headers:this.headers})
   }
 
 
 
   get_feed(){ //TODO :
-    let cookieValue = this.cookie.get('Test')
-    console.warn(cookieValue)
-
-    let headers = new HttpHeaders()
-    headers = headers.set('Authorization',"Token"+" "+this.auth)
-                     .set('Content-Type',"application/json")
-                     .set('uauth',"Token"+" "+cookieValue)
-
-    let url = "http://"+this.post_url+"/api/content/post/read/0"
-
-    return this.http.get(url,{headers:headers})
+    let url = "https://"+this.post_url+"/api/content/post/read/0"
+    return this.http.get(url,{headers:this.headers})
   }
 
 
 
+  get_specific_post(id){ //TODO :
+    let url = "https://"+this.post_url+"/api/content/post/read/"+id;
+    return this.http.get(url,{headers:this.headers})
+  }
 
+
+
+  reply(data){ //TODO :
+    let url = "https://"+this.post_url+"/api/content/reply/create/"
+    let json = JSON.stringify(data)
+    //console.log(json)
+    return this.http.post(url,json,{headers:this.headers})
+  }
 
 
 

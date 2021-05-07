@@ -6,10 +6,11 @@ import { ProfileComponent } from './profile/profile.component';
 import { AdminOrTeacherComponent } from './admin-or-teacher/admin-or-teacher.component';
 import { PostCreateComponent } from './post-create/post-create.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { ShowPostComponent } from './show-post/show-post.component';
 
 
 @NgModule({
-  declarations: [ProfileComponent, AdminOrTeacherComponent, PostCreateComponent, EditProfileComponent],
+  declarations: [ProfileComponent, AdminOrTeacherComponent, PostCreateComponent, EditProfileComponent, ShowPostComponent],
   imports: [
     CommonModule,
     ViewsRoutingModule,
@@ -20,6 +21,8 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     ProfileComponent,
     AdminOrTeacherComponent,
     PostCreateComponent,
+    EditProfileComponent,
+    ShowPostComponent,
   ]
 })
 export class ViewsModule { }

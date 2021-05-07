@@ -8,8 +8,8 @@ export class UserAuthService {
 
   constructor(private http : HttpClient) { }
 
-  api_url = ''
-  auth = ''
+  api_url = '2e3c6397754a.ngrok.io'
+  auth = 'MwNDjdPB4lJurP3EssDOJO56rhcUirJ5aW4iezSKNUGFCParIwhKhb8zz1UdVkYM'
 
   user_login(formdata) {
     let api_call = {
@@ -19,12 +19,11 @@ export class UserAuthService {
           "password" : formdata.password
       }
     }
-    let url = 'http://'+this.api_url+'/api/user/cred/create/'
+    let url = 'https://'+this.api_url+'/api/user/cred/'
     let json = JSON.stringify(api_call)
 
     let headers = new HttpHeaders()
-    headers = headers.set('Authorization',"Token"+" "+this.auth)
-
+    headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json")
     return this.http.post(url, json, {headers : headers})
   }
 

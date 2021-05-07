@@ -41,11 +41,11 @@ export class SignupComponent implements OnInit {
         document.getElementById('signup').innerHTML = "Fail"
       }
 
-      console.warn(receive['data'])
-      this.createCookie = receive['data']
+      console.warn(receive['data']['JWT'])
+      this.createCookie = receive['data']['JWT']
       this.cookieService.set('Test',this.createCookie)
     })
-    //console.warn(data)
+    console.warn(data)
     //this.user.send_registration_data(data)
   }
 

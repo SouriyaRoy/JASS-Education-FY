@@ -1,28 +1,31 @@
+<br><br><br>
+
 <div class="center">
     <h2 class="center-text">Login</h2>
     <form [formGroup]="loginForm" (ngSubmit)="loginSubmit(loginForm.value)">
-        
-            <div class="col-sm-6 input-group center">
-                <div class="input-group-text">@</div>
-                <input type="email" class="form-control" formControlName="email" placeholder="Email Address" [ngClass]="{
+
+        <div class="col-sm-6 input-group center">
+            <div class="input-group-text">@</div>
+            <input type="email" class="form-control" formControlName="email" placeholder="Email Address" [ngClass]="{
             'is-invalid':loginForm.get('email').touched && loginForm.get('email').invalid}">
-                <div *ngIf="loginForm.get('email').touched && loginForm.get('email').invalid"
-                    class="invalid-feedback">
-                    <div *ngIf="loginForm.get('email').errors.required">Email is Required</div>
-                    <div *ngIf="loginForm.get('email').errors.email">Enter proper email</div>
-                </div>
+            <div *ngIf="loginForm.get('email').touched && loginForm.get('email').invalid" class="invalid-feedback">
+                <div *ngIf="loginForm.get('email').errors.required">Email is Required</div>
+                <div *ngIf="loginForm.get('email').errors.email">Enter proper email</div>
             </div>
-            <div class="col-sm-6 center">
-                <input type="password" class="form-control" formControlName="password" placeholder="Password" [ngClass]="{
+        </div>
+        <div class="col-sm-6 center">
+            <input type="password" class="form-control" formControlName="password" placeholder="Password" [ngClass]="{
             'is-invalid':loginForm.get('password').touched && loginForm.get('password').invalid}">
-                <div *ngIf="loginForm.get('password').touched && loginForm.get('password').invalid"
-                    class="invalid-feedback">
-                    <div *ngIf="loginForm.get('password').errors.required">Password is Required</div>
-                    <div *ngIf="loginForm.get('password').errors.minlength">Password must be of 8 characters</div>
-                    <!-- <div *ngIf = "signupForm.get('password').errors.pattern">Invalid pattern</div> -->
-                </div>
+            <div *ngIf="loginForm.get('password').touched && loginForm.get('password').invalid"
+                class="invalid-feedback">
+                <div *ngIf="loginForm.get('password').errors.required">Password is Required</div>
+                <div *ngIf="loginForm.get('password').errors.minlength">Password must be of 8 characters</div>
+                <!-- <div *ngIf = "signupForm.get('password').errors.pattern">Invalid pattern</div> -->
             </div>
-        
-        <button class="center-text" mat-raised-button color="accent" class="reg_button" type="submit" [disabled]="!loginForm.valid">Login</button>
+        </div>
+        <div class="col-sm-12 center" style="margin-right: 37%;">
+            <button class="center-text" mat-raised-button color="accent" class="reg_button" type="submit"
+                [disabled]="!loginForm.valid">Login</button>
+        </div>
     </form>
 </div>

@@ -1,0 +1,100 @@
+<br><br><br>
+<!--//TODO: From here starts the post view section-->
+<div class="topics__body container">
+    <div class="topics__content">
+        <div class="topic">
+            <div class="topic__head">
+                
+                <div class="topic__caption">
+                    <div class="topic__name">
+                        <a href="#">Benjamin Caesar</a>
+                    </div>
+                    <div class="topic__date"><i class="icon-Watch_Later"></i>06 May, 2017</div>
+                </div>
+            </div>
+            <div class="topic__content">
+                <div class="topic__text">
+                    <p>Welcome to Prey. A lot of this game is going to feel familiar — you’ll see bits and pieces from a dozen well-loved games in its DNA. But that doesn’t mean you’re going to immediately understand how everything works. That’s what we’re here for. Let’s talk about some of the habits you’re going to have to pick up, concepts you’ll have to learn and choices you’re going to be making as you play.</p>
+                    <p>We’re going to break it down into three rough categories: Your world, your enemies (and ways to kill them) and yourself.</p>
+                </div>
+                <div class="topic__footer">
+                    <div class="topic__footer-likes">
+                        <div>
+                            <a><button class="btn btn-success" (click)="Upvote()">Upvote</button></a>
+                            <span id="upvote">{{upvote}}</span>
+                        </div>
+                        <div>
+                            <a><button class="btn btn-danger" (click)="Downvote()">Downvote</button></a>
+                            <span id="downvote">{{downvote}}</span>
+                        </div>
+                    </div>
+                    <div class="topic__footer-share">
+                        <a><button class="btn btn-warning" (click)="showReply()">Reply</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--//TODO: Reply form-->
+<form [formGroup]="reply_form" (ngSubmit)="ReplySubmit(reply_form.value)">
+    <div class="container" id="reply" hidden>
+        <textarea formControlName="reply" cols="155" rows="5"></textarea>
+        <button type="submit" class="btn btn-warning" onclick="window.location.reload();">Reply to this post</button>
+    </div>    
+</form>
+
+<div class="container" style="margin-top: 2%; margin-bottom: 2%;"><h5>Replies</h5></div>
+<!--//TODO: From here starts the reply section-->
+<div class="topic container">
+    <div class="topic__head">
+        
+        <div class="topic__caption">
+            <div class="topic__name">
+                <a href="#">Nicolas</a>
+            </div>
+            <div class="topic__date">
+                <div class="topic__user topic__user--pos-r">
+                    <p style="padding-top: 15px;">replied to</p>
+                    <a href="#" class="topic__user-name">Benjamin Caesar</a>
+                </div>
+                <i class="icon-Watch_Later"></i>06 May, 2017
+            </div>
+        </div>
+    </div>
+    <div class="topic__content">
+        <div class="topic__text">
+            <p>I am using BootStrap 4, but they are asking me to use PHP framework, which I won't do. My code is secure against SQL injection, XSS and all other attacks, it is well organized, i was using OOP. I just think CodeCanyon will always find a reason to reject my work....</p>
+        </div>
+        <div class="topic__footer">
+            <div class="topic__footer-likes">
+                <div>
+                    <a><button class="btn btn-success">Upvote</button></a>
+                    <span>137</span>
+                </div>
+                <div>
+                    <a><button class="btn btn-danger">Downvote</button></a>
+                    <span>02</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="topic topic--comment">
+        <div class="topic__head">
+            <div class="topic__caption">
+                <div class="topic__name">
+                    <a href="#">Larry</a>
+                </div>
+            </div>
+            <a href="#" class="topic__arrow topic__arrow--up"><i class="icon-Arrow_Up"></i></a>
+        </div>
+        <div class="topic__content">
+            <div class="topic__text">
+                <p>Can you stop ADP, and create new option for author can create coupon code, Author will give for their customer. It's better than now.</p>
+            </div>
+        </div>
+    </div>
+</div>
+

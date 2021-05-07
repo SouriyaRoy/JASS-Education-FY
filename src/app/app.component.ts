@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   constructor(private cookie : CookieService, private router : Router){
     this.cookieExists = this.cookie.check('Test')
     if (this.cookieExists) {
-      //console.warn("YES")
+      console.warn("YES")
       this.router.navigate(['forum/feed'])
     }else{
       this.router.navigate(['forum/home'])
@@ -24,11 +24,5 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(){
-    if (this.cookieExists) {
-      //console.warn("YES")
-      this.router.navigate(['forum/feed'])
-    }else{
-      this.router.navigate(['forum/home'])
-    }
   }
 }

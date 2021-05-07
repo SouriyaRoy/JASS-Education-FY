@@ -1,67 +1,80 @@
-<div class="container-fluid" style="padding-left: 200px;">
-<h2 class="pos">Sign Up</h2>
-<form [formGroup] = "signupForm" (ngSubmit)="formSubmit(signupForm.value)">
-    <br>
-    <div class="row col-sm-10">
-        <div class="col form-group">
-          <input type="text" class="form-control" formControlName = "first_name" placeholder="First name" [ngClass] = "{
+<br><br><br>
+
+<div class="container-fluid">
+    <h2 class="pos">Sign Up</h2>
+    <form [formGroup]="signupForm" (ngSubmit)="formSubmit(signupForm.value)">
+        <br>
+        <div class="row col-sm-10">
+            <div class="col form-group">
+                <input type="text" class="form-control" formControlName="first_name" placeholder="First name" [ngClass]="{
               'is-invalid':signupForm.get('first_name').touched && signupForm.get('first_name').invalid}">
-              <div *ngIf = "signupForm.get('first_name').touched && signupForm.get('first_name').invalid" class="invalid-feedback">
-                  <div *ngIf = "signupForm.get('first_name').errors.required">First Name is Required</div>                  
-              </div>
-        </div>
-        <div class="col form-group">
-            <input type="text" class="form-control" formControlName = "middle_name" placeholder="Middle name">
-        </div>
-        <div class="col form-group">
-          <input type="text" class="form-control" formControlName = "last_name" placeholder="Last name" [ngClass] = "{
-            'is-invalid':signupForm.get('last_name').touched && signupForm.get('last_name').invalid}">
-            <div *ngIf = "signupForm.get('last_name').touched && signupForm.get('last_name').invalid" class="invalid-feedback">
-                <div *ngIf = "signupForm.get('last_name').errors.required">Last Name is Required</div>                  
-            </div>
-        </div>
-    </div><br>
-    <div class="row col-sm-10">
-        <div class="col input-group">
-            <div class="input-group-text">@</div>
-            <input type="email" class="form-control" formControlName = "email" placeholder="Email Address" [ngClass] = "{
-                'is-invalid':signupForm.get('email').touched && signupForm.get('email').invalid}">
-                <div *ngIf = "signupForm.get('email').touched && signupForm.get('email').invalid" class="invalid-feedback">
-                    <div *ngIf = "signupForm.get('email').errors.required">Email is Required</div>
-                    <div *ngIf = "signupForm.get('email').errors.email">Enter proper email</div>
+                <div *ngIf="signupForm.get('first_name').touched && signupForm.get('first_name').invalid"
+                    class="invalid-feedback">
+                    <div *ngIf="signupForm.get('first_name').errors.required">First Name is Required</div>
                 </div>
-        </div>
-        <div class="col">
-            <input type="password" class="form-control" formControlName = "password" placeholder="Password" [ngClass] = "{
+            </div>
+            <div class="col form-group">
+                <input type="text" class="form-control" formControlName="middle_name" placeholder="Middle name">
+            </div>
+            <div class="col form-group">
+                <input type="text" class="form-control" formControlName="last_name" placeholder="Last name" [ngClass]="{
+            'is-invalid':signupForm.get('last_name').touched && signupForm.get('last_name').invalid}">
+                <div *ngIf="signupForm.get('last_name').touched && signupForm.get('last_name').invalid"
+                    class="invalid-feedback">
+                    <div *ngIf="signupForm.get('last_name').errors.required">Last Name is Required</div>
+                </div>
+            </div>
+        </div><br>
+        <div class="row col-sm-10">
+            <div class="col input-group">
+                <div class="input-group-text">@</div>
+                <input type="email" class="form-control" formControlName="email" placeholder="Email Address" [ngClass]="{
+                'is-invalid':signupForm.get('email').touched && signupForm.get('email').invalid}">
+                <div *ngIf="signupForm.get('email').touched && signupForm.get('email').invalid"
+                    class="invalid-feedback">
+                    <div *ngIf="signupForm.get('email').errors.required">Email is Required</div>
+                    <div *ngIf="signupForm.get('email').errors.email">Enter proper email</div>
+                </div>
+            </div>
+            <div class="col">
+                <input type="password" class="form-control" formControlName="password" placeholder="Password" [ngClass]="{
                 'is-invalid':signupForm.get('password').touched && signupForm.get('password').invalid}">
-                <div *ngIf = "signupForm.get('password').touched && signupForm.get('password').invalid" class="invalid-feedback">
-                    <div *ngIf = "signupForm.get('password').errors.required">Password is Required</div>
-                    <div *ngIf = "signupForm.get('password').errors.minlength">Password must be of 8 characters</div>
+                <div *ngIf="signupForm.get('password').touched && signupForm.get('password').invalid"
+                    class="invalid-feedback">
+                    <div *ngIf="signupForm.get('password').errors.required">Password is Required</div>
+                    <div *ngIf="signupForm.get('password').errors.minlength">Password must be of 8 characters</div>
                     <!-- <div *ngIf = "signupForm.get('password').errors.pattern">Invalid pattern</div> -->
                 </div>
+            </div>
+        </div><br>
+        <div class="row col-sm-10">
+            <div class="col">
+                <input type="text" class="form-control" formControlName="security_ques"
+                    placeholder="User Security Question?">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" formControlName="security_ans"
+                    placeholder="User Security Answer.">
+            </div>
+        </div><br>
+        <div style="margin-left: 3%;">
+            <button mat-raised-button color="accent" class="reg_button" type="submit"
+                [disabled]="!signupForm.valid">Register</button>
+            &nbsp;|&nbsp;
+            <button mat-raised-button color="accent" style="position: relative;" routerLink="../login">Login</button>
         </div>
-    </div><br>
-    <div class="row col-sm-10">
-        <div class="col">
-          <input type="text" class="form-control" formControlName = "security_ques" placeholder="User Security Question?">
-        </div>
-        <div class="col">
-            <input type="text" class="form-control" formControlName = "security_ans" placeholder="User Security Answer.">
-        </div>
-    </div><br>
-    <button mat-raised-button color="accent" class="reg_button" type="submit" [disabled]="!signupForm.valid">Register</button>
-    &nbsp;|&nbsp;
-    <button mat-raised-button color="accent" style="position: relative;" routerLink = "../login">Login</button>
-</form>
+    </form>
 
 </div>
-<div id="signup"></div>
+<div id="signup" class="pos"></div>
 
 
 
 
 
-<main><router-outlet></router-outlet></main>
+<main>
+    <router-outlet></router-outlet>
+</main>
 
 
 <!-- <form>

@@ -17,7 +17,7 @@ export class FeedComponent implements OnInit {
     // })
     this.feed.getData().subscribe(res => {
       this.feed_call = res
-      console.log(this.feed_call)
+      //console.log(this.feed_call)
     })
    }
 

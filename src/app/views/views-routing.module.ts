@@ -4,6 +4,7 @@ import { AdminOrTeacherComponent } from './admin-or-teacher/admin-or-teacher.com
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { PostCreateComponent } from './post-create/post-create.component'
 import { ProfileComponent } from './profile/profile.component'
+import { ShowPostComponent } from './show-post/show-post.component'
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path : 'edit-profile',
     component : EditProfileComponent
+  },
+  {
+    path : 'show-post/:id',
+    component : ShowPostComponent
   },
 ];
 
