@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  static count = 0
+
   constructor() { }
 
   ngOnInit(): void {
+    window.location.reload()
   }
 
 }
