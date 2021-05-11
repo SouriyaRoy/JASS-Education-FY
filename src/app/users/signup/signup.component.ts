@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { CookieService } from 'ngx-cookie-service';
-import { UserserviceService } from '../userservice.service';
+import { UserserviceService } from '../../services/userservice.service';
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-signup',
@@ -10,7 +11,8 @@ import { UserserviceService } from '../userservice.service';
 })
 export class SignupComponent implements OnInit {
   constructor(private user : UserserviceService,
-              private cookieService : CookieService) { }
+              private cookieService : CookieService,
+              private router : Router) { }
 
   createCookie
 
@@ -36,16 +38,18 @@ export class SignupComponent implements OnInit {
 
     this.user.send_registration_data(data).subscribe(receive => {
       if(receive['success']==true){
-        document.getElementById('signup').innerHTML = "User Registration Successfull"
+        //document.getElementById('signup').innerHTML = "User Registration Successfull"
+        this.cookieService.set('Test',receive['data']['JWT'])
+        this.router.navigateByUrl('forum/feed')
       }else{
         document.getElementById('signup').innerHTML = "Fail"
       }
 
-      console.warn(receive['data']['JWT'])
-      this.createCookie = receive['data']['JWT']
-      this.cookieService.set('Test',this.createCookie)
+      // console.warn(receive['data']['JWT'])
+      // this.createCookie = receive['data']['JWT']
+      // this.cookieService.set('Test',this.createCookie)
     })
-    console.warn(data)
+    //console.warn(data)
     //this.user.send_registration_data(data)
   }
 

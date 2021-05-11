@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { UserserviceService } from 'src/app/users/userservice.service';
+import { UserserviceService } from '../../services/userservice.service';
 
 @Component({
   selector: 'app-edit-profile',

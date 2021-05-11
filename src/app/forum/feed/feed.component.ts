@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FeedApiCallsService } from 'src/app/views/feed-api-calls.service';
+import { CookieService } from 'ngx-cookie-service';
+import { FeedApiCallsService } from '../../services/feed-api-calls.service';
 
 @Component({
   selector: 'app-feed',
@@ -9,8 +10,9 @@ import { FeedApiCallsService } from 'src/app/views/feed-api-calls.service';
 export class FeedComponent implements OnInit {
 
   feed_call
+  cookieExists
 
-  constructor(private feed : FeedApiCallsService) {
+  constructor(private feed : FeedApiCallsService, private cookie : CookieService) {
     // this.feed.get_feed().subscribe(res => {
     //   this.feed_call = res['data']
     //   console.log(this.feed_call)
@@ -22,6 +24,7 @@ export class FeedComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.cookieExists = this.cookie.check('Test')
   }
 
 }

@@ -28,6 +28,10 @@ const routes: Routes = [
   {
     path : 'app-cookie',
     component : CookieComponent
+  },
+  {
+    path:'admin-panel', loadChildren:() => import('./admin-panel/admin-panel.module')
+    .then(mod => mod.AdminPanelModule)
   }
 ];
 

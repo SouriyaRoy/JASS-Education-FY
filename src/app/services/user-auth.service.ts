@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import {HttpClient,HttpHeaders} from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserAuthService {
 
-  constructor(private http : HttpClient) { }
+  constructor(private http : HttpClient, private cookie : CookieService) { }
 
-  api_url = '2e3c6397754a.ngrok.io'
-  auth = 'MwNDjdPB4lJurP3EssDOJO56rhcUirJ5aW4iezSKNUGFCParIwhKhb8zz1UdVkYM'
+  api_url = ''
+  auth = ''
+
+  public cookieValue = this.cookie.get('Test')
 
   user_login(formdata) {
     let api_call = {
@@ -27,11 +30,13 @@ export class UserAuthService {
     return this.http.post(url, json, {headers : headers})
   }
 
-  // check_admin() {
-  //   // let api_call 
-  //   // let json = JSON.stringify(api_call)
-  //   return this.http.get(this.url)
-  // }
+  check_admin() {
+    let headers = new HttpHeaders()
+    headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json").set('uauth',"Token"+" "+this.cookieValue)
+    let api_call 
+    let json = JSON.stringify(api_call)
+    return this.http.get(this.api_url, {headers:headers})
+  }
 
   // check_coordinator_teacher(hash) {
   //   let api_call

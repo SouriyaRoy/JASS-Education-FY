@@ -1,0 +1,85 @@
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+</head>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Pricing</a>
+          </li>
+          <li class="nav-item dropdown" ngbDropdown>
+            <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+                <button class="btn btn-outline-primary mr-2" id="dropdownManual" ngbDropdownAnchor (focus)="myDrop.open()">Toggle dropdown</button>
+                <div ngbDropdownMenu aria-labelledby="dropdownManual">
+                  <button ngbDropdownItem>Action - 1</button>
+                  <button ngbDropdownItem>Another Action</button>
+                  <button ngbDropdownItem>Something else is here</button>
+                </div>
+              </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+<div class="navbar">
+    <div class="dropdown">
+      <button class="dropbtn">User
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content">
+        <a routerLink="user/list">List</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Admin Credentials
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content">
+        <a routerLink="admincredential/list">List</a>
+      </div>
+    </div>
+  
+    <div class="dropdown">
+      <button class="dropbtn">Admin Privileges
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content">
+        <a routerLink="adminprivilege/view">View</a>
+        <a routerLink="adminprivilege/edit">Edit</a>
+      </div>
+    </div>
+  
+    <div class="dropdown">
+      <button class="dropbtn">Co-Ordinator
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content">
+        <a routerLink="coordinator/list">List</a>
+        <a routerLink="coordinator/edit">Edit</a>
+      </div>
+    </div>
+  
+    <div class="dropdown">
+      <button class="dropbtn">Subject
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content">
+        <a routerLink="subject/view">View</a>
+        <a routerLink="subject/create">Create</a>
+        <a routerLink="subject/edit">Edit</a>
+      </div>
+    </div>
+  </div>
+  
+  <router-outlet></router-outlet>

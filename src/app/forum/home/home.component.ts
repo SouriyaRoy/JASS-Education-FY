@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-home',
@@ -7,12 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  static count = 0
+  cookieExists
 
-  constructor() { }
+  constructor(private cookie : CookieService) { }
 
   ngOnInit(): void {
-    window.location.reload()
+    this.cookieExists = this.cookie.check('Test')
   }
 
 }

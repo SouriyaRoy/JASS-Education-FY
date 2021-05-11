@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserserviceService } from 'src/app/users/userservice.service';
-import { FeedApiCallsService } from '../feed-api-calls.service';
+import { UserserviceService } from '../../services/userservice.service';
+import { FeedApiCallsService } from '../../services/feed-api-calls.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-post-create',
@@ -12,7 +13,7 @@ import { FeedApiCallsService } from '../feed-api-calls.service';
 export class PostCreateComponent implements OnInit {
 
   profile_details
-
+  cookieExists
   disabledBox1 = true
   disabledBox2 = true
   disabledBox3 = true
@@ -80,7 +81,7 @@ export class PostCreateComponent implements OnInit {
 
   constructor(private api_call : FeedApiCallsService,
               private router : Router,
-              private user : UserserviceService) {
+              private cookie : CookieService) {
     // user.get_user_profile_details()
     // .subscribe(result => {
     //   this.profile_details = result
@@ -88,6 +89,7 @@ export class PostCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.cookieExists = this.cookie.check('Test')
   }
 
 }

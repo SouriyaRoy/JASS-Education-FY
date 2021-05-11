@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router'
-import { FeedApiCallsService } from '../feed-api-calls.service';
+import { FeedApiCallsService } from '../../services/feed-api-calls.service';
 
 @Component({
   selector: 'app-show-post',

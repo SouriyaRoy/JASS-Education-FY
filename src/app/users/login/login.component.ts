@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { UserAuthService } from '../user-auth.service';
+import { UserAuthService } from '../../services/user-auth.service';
 
 @Component({
   selector: 'app-login',
@@ -18,8 +18,9 @@ export class LoginComponent implements OnInit {
       {
         console.warn(receive)
         this.cook.set('Test',receive['data']['JWT'])
+        this.router.navigateByUrl('forum/feed')
         // this.signin.check_admin().subscribe(receive => {
-        this.router.navigate(['./forum/feed'])
+        //this.router.navigate(['./forum/feed'])
         // })
       }
     })
