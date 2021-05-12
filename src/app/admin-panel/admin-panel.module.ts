@@ -3,18 +3,19 @@ import { CommonModule } from '@angular/common';
 
 import { AdminPanelRoutingModule } from './admin-panel-routing.module';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
-import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+import { UserComponent } from './user/user.component';
+import { AdminCredentialsModule } from './admin-credentials/admin-credentials.module';
 
 
 @NgModule({
-  declarations: [AdminHomeComponent],
+  declarations: [AdminHomeComponent, UserComponent],
   imports: [
     CommonModule,
     AdminPanelRoutingModule,
-    NgbDropdown
   ],
   exports: [
-    AdminHomeComponent
+    AdminHomeComponent,
+    UserComponent,
   ]
 })
 export class AdminPanelModule { }

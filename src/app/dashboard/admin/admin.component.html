@@ -1,36 +1,53 @@
-<br><br><br>
-<div class="heading">
-    <h2>Admin</h2>
-</div>
-<div class="content-admin-home">
-    <div class="row">
-        <div class="col-sm-6">
-            <a routerLink="../student">
-                <div class="card text-center border-dark mb-3">
-                    <div class="card-header" style="color: black;">
-                        <h5>Self Admin Level</h5>
-                    </div>
-                    <div class="card-body text-dark">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    </div>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+</head>
+<nav class="navbar navbar-expand-lg navbar-light bg-warning bg-gradient fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand mb-0 h1" routerLink="../../forum/home">JASS</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="../../forum/feed">Feed</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="../../app-cookie">Cookie</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="../../admin-panel/admin-home">AdminPanel</a>
+                </li>
+                <div>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="../../dashboard/admin">Admin</a>
+                    </li>
                 </div>
-            </a>
-        </div>
-        <div class="col-sm-6">
-            <a routerLink="../teacher">
-                <div class="card text-center border-dark mb-3">
-                    <div class="card-header" style="color: black;">
-                        <h5>Profile</h5>
-                    </div>
-                    <div class="card-body text-dark">
-                        <h5 class="card-title">Check</h5>
-                        <p class="card-text">Change your profile</p>
-                    </div>
-                </div>
-            </a>
+                <li>
+                    <a class="nav-link" routerLink="../../video/search_video">Videos</a>
+                </li>
+            </ul>
+            <!-- <form class="d-flex"> -->
+            <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->
+            <div>
+                <a style="text-decoration: none;" routerLink="../../views/profile"><button class="d-flex btn btn-success">Profile</button></a>
+            </div>&nbsp;
+            <div>
+                <a style="text-decoration: none;" routerLink="../../views/post-create"><button class="d-flex btn btn-success">Create Post</button></a>
+            </div>&nbsp;
+            <div>
+                <button class="d-flex btn btn-outline-success">Logout</button>
+            </div>
+            <!-- </form> -->
         </div>
     </div>
+</nav>
+<br><br><br>
+<div class="heading">
+    <h2>Ticket Section</h2>
+</div>
+<div class="content-admin-home">
     <div class="row">
         <div class="col-sm-6">
             <a routerLink="/subjects/assignments">
@@ -49,7 +66,7 @@
             <a routerLink="#">
                 <div class="card text-center border-dark mb-3">
                     <div class="card-header" style="color: black;">
-                        <h5>All Coordinators and Subjects</h5>
+                        <h5>Check AdminPrimes</h5>
                     </div>
                     <div class="card-body text-dark">
                         <h5 class="card-title">Special title treatment</h5>
@@ -64,7 +81,7 @@
             <a routerLink="#">
                 <div class="card text-center border-dark mb-3">
                     <div class="card-header" style="color: black;">
-                        <h5>All Posts</h5>
+                        <h5>Check Coordinators</h5>
                     </div>
                     <div class="card-body text-dark">
                         <h5 class="card-title">Special title treatment</h5>
@@ -73,11 +90,11 @@
                 </div>
             </a>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-6" ng-show="collapsed">
             <a routerLink="#">
                 <div class="card text-center border-dark mb-3">
                     <div class="card-header" style="color: black;">
-                        <h5>All Users</h5>
+                        <h5>Raise Ticket</h5>
                     </div>
                     <div class="card-body text-dark">
                         <h5 class="card-title">Special title treatment</h5>

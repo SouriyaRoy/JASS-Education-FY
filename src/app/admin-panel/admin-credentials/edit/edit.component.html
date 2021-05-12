@@ -11,10 +11,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" style="color: white;" routerLink="/admin-panel/user">Users</a>
+                    <a class="nav-link" style="color: white;" routerLink="/admin-panel/admin-home">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="color: white;" routerLink="/admin-panel/admin-cred/list">Credentials</a>
+                    <a class="nav-link" style="color: white;" routerLink="/admin-panel/user">Users</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" style="color: white;" routerLink="/admin-panel/admin-priv">Privileges</a>
@@ -32,55 +32,20 @@
         </div>
     </div>
 </nav>
+<br><br><br>
+<h3>Admin Credential Edit</h3>
+    
+    <div class="container">
+      <form >
+        <label for="admin_id">Admin Privilege ID</label>
+        <input type="text" id="admin_id" name="admin_id"><!-- should be hidden -->
 
-<!-- <div class="navbar">
-    <div class="dropdown">
-      <button class="dropbtn">User
-        <i class="fa fa-caret-down"></i>
-      </button>
-      <div class="dropdown-content">
-        <a routerLink="user/list">List</a>
-      </div>
+        <label for="ap_name">Admin Privilege Name</label><!-- read only -->
+        <input type="text" id="ap_name" name="ap_name">
+    
+        <label for="description">Admin Privilege Description</label>
+        <textarea id="ap_desc" name="ap_desc" placeholder="Write something.." style="height:200px"></textarea>
+    
+        <input type="submit" value="Submit">
+      </form>
     </div>
-    <div class="dropdown">
-      <button class="dropbtn">Admin Credentials
-        <i class="fa fa-caret-down"></i>
-      </button>
-      <div class="dropdown-content">
-        <a routerLink="admincredential/list">List</a>
-      </div>
-    </div>
-  
-    <div class="dropdown">
-      <button class="dropbtn">Admin Privileges
-        <i class="fa fa-caret-down"></i>
-      </button>
-      <div class="dropdown-content">
-        <a routerLink="adminprivilege/view">View</a>
-        <a routerLink="adminprivilege/edit">Edit</a>
-      </div>
-    </div>
-  
-    <div class="dropdown">
-      <button class="dropbtn">Co-Ordinator
-        <i class="fa fa-caret-down"></i>
-      </button>
-      <div class="dropdown-content">
-        <a routerLink="coordinator/list">List</a>
-        <a routerLink="coordinator/edit">Edit</a>
-      </div>
-    </div>
-  
-    <div class="dropdown">
-      <button class="dropbtn">Subject
-        <i class="fa fa-caret-down"></i>
-      </button>
-      <div class="dropdown-content">
-        <a routerLink="subject/view">View</a>
-        <a routerLink="subject/create">Create</a>
-        <a routerLink="subject/edit">Edit</a>
-      </div>
-    </div>
-  </div>
-  
-  <router-outlet></router-outlet> -->

@@ -11,6 +11,8 @@ import { UserAuthService } from '../../services/user-auth.service';
 })
 export class LoginComponent implements OnInit {
 
+  cookieExists
+
   loginSubmit(formdata){
     console.warn(formdata)
     this.signin.user_login(formdata).subscribe(receive => {
@@ -34,6 +36,7 @@ export class LoginComponent implements OnInit {
   constructor(private signin : UserAuthService, private cook : CookieService, private router : Router) { }
 
   ngOnInit(): void {
+    this.cookieExists = this.cook.check('Test')
   }
 
 }

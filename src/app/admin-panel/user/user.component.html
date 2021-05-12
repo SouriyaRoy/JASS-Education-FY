@@ -11,7 +11,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" style="color: white;" routerLink="/admin-panel/user">Users</a>
+                    <a class="nav-link" style="color: white;" routerLink="/admin-panel/admin-home">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" style="color: white;" routerLink="/admin-panel/admin-cred/list">Credentials</a>
@@ -25,62 +25,29 @@
                 <li>
                     <a class="nav-link" style="color: white;" routerLink="/admin-panel/subjects">Subjects</a>
                 </li>
-                <li>
-                    <a class="nav-link" style="color: white;" routerLink="/admin-panel/tickets">Tickets</a>
-                </li>
             </ul>
         </div>
     </div>
 </nav>
+<br><br><br>
+<h3>Users</h3>
+<button style="margin-left: 47%;" class="btn btn-danger" (click)="opensweetalert()">Delete All</button>
+<table style="margin-left: 15%;">
+    <tr>
+      <th>ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th style="text-align: center;">Actions</th>
+    </tr>
+    <tr>
+      <td>Alfreds Futterkiste</td>
+      <td>Maria Anders</td>
+      <td>Maria Anders</td>
+      <td style="text-align: center;">
+          <button class="btn btn-danger">Delete</button>&nbsp;
+          <button class="btn btn-warning">Make Admin</button>&nbsp;
+          <button class="btn btn-success">Make Co-Ordinator</button>
+      </td>
+    </tr>
 
-<!-- <div class="navbar">
-    <div class="dropdown">
-      <button class="dropbtn">User
-        <i class="fa fa-caret-down"></i>
-      </button>
-      <div class="dropdown-content">
-        <a routerLink="user/list">List</a>
-      </div>
-    </div>
-    <div class="dropdown">
-      <button class="dropbtn">Admin Credentials
-        <i class="fa fa-caret-down"></i>
-      </button>
-      <div class="dropdown-content">
-        <a routerLink="admincredential/list">List</a>
-      </div>
-    </div>
-  
-    <div class="dropdown">
-      <button class="dropbtn">Admin Privileges
-        <i class="fa fa-caret-down"></i>
-      </button>
-      <div class="dropdown-content">
-        <a routerLink="adminprivilege/view">View</a>
-        <a routerLink="adminprivilege/edit">Edit</a>
-      </div>
-    </div>
-  
-    <div class="dropdown">
-      <button class="dropbtn">Co-Ordinator
-        <i class="fa fa-caret-down"></i>
-      </button>
-      <div class="dropdown-content">
-        <a routerLink="coordinator/list">List</a>
-        <a routerLink="coordinator/edit">Edit</a>
-      </div>
-    </div>
-  
-    <div class="dropdown">
-      <button class="dropbtn">Subject
-        <i class="fa fa-caret-down"></i>
-      </button>
-      <div class="dropdown-content">
-        <a routerLink="subject/view">View</a>
-        <a routerLink="subject/create">Create</a>
-        <a routerLink="subject/edit">Edit</a>
-      </div>
-    </div>
-  </div>
-  
-  <router-outlet></router-outlet> -->
+  </table>

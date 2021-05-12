@@ -15,6 +15,7 @@ export class SignupComponent implements OnInit {
               private router : Router) { }
 
   createCookie
+  cookieExists
 
   signupForm = new FormGroup({
     first_name : new FormControl('',[Validators.required]),
@@ -54,6 +55,7 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.cookieExists = this.cookieService.check("Test")
   }
 
 }
