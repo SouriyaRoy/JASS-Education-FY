@@ -17,10 +17,10 @@
                     <a class="nav-link" style="color: white;" routerLink="/admin-panel/user">Users</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="color: white;" routerLink="/admin-panel/coordinators/list">Coordinators</a>
+                    <a class="nav-link" style="color: white;" routerLink="/admin-panel/admin-cred/list">Credentials</a>
                 </li>
-                <li>
-                    <a class="nav-link" style="color: white;" routerLink="/admin-panel/subjects/view">Subjects</a>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: white;" routerLink="/admin-panel/coordinators/list">Coordinators</a>
                 </li>
                 <li>
                     <a class="nav-link" style="color: white;" routerLink="/admin-panel/tickets">Tickets</a>
@@ -30,18 +30,19 @@
     </div>
 </nav>
 <br><br><br>
-<h3>Admin Credential Edit</h3>
+<h3>Subject Edit</h3>
     
     <div class="container">
       <form >
-        <label for="admin_id">Admin Privilege ID</label>
-        <input type="text" id="admin_id" name="admin_id"><!-- should be hidden -->
+        <label for="sub_id">Subject ID</label>
+        <input type="text" id="sub_id" name="sub_id"><!-- make it disabled -->
 
-        <label for="ap_name">Admin Privilege Name</label><!-- read only -->
-        <input type="text" id="ap_name" name="ap_name">
+        <!-- auto populate below fields using data from backend and interpolation concept -->
+        <label for="sub_name">Subject Name</label>
+        <input type="text" id="sub_name" name="sub_name">
     
-        <label for="description">Admin Privilege Description</label>
-        <textarea id="ap_desc" name="ap_desc" placeholder="Write something.." style="height:200px"></textarea>
+        <label for="subject">Subject Description</label>
+        <textarea id="subject_desc" name="subject_desc" placeholder="Write something.." style="height:200px"></textarea>
     
         <input type="submit" value="Submit">
       </form>

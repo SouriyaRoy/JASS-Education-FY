@@ -15,6 +15,14 @@ const routes: Routes = [
   {
     path : 'admin-cred', loadChildren:() => import ('./admin-credentials/admin-credentials.module')
     .then(mod => mod.AdminCredentialsModule)
+  },
+  {
+    path : 'coordinators', loadChildren:() => import ('./coordinator/coordinator.module')
+    .then(mod => mod.CoordinatorModule)
+  },
+  {
+    path : 'subjects', loadChildren:() => import ('./subjects/subjects.module')
+    .then(mod => mod.SubjectsModule)
   }
 ];
 

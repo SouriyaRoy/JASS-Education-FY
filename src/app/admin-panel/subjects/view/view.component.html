@@ -1,26 +1,28 @@
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 </head>
 <nav class="navbar navbar-expand-lg navbar-light bg-dark bg-gradient fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand mb-0 h1" style="color:white" routerLink="/admin-panel/admin-home">Admin Panel</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link" style="color: white;" routerLink="/admin-panel/admin-home">Home</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" style="color: white;" routerLink="/admin-panel/user">Users</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" style="color: white;" routerLink="/admin-panel/admin-cred/list">Credentials</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" style="color: white;" routerLink="/admin-panel/coordinators/list">Coordinators</a>
-                </li>
-                <li>
-                    <a class="nav-link" style="color: white;" routerLink="/admin-panel/subjects/view">Subjects</a>
                 </li>
                 <li>
                     <a class="nav-link" style="color: white;" routerLink="/admin-panel/tickets">Tickets</a>
@@ -30,24 +32,22 @@
     </div>
 </nav>
 <br><br><br>
-<h3>Users</h3>
-<button style="margin-left: 47%;" class="btn btn-danger" (click)="opensweetalert()">Delete All</button>
+<h3>Subjects</h3>
 <table style="margin-left: 15%;">
     <tr>
-      <th>ID</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th style="text-align: center;">Actions</th>
+        <th>Subject ID</th>
+        <th>Subject Name</th>
+        <th>Subject Description</th>
+        <th style="text-align: center;">Actions</th>
     </tr>
     <tr>
-      <td>Alfreds Futterkiste</td>
-      <td>Maria Anders</td>
-      <td>Maria Anders</td>
-      <td style="text-align: center;">
-          <button class="btn btn-danger">Delete</button>&nbsp;
-          <button class="btn btn-warning">Make Admin</button>&nbsp;
-          <button class="btn btn-success">Make Co-Ordinator</button>
-      </td>
+        <td>Alfreds Futterkiste</td>
+        <td>Maria Anders</td>
+        <td>{{description}}..............</td>
+        <td style="text-align: center;">
+            <button class="btn btn-danger">Delete</button>&nbsp;|
+            <button class="btn btn-primary" routerLink="../edit">Edit</button>
+        </td>
     </tr>
-
-  </table>
+</table>
+<router-outlet></router-outlet>

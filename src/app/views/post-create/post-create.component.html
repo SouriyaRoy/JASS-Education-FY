@@ -16,25 +16,10 @@
                 <li class="nav-item">
                     <a class="nav-link" routerLink="../../forum/feed">Feed</a>
                 </li>
-                <div>
-                    <li class="nav-item" class="d-flex">
-                        <a class="nav-link" routerLink="../../users/signup">Signup</a>
-                    </li>
-                </div>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="../../app-cookie">Cookie</a>
-                </li>
-                <div>
-                    <li class="nav-item">
-                        <a class="nav-link" routerLink="../../dashboard/admin">Admin</a>
-                    </li>
-                </div>
                 <li>
                     <a class="nav-link" routerLink="../../video/search_video">Videos</a>
                 </li>
             </ul>
-            <!-- <form class="d-flex"> -->
-            <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->
             <div *ngIf="cookieExists">
                 <a style="text-decoration: none;" routerLink="../../views/profile"><button class="d-flex btn btn-success">Profile</button></a>
             </div>&nbsp;
@@ -44,7 +29,6 @@
             <div *ngIf="cookieExists">
                 <button class="d-flex btn btn-outline-success">Logout</button>
             </div>
-            <!-- </form> -->
         </div>
     </div>
 </nav>

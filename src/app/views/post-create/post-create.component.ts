@@ -27,6 +27,7 @@ export class PostCreateComponent implements OnInit {
     if(data.enablelecture ==true){
       this.LectureSubmit(data.lecture_title,data.lecture_description,data.lecture_link_1,data.lecture_link_2)
     }
+    this.router.navigateByUrl('forum/feed')
   }
   AssignSubmit(title, description, link1, link2){
     //console.warn(title, description, link1, link2)

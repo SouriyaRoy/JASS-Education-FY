@@ -17,7 +17,7 @@
                     <a class="nav-link" style="color: white;" routerLink="/admin-panel/user">Users</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="color: white;" routerLink="/admin-panel/coordinators/list">Coordinators</a>
+                    <a class="nav-link" style="color: white;" routerLink="/admin-panel/admin-cred/list">Credentials</a>
                 </li>
                 <li>
                     <a class="nav-link" style="color: white;" routerLink="/admin-panel/subjects/view">Subjects</a>
@@ -30,19 +30,21 @@
     </div>
 </nav>
 <br><br><br>
-<h3>Admin Credential Edit</h3>
-    
-    <div class="container">
-      <form >
-        <label for="admin_id">Admin Privilege ID</label>
-        <input type="text" id="admin_id" name="admin_id"><!-- should be hidden -->
-
-        <label for="ap_name">Admin Privilege Name</label><!-- read only -->
-        <input type="text" id="ap_name" name="ap_name">
-    
-        <label for="description">Admin Privilege Description</label>
-        <textarea id="ap_desc" name="ap_desc" placeholder="Write something.." style="height:200px"></textarea>
-    
-        <input type="submit" value="Submit">
-      </form>
-    </div>
+<h3>Co-Ordinator</h3>
+<button style="margin-left: 47%;" class="btn btn-danger" (click)="opensweetalert()">Delete All</button>
+<table style="margin-left: 15%;">
+    <tr>
+      <th>Co-Ordinator ID</th>
+      <th>Co-Ordinator/User Name</th>
+      <th style="text-align: center;">Actions</th>
+    </tr>
+    <tr>
+      <td>Alfreds Futterkiste</td>
+      <td>Maria Anders</td>
+      <td style="text-align: center;">
+          <button class="btn btn-danger">Delete</button>&nbsp;
+          <button class="btn btn-primary" routerLink="../edit">Edit</button>
+      </td>
+    </tr>
+  </table>
+  <router-outlet></router-outlet>

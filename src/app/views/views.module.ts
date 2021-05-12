@@ -3,14 +3,16 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { ViewsRoutingModule } from './views-routing.module';
 import { ProfileComponent } from './profile/profile.component';
-import { AdminOrTeacherComponent } from './admin-or-teacher/admin-or-teacher.component';
 import { PostCreateComponent } from './post-create/post-create.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { ShowPostComponent } from './show-post/show-post.component';
 
 
 @NgModule({
-  declarations: [ProfileComponent, AdminOrTeacherComponent, PostCreateComponent, EditProfileComponent, ShowPostComponent],
+  declarations: [ProfileComponent,
+    PostCreateComponent,
+    EditProfileComponent,
+    ShowPostComponent],
   imports: [
     CommonModule,
     ViewsRoutingModule,
@@ -19,7 +21,6 @@ import { ShowPostComponent } from './show-post/show-post.component';
   ],
   exports: [
     ProfileComponent,
-    AdminOrTeacherComponent,
     PostCreateComponent,
     EditProfileComponent,
     ShowPostComponent,
