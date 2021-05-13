@@ -8,8 +8,8 @@ import { CookieService } from 'ngx-cookie-service';
 export class UserserviceService {
   constructor(private http : HttpClient, private cookie : CookieService) { }
 
-  api_url = '2e3c6397754a.ngrok.io'
-  auth = 'MwNDjdPB4lJurP3EssDOJO56rhcUirJ5aW4iezSKNUGFCParIwhKhb8zz1UdVkYM'
+  api_url = '252ea2af87ca.ngrok.io'
+  auth = 'E8QQ6sdv3iHwGnoufSKfOVzY5n7B6DPlJtN0OLXD9yO9JA46Mx0Ss3TMPwX675t7'
 
   send_registration_data(form_data){
     var api_call = {
@@ -30,7 +30,7 @@ export class UserserviceService {
 
     let json = JSON.stringify(api_call)
 
-    let url = 'https://'+this.api_url+'/api/user/cred/create/'
+    let url = 'https://'+this.api_url+'/api/user/cred/'
 
     return this.http.post(url,json,{headers : headers})
     //console.warn(json)
@@ -40,11 +40,11 @@ export class UserserviceService {
     let cookieValue = this.cookie.get('Test')
 
     let headers = new HttpHeaders()
-    headers = headers.set('Authorization',"Token"+" "+this.auth).set('uauth',"Token"+" "+cookieValue)
+    headers = headers.set('Authorization',"Token"+" "+this.auth).set('uauth',"Token"+" "+cookieValue).set('Content-Type',"application/json")
 
     let url = 'https://'+this.api_url+'/api/user/prof/read/0'
 
-    console.warn(this.http.get(url, {headers:headers}))
+    //console.warn(this.http.get(url, {headers:headers}))
     return this.http.get(url, {headers:headers})
     
   }
@@ -65,7 +65,25 @@ export class UserserviceService {
       "user_profile_pic" : null,
       "user_roll_number" : data.rollno,
       "prime" : true
+    }
+    let cookieValue = this.cookie.get('Test')
+    let headers = new HttpHeaders()
+    headers = headers.set('Authorization',"Token"+" "+this.auth).set('uauth',"Token"+" "+cookieValue).set('Content-Type',"application/json")
+
+    var json = JSON.stringify(api_call)
+
+    return this.http.post(url,json,{headers:headers})
   }
+
+
+  raise_ticket(data,id){
+    let url = 'https://'+this.api_url+'/api/user/cred/'
+    var api_call = id+"||"+data.req_type+"||"+data.contact+"||"+data.req
+    var json = JSON.stringify(api_call)
+    let cookieValue = this.cookie.get('Test')
+    let headers = new HttpHeaders()
+    headers = headers.set('Authorization',"Token"+" "+this.auth).set('uauth',"Token"+" "+cookieValue).set('Content-Type',"application/json")
+    return this.http.post(url,json,{headers:headers})
   }
 
 }

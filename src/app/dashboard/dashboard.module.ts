@@ -6,13 +6,16 @@ import { StudentComponent } from './student/student.component';
 import { TeacherCoordinatorComponent } from './teacher-coordinator/teacher-coordinator.component';
 import { AdminComponent } from './admin/admin.component';
 import { RaiseTicketComponent } from './raise-ticket/raise-ticket.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 
 @NgModule({
   declarations: [StudentComponent, TeacherCoordinatorComponent, AdminComponent, RaiseTicketComponent],
   imports: [
     CommonModule,
-    DashboardRoutingModule
+    DashboardRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   exports: [
     StudentComponent,

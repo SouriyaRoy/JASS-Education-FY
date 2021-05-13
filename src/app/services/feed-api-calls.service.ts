@@ -8,8 +8,8 @@ import { CookieService } from 'ngx-cookie-service';
 export class FeedApiCallsService {
   [x: string]: any;
 
-  post_url = '2e3c6397754a.ngrok.io'
-  auth = 'MwNDjdPB4lJurP3EssDOJO56rhcUirJ5aW4iezSKNUGFCParIwhKhb8zz1UdVkYM'
+  post_url = '252ea2af87ca.ngrok.io'
+  auth = 'E8QQ6sdv3iHwGnoufSKfOVzY5n7B6DPlJtN0OLXD9yO9JA46Mx0Ss3TMPwX675t7'
 
   public cookieValue = this.cookie.get('Test')
     //console.warn(cookieValue)

@@ -9,8 +9,8 @@ export class UserAuthService {
 
   constructor(private http : HttpClient, private cookie : CookieService) { }
 
-  api_url = ''
-  auth = ''
+  api_url = '252ea2af87ca.ngrok.io'
+  auth = 'E8QQ6sdv3iHwGnoufSKfOVzY5n7B6DPlJtN0OLXD9yO9JA46Mx0Ss3TMPwX675t7'
 
   public cookieValue = this.cookie.get('Test')
 
@@ -30,12 +30,26 @@ export class UserAuthService {
     return this.http.post(url, json, {headers : headers})
   }
 
-  check_admin() {
+  async check_admin() {
+    var isAdmin : boolean
+    let url = 'https://'+this.api_url+'/api/admin/cred/0'
     let headers = new HttpHeaders()
     headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json").set('uauth',"Token"+" "+this.cookieValue)
-    let api_call 
-    let json = JSON.stringify(api_call)
-    return this.http.get(this.api_url, {headers:headers})
+    try{
+      var response = await this.http.get(url, {headers:headers}).toPromise()
+      console.log(response)
+      return response
+    }catch(e){
+      console.log("Warning", e)
+      return {"success": false}
+    }   
+  }
+
+  get_user_data(){
+    let url = 'https://'+this.api_url+'/api/user/cred/0'
+    let headers = new HttpHeaders()
+    headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json").set('uauth',"Token"+" "+this.cookieValue)
+    return this.http.get(url,{headers:headers})
   }
 
   // check_coordinator_teacher(hash) {

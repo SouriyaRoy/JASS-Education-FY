@@ -33,12 +33,19 @@ export class ShowPostComponent implements OnInit {
     let rep = document.getElementById('reply')
     rep.removeAttribute('hidden')
   }
+  showReplyofReply(){
+    let rep = document.getElementById('replyofreply')
+    rep.removeAttribute('hidden')
+  }
 
   ReplySubmit(data){
     console.warn(data)
     this.feed.reply(data).subscribe(result => {
       console.log(result)
     })
+  }
+  ReplyofreplySubmit(data){
+    console.warn(data)
   }
 
   constructor(private route : ActivatedRoute,
