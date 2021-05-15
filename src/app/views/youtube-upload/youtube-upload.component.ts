@@ -42,6 +42,8 @@ export class YoutubeUploadComponent implements OnInit {
           this.loading = false;
           this.alertService.success('video is uploaded to youtube successfully');
           this.dialogRef.close();
+          console.warn(data)
+          console.warn(data['body']['id'])
           // upload to my server
         }
       }, (error => {

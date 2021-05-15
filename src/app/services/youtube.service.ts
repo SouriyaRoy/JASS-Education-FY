@@ -108,13 +108,13 @@ export class YoutubeService {
       .set('Content-Type', 'application/json; charset=UTF-8')
       .set('X-Upload-Content-Length', video.size + '')
       .set('X-Upload-Content-Type', 'video/*')
-      .set('Access-Control-Allow-Origin','*')
-      .set('Access-Control-Allow-Headers','Origin, X-Requested-With, Content-Type, Accept')
-      .set('Access-Control-Allow-Methods','GET, POST, PATCH, PUT, DELETE, OPTIONS');
+      // .set('Access-Control-Allow-Origin','*')
+      // .set('Access-Control-Allow-Headers','Origin, X-Requested-With, Content-Type, Accept')
+      // .set('Access-Control-Allow-Methods','GET, POST, PATCH, PUT, DELETE, OPTIONS');
 
-    const url = 'https://www.googleapis.com/upload/youtube/v3/videos?uploadType=resumable&part=snippet,status,contentDetails';
+    const url = 'https://www.googleapis.com/upload/youtube/v3/videos?uploadType=resumable&part=snippet,status';
     console.warn(data)
-    return this.httpClient.post(url, data.toString(), {headers, observe: 'response', responseType: 'text'})
+    return this.httpClient.post(url, data, {headers, observe: 'response', responseType: 'text'})
       .pipe(switchMap(newData => {
         const newRequest = new HttpRequest('PUT', newData.headers.get('location'), video, {reportProgress: true});
         return this.httpClient.request(newRequest);
