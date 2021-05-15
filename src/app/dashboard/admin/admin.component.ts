@@ -31,19 +31,19 @@ export class AdminComponent implements OnInit {
   RaiseTicket(data){
     //console.warn(data)
     this.uauth_service.get_user_data().subscribe((response) => {
-      this.user_id = response['id']
+      this.user_id = response['data']['user_credential_id']
+      
+      this.uservice.raise_ticket(data,this.user_id).subscribe((response) => {
+        alert("Ticket Raised Successfully with number : " + response['data']['ticket_id'])
+        this.router.navigateByUrl('forum/feed')
+      }, (error) => {
+        console.error(error)
+      })
     }, (error) => {
-      console.warn(error)
+      console.error(error)
     })
 
-    //TODO:check if user is already an admin or a coordinator
-
-    this.uservice.raise_ticket(data,this.user_id).subscribe((response) => {
-      alert("Ticket Raised Successfully with number : "+response['docket'])
-      this.router.navigateByUrl('forum/feed')
-    }, (error) => {
-      console.warn(error)
-    })
+    
   }
 
   ngOnInit(): void {

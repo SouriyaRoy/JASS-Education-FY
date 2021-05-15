@@ -13,18 +13,16 @@ export class LoginComponent implements OnInit {
 
   cookieExists
 
-  loginSubmit(formdata){
+  loginSubmit(formdata){ 
     console.warn(formdata)
-    this.signin.user_login(formdata).subscribe(receive => {
-      if(receive['success'] == true)
-      {
+    this.signin.user_login(formdata).subscribe((receive) => {
+      if(receive['success'] == true){
         console.warn(receive)
         this.cook.set('Test',receive['data']['JWT'])
         this.router.navigateByUrl('forum/feed')
-        // this.signin.check_admin().subscribe(receive => {
-        //this.router.navigate(['./forum/feed'])
-        // })
       }
+    }, (error) => {
+      console.error(error)
     })
   }
 

@@ -8,7 +8,9 @@ import { CookieService } from 'ngx-cookie-service';
 export class FeedApiCallsService {
   [x: string]: any;
 
-  post_url = '252ea2af87ca.ngrok.io'
+  public cookieValue = this.cookie.get('Test')
+
+  post_url = ''
   auth = 'E8QQ6sdv3iHwGnoufSKfOVzY5n7B6DPlJtN0OLXD9yO9JA46Mx0Ss3TMPwX675t7'
 
   public cookieValue = this.cookie.get('Test')
@@ -30,9 +32,9 @@ export class FeedApiCallsService {
       "assignment_external_url_2": link2
     }
     let json = JSON.stringify(api_call)
-    let url = "https://"+this.post_url+"/api/content/assignment/create/"
+    let url = "https://"+this.post_url+"/api/content/assignment/"
 
-    //console.warn(api_call)
+    console.warn(json)
     return this.http.post(url, json,{headers:this.headers})
   }
 
@@ -47,16 +49,57 @@ export class FeedApiCallsService {
       "lecture_external_url_2": link2
     }
     let json = JSON.stringify(api_call)
-    let url = "https://"+this.post_url+"/api/content/lecture/create/"
+    let url = "https://"+this.post_url+"/api/content/lecture/"
 
-    //console.warn(api_call)
+    console.warn(json)
     return this.http.post(url, json,{headers:this.headers})
   }
 
 
 
+  post_submit(ass_id, lec_id, video_id, subject_id, forum_id,title,description){
+    if(ass_id=="")
+      ass_id=null;
+
+    if(lec_id=="")
+    lec_id=null;
+
+    if(video_id=="")
+    video_id=null;
+
+    if(subject_id=="")
+    subject_id=null;
+
+    if(forum_id=="")
+    forum_id=null;
+
+    if(title=="")
+    title=null;
+
+    if(description=="")
+    description=null;
+
+    var api = {
+      "video_id" : video_id,
+  
+      "forum_id" : forum_id,
+      "assignment_id" : ass_id,
+      "lecture_id" : lec_id,
+      "subject_id" : subject_id,
+                  
+      "post_name" : title,
+      "post_body" : description
+    }
+
+    let json = JSON.stringify(api)
+    //console.log(json)
+    let url = "https://"+this.post_url+"/api/content/post/"
+    return this.http.post(url,json,{headers:this.headers})
+  }
+
+
   get_feed(){ //TODO :
-    let url = "https://"+this.post_url+"/api/content/post/read/0"
+    let url = "https://"+this.post_url+"/api/content/post/0"
     return this.http.get(url,{headers:this.headers})
   }
 
@@ -70,7 +113,7 @@ export class FeedApiCallsService {
 
 
   reply(data){ //TODO :
-    let url = "https://"+this.post_url+"/api/content/reply/create/"
+    let url = "https://"+this.post_url+"/api/content/reply/"
     let json = JSON.stringify(data)
     //console.log(json)
     return this.http.post(url,json,{headers:this.headers})
@@ -91,13 +134,7 @@ export class FeedApiCallsService {
 
 
 
-  // search_youtube(key,search,max){
-  //   console.log(key,max,search)
-  //   let y_link = "https://www.googleapis.com/youtube/v3/search?key=" + key +
-  //   "&type=video&part=snippet&resultsPerPage=" + max + "&q=" + search
-
-  //   return this.http.get(y_link)
-  // }
+  
 
 
   getData() { //FIX: Delete this later

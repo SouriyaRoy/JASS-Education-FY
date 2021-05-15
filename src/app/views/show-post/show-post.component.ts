@@ -40,8 +40,11 @@ export class ShowPostComponent implements OnInit {
 
   ReplySubmit(data){
     console.warn(data)
-    this.feed.reply(data).subscribe(result => {
+    this.feed.reply(data).subscribe((result) => {
       console.log(result)
+    }, (error) => {
+      alert("Check Console")
+      console.warn(error)
     })
   }
   ReplyofreplySubmit(data){
@@ -58,8 +61,11 @@ export class ShowPostComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.identity = params.id
     })
-    this.feed.get_specific_post(this.identity).subscribe(res => {
+    this.feed.get_specific_post(this.identity).subscribe((res) => {
       this.data = res
+    }, (error) => {
+      alert("Check Console")
+      console.warn(error)
     })
   }
 

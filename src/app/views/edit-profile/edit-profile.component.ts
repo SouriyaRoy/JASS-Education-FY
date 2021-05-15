@@ -33,8 +33,11 @@ export class EditProfileComponent implements OnInit {
     // user.getData().subscribe(result => {
     //   this.allDetails = result
     // })
-    user.get_user_profile_details().subscribe(result => {
+    user.get_user_profile_details().subscribe((result) => {
       this.allDetails = result
+    }, (error) => {
+      alert("There is some error check console")
+      console.error(error)
     })
    }
 

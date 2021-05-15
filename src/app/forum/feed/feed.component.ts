@@ -15,47 +15,40 @@ export class FeedComponent implements OnInit {
   cookieExists
   isAdmin
 
-  constructor(private feed : FeedApiCallsService, private cookie : CookieService, private router : Router, private uauth : UserAuthService) {
-    // this.feed.get_feed().subscribe(res => {
-    //   this.feed_call = res['data']
-    //   console.log(this.feed_call)
-    // })
-    this.feed.getData().subscribe(res => {
+  constructor(private feed : FeedApiCallsService,
+              private cookie : CookieService,
+              private router : Router,
+              private uauth : UserAuthService) {
+    this.feed.getData().subscribe((res) => {
       this.feed_call = res
-      //console.log(this.feed_call)
+    }, (error) => {
+      alert("Check Console")
+      console.error(error)
     })
    }
 
-   async AdminPanel(){
-     var res = await this.uauth.check_admin()
-     this.isAdmin = res['success']
-     if(this.isAdmin == true){
+  //  async AdminPanel(){
+  //    var res = await this.uauth.check_admin()
+  //    this.isAdmin = res['success']
+  //    if(this.isAdmin == true){
+  //       this.router.navigateByUrl('admin-panel/admin-home')
+  //     }else{
+  //       alert("You are not authorized")
+  //       this.router.navigateByUrl('dashboard/admin')
+  //    //console.warn(res['success'])
+  //   }
+  // }
+
+  AdminPanel(){
+    this.uauth.check_admin().subscribe((response) => {
+      if(response['success'] == true){
         this.router.navigateByUrl('admin-panel/admin-home')
-      }else{
-        alert("You are not authorized")
-        this.router.navigateByUrl('dashboard/admin')
-     //console.warn(res['success'])
-    }
+      }
+    }, (error) => {
+      alert("You are not Authorized")
+      this.router.navigateByUrl('dashboard/admin')
+    })
   }
-    //  while(typeof(this.isAdmin) == undefined){
-    //    continue
-    //  }
-    //  console.warn("2", this.isAdmin, typeof(this.isAdmin))
-
-    //  if(this.isAdmin == true){
-    //    console.warn("3", this.isAdmin, typeof(this.isAdmin))
-    //   this.router.navigateByUrl('admin-panel/admin-home')
-    // }else{
-    //   alert("You are not Admin")
-    //   this.router.navigateByUrl('dashboard/admin')
-    // }
-    // if(this.isAdmin == true){
-    //   this.router.navigateByUrl('admin-panel/admin-home')
-    // }else{
-    //   alert("You are not Admin")
-    //   this.router.navigateByUrl('dashboard/admin')
-    // }
-
 
   ngOnInit(): void {
     this.cookieExists = this.cookie.check('Test')

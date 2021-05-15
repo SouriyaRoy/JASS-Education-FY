@@ -8,7 +8,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class UserserviceService {
   constructor(private http : HttpClient, private cookie : CookieService) { }
 
-  api_url = '252ea2af87ca.ngrok.io'
+  api_url = ''
   auth = 'E8QQ6sdv3iHwGnoufSKfOVzY5n7B6DPlJtN0OLXD9yO9JA46Mx0Ss3TMPwX675t7'
 
   send_registration_data(form_data){
@@ -49,11 +49,6 @@ export class UserserviceService {
     
   }
 
-  // getData() {
-  //   let get_url = "https://jsonplaceholder.typicode.com/users/1"
-  //   return this.http.get(get_url);
-  // }
-
   submit_user_profile_details(data){
     let url = 'http://'+this.api_url+'/api/user/prof/edit/0'
     var api_call = {
@@ -77,9 +72,10 @@ export class UserserviceService {
 
 
   raise_ticket(data,id){
-    let url = 'https://'+this.api_url+'/api/user/cred/'
-    var api_call = id+"||"+data.req_type+"||"+data.contact+"||"+data.req
+    let url = 'https://'+this.api_url+'/api/analytics/ticket/'
+    var api_call = { "ticket_body" : id+"||"+data.req_type+"||"+data.contact+"||"+data.request }
     var json = JSON.stringify(api_call)
+    console.log(json)
     let cookieValue = this.cookie.get('Test')
     let headers = new HttpHeaders()
     headers = headers.set('Authorization',"Token"+" "+this.auth).set('uauth',"Token"+" "+cookieValue).set('Content-Type',"application/json")

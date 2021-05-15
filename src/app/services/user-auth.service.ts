@@ -9,7 +9,7 @@ export class UserAuthService {
 
   constructor(private http : HttpClient, private cookie : CookieService) { }
 
-  api_url = '252ea2af87ca.ngrok.io'
+  api_url = ''
   auth = 'E8QQ6sdv3iHwGnoufSKfOVzY5n7B6DPlJtN0OLXD9yO9JA46Mx0Ss3TMPwX675t7'
 
   public cookieValue = this.cookie.get('Test')
@@ -30,19 +30,28 @@ export class UserAuthService {
     return this.http.post(url, json, {headers : headers})
   }
 
-  async check_admin() {
-    var isAdmin : boolean
+  // async check_admin() {
+  //   var isAdmin : boolean
+  //   let url = 'https://'+this.api_url+'/api/admin/cred/0'
+  //   let headers = new HttpHeaders()
+  //   headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json").set('uauth',"Token"+" "+this.cookieValue)
+  //   try{
+  //     var response = await this.http.get(url, {headers:headers}).toPromise()
+  //     console.log(response)
+  //     return response
+  //   }catch(e){
+  //     console.log("Warning", e)
+  //     return {"success": false}
+  //   }   
+  // }
+
+  check_admin() {
     let url = 'https://'+this.api_url+'/api/admin/cred/0'
     let headers = new HttpHeaders()
     headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json").set('uauth',"Token"+" "+this.cookieValue)
-    try{
-      var response = await this.http.get(url, {headers:headers}).toPromise()
-      console.log(response)
-      return response
-    }catch(e){
-      console.log("Warning", e)
-      return {"success": false}
-    }   
+    var response = this.http.get(url, {headers:headers})
+    console.log(response)
+    return response
   }
 
   get_user_data(){

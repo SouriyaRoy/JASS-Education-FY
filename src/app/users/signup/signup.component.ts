@@ -37,21 +37,16 @@ export class SignupComponent implements OnInit {
     if(data.security_ans=="")
       data.security_ans=null;
 
-    this.user.send_registration_data(data).subscribe(receive => {
+    this.user.send_registration_data(data).subscribe((receive) => {
       if(receive['success']==true){
-        //document.getElementById('signup').innerHTML = "User Registration Successfull"
         this.cookieService.set('Test',receive['data']['JWT'])
         this.router.navigateByUrl('forum/feed')
       }else{
-        document.getElementById('signup').innerHTML = "Fail"
+        document.getElementById('signup').innerHTML = "Registration Failed"
       }
-
-      // console.warn(receive['data']['JWT'])
-      // this.createCookie = receive['data']['JWT']
-      // this.cookieService.set('Test',this.createCookie)
+    }, (error) => {
+      console.error(error)
     })
-    //console.warn(data)
-    //this.user.send_registration_data(data)
   }
 
   ngOnInit(): void {

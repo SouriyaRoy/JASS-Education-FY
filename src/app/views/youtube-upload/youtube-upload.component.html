@@ -1,0 +1,50 @@
+<div>
+    <div fxLayout="row" fxLayoutGap="30px" *ngIf="this.youtubeService.profile$ | async as profile">
+      <span>Your Connected Account is: <strong>{{profile.getEmail()}}</strong></span>
+      <span class="change" *ngIf="youtubeService.isAuthInit$ | async"
+            (click)="youtubeService.signIn()">change account</span>
+      <hr>
+    </div>
+    <form  fxLayout="column"
+          [formGroup]="this.videoForm" fxLayoutAlign="center stretch"
+          (ngSubmit)="videoForm.get('privacyStatus').markAsTouched(); videoForm.valid && onSubmit()" novalidate fxFlexAlign="center"
+          fxLayoutGap="10px">
+      <mat-form-field style="width: 100%">
+        <input matInput placeholder="Title of video" formControlName="title">
+        <mat-error>Title is required</mat-error>
+      </mat-form-field>
+      <mat-form-field style="width: 100%">
+        <textarea matInput placeholder="Description of video (optional)" formControlName="description"></textarea>
+      </mat-form-field>
+      <mat-radio-group formControlName="privacyStatus" style="padding-bottom: 18px">
+        <mat-radio-button value="unlisted"
+                          matTooltip="Only people to whom you share/email the video will be able to view your video">
+          Keep my video private
+        </mat-radio-button>
+        <mat-radio-button value="public"
+                          matTooltip="Your video will be public on YouTube and search engines will also crawl it">
+          I want maximum views so make it public
+        </mat-radio-button>
+        <mat-error *ngIf="videoForm.get('privacyStatus').touched && videoForm.get('privacyStatus').invalid"
+                   style="margin-bottom: -18px">
+          Select one of the options
+        </mat-error>
+      </mat-radio-group>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <mat-progress-bar
+          color="accent"
+          [value]="this.percentageUpload"
+          [bufferValue]="100">
+        </mat-progress-bar>
+        <button mat-icon-button (click)="onCancel()">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </div>
+      <button mat-raised-button fxFlexAlign="end" *ngIf="!loading" color="accent">Upload</button>
+    </form>
+    <div *ngIf="(youtubeService.isAuthInit$ | async) && !(youtubeService.isSignedIn$ | async)" fxLayoutAlign="start center"
+         fxLayout="column">
+      <h2>Please re(Connect) your Youtube Account</h2>
+      <button (click)="this.youtubeService.signIn()" mat-raised-button color="primary">Sign In</button>
+    </div>
+  </div>

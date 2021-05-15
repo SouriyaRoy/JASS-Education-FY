@@ -15,17 +15,6 @@
                 <li class="nav-item">
                     <a class="nav-link" routerLink="../../forum/feed">Feed</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="../../app-cookie">Cookie</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="../../admin-panel/admin-home">AdminPanel</a>
-                </li>
-                <div>
-                    <li class="nav-item">
-                        <a class="nav-link" routerLink="../../dashboard/admin">Admin</a>
-                    </li>
-                </div>
                 <li>
                     <a class="nav-link" routerLink="../../video/search_video">Videos</a>
                 </li>
@@ -110,7 +99,7 @@
                 <option value="coordinator_access">Coordinator Access</option>
                 <option value="privilege_escalation">Escalate Privilege</option>
             </select>
-            <div *ngIf="ticket_form.get('request').touched && ticket_form.get('request').invalid"
+            <div *ngIf="ticket_form.get('req_type').touched && ticket_form.get('req_type').invalid"
                 class="invalid-feedback">
                 <div *ngIf="ticket_form.get('req_type').errors.required">Required</div>
             </div>
@@ -120,9 +109,6 @@
         </div>
     </form>
 </div>
-
-
-
 <main>
     <router-outlet></router-outlet>
 </main>

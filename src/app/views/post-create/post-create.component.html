@@ -3,14 +3,16 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 </head>
 <nav class="navbar navbar-expand-lg navbar-light bg-warning bg-gradient fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand mb-0 h1" routerLink="../../forum/home">JASS</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
@@ -21,10 +23,12 @@
                 </li>
             </ul>
             <div *ngIf="cookieExists">
-                <a style="text-decoration: none;" routerLink="../../views/profile"><button class="d-flex btn btn-success">Profile</button></a>
+                <a style="text-decoration: none;" routerLink="../../views/profile"><button
+                        class="d-flex btn btn-success">Profile</button></a>
             </div>&nbsp;
             <div *ngIf="cookieExists">
-                <a style="text-decoration: none;" routerLink="../../views/post-create"><button class="d-flex btn btn-success">Create Post</button></a>
+                <a style="text-decoration: none;" routerLink="../../views/post-create"><button
+                        class="d-flex btn btn-success">Create Post</button></a>
             </div>&nbsp;
             <div *ngIf="cookieExists">
                 <button class="d-flex btn btn-outline-success">Logout</button>
@@ -54,29 +58,40 @@
                         placeholder="Add description"></textarea>
                 </div>
                 <br>
+                <div class="form-group">
+                    <label for="Subjects">
+                        <h4>Select Subject</h4>
+                    </label>
+                    <select class="form-control" formControlName="subject">
+                        <option *ngFor="let item of subject_array" value="{{item}}">{{item}}</option>
+                    </select>
+                </div>
+                <br>
                 <div class="create__section">
                     <label class="create__label" for="tags">
                         <h4>Add more</h4>
                     </label>
                     <div class="form-check">
-                        <input class="form-check-input" id="enableassignment" type="checkbox" (click)="enableBox1()" formControlName="enableassignment">
+                        <input class="form-check-input" type="checkbox" (click)="enableBox1()"
+                            formControlName="enableassignment">
                         <label class="form-check-label">
                             Assignment
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" (click)="enableBox2()" formControlName="enablelecture">
+                        <input class="form-check-input" type="checkbox" (click)="enableBox2()"
+                            formControlName="enablelecture">
                         <label class="form-check-label">
                             Lecture
                         </label>
                     </div>
-                    <!-- <div class="form-check">
+                    <div class="form-check">
                         <input class="form-check-input" type="checkbox" (click)="enableBox3()">
                         <label class="form-check-label">
                             Video
                         </label>
                     </div>
-                    <div class="form-check">
+                    <!--<div class="form-check">
                         <input class="form-check-input" type="checkbox" (click)="enableBox4()">
                         <label class="form-check-label">
                             Forum Post
@@ -86,45 +101,75 @@
                 <br><br>
                 <div class="" id="assignment_hide" hidden>
                     <h3><i>Assignment Details</i></h3><br>
-                    <!-- <form [formGroup]="assignment_form" (ngSubmit)="AssignSubmit()"> -->
-                        <div class="form-group">
-                            <label>Assignment Title</label>
-                            <input type="text" class="form-control" formControlName="assignment_title">
-                        </div>
-                        <div class="form-group">
-                            <label>Assignment Description</label>
-                            <input type="text" class="form-control" formControlName="assignment_description">
-                        </div>
-                        <div class="form-group">
-                            <label>Submit Link 1</label>
-                            <input type="text" class="form-control" formControlName="assignment_link_1">
-                        </div>
-                        <div class="form-group">
-                            <label>Submit Link 2</label>
-                            <input type="text" class="form-control" formControlName="assignment_link_2">
-                        </div>
-                    <!-- </form> -->
+                    <div class="form-group">
+                        <label>Assignment Title</label>
+                        <input type="text" class="form-control" formControlName="assignment_title">
+                    </div>
+                    <div class="form-group">
+                        <label>Assignment Description</label>
+                        <input type="text" class="form-control" formControlName="assignment_description">
+                    </div>
+                    <div class="form-group">
+                        <label>Submit Link 1</label>
+                        <input type="text" class="form-control" formControlName="assignment_link_1"
+                            placeholder="Start with https://">
+                    </div>
+                    <div class="form-group">
+                        <label>Submit Link 2</label>
+                        <input type="text" class="form-control" formControlName="assignment_link_2"
+                            placeholder="Start with https://">
+                    </div>
                 </div><br>
                 <div class="" id="lecture_hide" hidden>
                     <h3><i>Lecture Details</i></h3><br>
-                    <!-- <form [formGroup]="lecture_form" (ngSubmit)="LectureSubmit()"> -->
-                        <div class="form-group">
-                            <label>Lecture Title</label>
-                            <input type="text" class="form-control" formControlName="lecture_title">
-                        </div>
-                        <div class="form-group">
-                            <label>Lecture Description</label>
-                            <input type="text" class="form-control" formControlName="lecture_description">
-                        </div>
-                        <div class="form-group">
-                            <label>Lecture Link 1</label>
-                            <input type="text" class="form-control" formControlName="lecture_link_1">
-                        </div>
-                        <div class="form-group">
-                            <label>Lecture Link 2</label>
-                            <input type="text" class="form-control" formControlName="lecture_link_2">
-                        </div>
-                    <!-- </form> -->
+                    <div class="form-group">
+                        <label>Lecture Title</label>
+                        <input type="text" class="form-control" formControlName="lecture_title">
+                    </div>
+                    <div class="form-group">
+                        <label>Lecture Description</label>
+                        <input type="text" class="form-control" formControlName="lecture_description">
+                    </div>
+                    <div class="form-group">
+                        <label>Lecture Link 1</label>
+                        <input type="text" class="form-control" formControlName="lecture_link_1"
+                            placeholder="Start with https://">
+                    </div>
+                    <div class="form-group">
+                        <label>Lecture Link 2</label>
+                        <input type="text" class="form-control" formControlName="lecture_link_2"
+                            placeholder="Start with https://">
+                    </div>
+                </div>
+                <div fxLayout="column" style="margin-top: 3%" fxLayoutAlign="center center " fxLayoutGap="30px"
+                    id="video_hide" hidden>
+                    <h1>Select a video from your Computer</h1>
+                    <p>(Upload your video to add it to your Youtube Channel)</p>
+                    <div *ngIf="!this.videoSelected" fxLayoutAlign="center center" style="margin-top: 20px"
+                        fxLayout="row">
+                        <input #videoFile name="video" type="file" (change)="this.selectVideo($event)" hidden
+                            accept="video/" />
+                        <button (click)="this.pickFile()" mat-raised-button color="primary">
+                            <mat-icon>add</mat-icon>
+                            SELECT
+                        </button>
+                    </div>
+                    <div [hidden]="!this.videoSelected">
+                        <video *ngIf="!this.isUploaded" id="video" controls #video>
+                            Your Browser Does not Support it
+                        </video>
+                    </div>
+                    <div *ngIf="this.videoSelected" fxLayoutAlign="center center" fxLayout="row" fxLayoutGap="20px">
+                        <button *ngIf="!this.isUploaded" mat-raised-button color="primary"
+                            matTooltip="This will be a Private video" (click)="youtubeSubmit()">Upload to Youtube
+                        </button>
+                        <input type="file" #videoFile name="video" accept="video/" (change)="selectVideo($event)"
+                            hidden>
+                        <button mat-raised-button color="primary" (click)="this.pickFile()">
+                            <mat-icon>cached</mat-icon>
+                            <strong>CHANGE</strong>
+                        </button>
+                    </div>
                 </div>
             </div>
             <button class="btn btn-warning" type="submit">Create</button>
@@ -135,51 +180,55 @@
 
 <footer class="site-footer">
     <div class="container">
-      <div class="row">
-        <div class="col-sm-12 col-md-6">
-          <h6>About</h6>
-          <p class="text-justify">Scanfcode.com <i>CODE WANTS TO BE SIMPLE </i> is an initiative  to help the upcoming programmers with the code. Scanfcode focuses on providing the most efficient code or snippets as the code wants to be simple. We will help programmers build up concepts in different programming languages that include C, C++, Java, HTML, CSS, Bootstrap, JavaScript, PHP, Android, SQL and Algorithm.</p>
-        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <h6>About</h6>
+                <p class="text-justify">Scanfcode.com <i>CODE WANTS TO BE SIMPLE </i> is an initiative to help the
+                    upcoming programmers with the code. Scanfcode focuses on providing the most efficient code or
+                    snippets as the code wants to be simple. We will help programmers build up concepts in different
+                    programming languages that include C, C++, Java, HTML, CSS, Bootstrap, JavaScript, PHP, Android, SQL
+                    and Algorithm.</p>
+            </div>
 
-        <div class="col-xs-6 col-md-3">
-          <h6>Categories</h6>
-          <ul class="footer-links">
-            <li><a href="http://scanfcode.com/category/c-language/">C</a></li>
-            <li><a href="http://scanfcode.com/category/front-end-development/">UI Design</a></li>
-            <li><a href="http://scanfcode.com/category/back-end-development/">PHP</a></li>
-            <li><a href="http://scanfcode.com/category/java-programming-language/">Java</a></li>
-            <li><a href="http://scanfcode.com/category/android/">Android</a></li>
-            <li><a href="http://scanfcode.com/category/templates/">Templates</a></li>
-          </ul>
-        </div>
+            <div class="col-xs-6 col-md-3">
+                <h6>Categories</h6>
+                <ul class="footer-links">
+                    <li><a href="http://scanfcode.com/category/c-language/">C</a></li>
+                    <li><a href="http://scanfcode.com/category/front-end-development/">UI Design</a></li>
+                    <li><a href="http://scanfcode.com/category/back-end-development/">PHP</a></li>
+                    <li><a href="http://scanfcode.com/category/java-programming-language/">Java</a></li>
+                    <li><a href="http://scanfcode.com/category/android/">Android</a></li>
+                    <li><a href="http://scanfcode.com/category/templates/">Templates</a></li>
+                </ul>
+            </div>
 
-        <div class="col-xs-6 col-md-3">
-          <h6>Quick Links</h6>
-          <ul class="footer-links">
-            <li><a href="http://scanfcode.com/about/">About Us</a></li>
-            <li><a href="http://scanfcode.com/contact/">Contact Us</a></li>
-            <li><a href="http://scanfcode.com/contribute-at-scanfcode/">Contribute</a></li>
-            <li><a href="http://scanfcode.com/privacy-policy/">Privacy Policy</a></li>
-            <li><a href="http://scanfcode.com/sitemap/">Sitemap</a></li>
-          </ul>
+            <div class="col-xs-6 col-md-3">
+                <h6>Quick Links</h6>
+                <ul class="footer-links">
+                    <li><a href="http://scanfcode.com/about/">About Us</a></li>
+                    <li><a href="http://scanfcode.com/contact/">Contact Us</a></li>
+                    <li><a href="http://scanfcode.com/contribute-at-scanfcode/">Contribute</a></li>
+                    <li><a href="http://scanfcode.com/privacy-policy/">Privacy Policy</a></li>
+                    <li><a href="http://scanfcode.com/sitemap/">Sitemap</a></li>
+                </ul>
+            </div>
         </div>
-      </div>
-      <hr>
+        <hr>
     </div>
     <div class="container">
-      <div class="row">
-        <div class="col-md-8 col-sm-6 col-xs-12">
-          <p class="copyright-text">Copyright &copy; 2021 All Rights Reserved by JASS</p>
-        </div>
+        <div class="row">
+            <div class="col-md-8 col-sm-6 col-xs-12">
+                <p class="copyright-text">Copyright &copy; 2021 All Rights Reserved by JASS</p>
+            </div>
 
-        <div class="col-md-4 col-sm-6 col-xs-12">
-          <ul class="social-icons">
-            <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-            <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-            <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
-            <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>   
-          </ul>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <ul class="social-icons">
+                    <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                    <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
+                    <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+                </ul>
+            </div>
         </div>
-      </div>
     </div>
 </footer>
