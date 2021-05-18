@@ -6,6 +6,7 @@ import { FeedApiCallsService } from '../../services/feed-api-calls.service';
 import { CookieService } from 'ngx-cookie-service';
 import { YoutubeUploadComponent } from '../youtube-upload/youtube-upload.component'
 import { MatDialog } from '@angular/material/dialog'
+import { UserAuthService } from 'src/app/services/user-auth.service';
 
 @Component({
   selector: 'app-post-create',
@@ -20,60 +21,66 @@ export class PostCreateComponent implements OnInit {
   disabledBox2 = true
   disabledBox3 = true
   disabledBox4 = true
-  subject_array = ["One","Two","Three"]
+  subject_array = []
+  ass_id=""
+  lec_id=""
+  video_id=""
+  subject_id=""
+  forum_id=""
+  title=""
+  description=""
 
-  PostSubmit(data){
-    var ass_id="",lec_id="",video_id="",subject_id="",forum_id="",title="",description=""
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+}
+
+  async PostSubmit(data){
+
+    var assign_iden
+    var lecture_iden
+    var random_forum_id
+
+    if(data.enableforum == true){
+      await this.api_call.get_forum_id(Math.random().toString(36).substring(2,7)).then((result) => {
+        random_forum_id = result['data']['forum_id'];
+        console.warn(random_forum_id)
+      }, (error) => {
+        console.warn(error)
+      });      
+    }
 
     if(data.enableassignment == true){
-      ass_id = this.AssignSubmit(data.assignment_title,data.assignment_description,data.assignment_link_1,data.assignment_link_2)
+      await this.api_call.submit_assignment_teacher(data.assignment_title,data.assignment_description,data.assignment_link_1,data.assignment_link_2).then((result) => {
+        assign_iden = result['data']['assignment_id'];
+        console.error(assign_iden)
+      }, (error) => {
+        alert("Check Console")
+        console.warn(error)
+      })
     }
 
     if(data.enablelecture ==true){
-      lec_id = this.LectureSubmit(data.lecture_title,data.lecture_description,data.lecture_link_1,data.lecture_link_2)
+      await this.api_call.submit_lecture_teacher(data.lecture_title,data.lecture_description,data.lecture_link_1,data.lecture_link_2).then((result) => {
+        lecture_iden = result['data']['lecture_id'];
+        console.warn(lecture_iden)
+      }, (error) => {
+        alert("Check console")
+        console.warn(error)
+      })
     }
-    title = data.title
-    description = data.description
-    subject_id = data.subject
-    //console.warn(ass_id, lec_id, video_id, subject_id, forum_id, title, description)
-    this.api_call.post_submit(ass_id, lec_id, video_id, subject_id, forum_id,title,description).subscribe((response) => {
+
+    this.title = data.title
+    this.description = data.description
+    this.subject_id = data.subject
+
+    console.warn(assign_iden, lecture_iden, this.video_id, this.subject_id, random_forum_id, this.title, this.description)
+
+    this.api_call.post_submit(assign_iden, lecture_iden, this.video_id, this.subject_id, random_forum_id, this.title, this.description).then((response) => {
       console.warn(response)
       this.router.navigateByUrl('forum/feed')
     },(error) => {
       console.error(error)
     })
-  }
-
-  AssignSubmit(title, description, link1, link2){
-    var ass_id
-    this.api_call.submit_assignment_teacher(title, description, link1, link2).subscribe((result) => { 
-      console.warn(result)
-      if(result['success'] == true){
-        //this.router.navigate(['./forum/feed'])
-        ass_id = result['data']['assignment_id']
-        //console.warn(ass_id)
-      }
-    }, (error) => {
-      console.warn(error)
-    })
-    //console.warn(ass_id)
-    return ass_id
-  }
-
-  LectureSubmit(title, description, link1, link2){
-    var lec_id
-    this.api_call.submit_lecture_teacher(title, description, link1, link2).subscribe((result) => { 
-      console.warn(result)
-      if(result['success'] == true){
-        //this.router.navigate(['./forum/feed'])
-        lec_id = result['data']['lecture_id']
-        //console.warn(lec_id)
-      }
-    }, (error) => {
-      console.warn(error)
-    })
-    //console.warn(lec_id)
-    return lec_id
   }
 
   post_form = new FormGroup({
@@ -89,7 +96,8 @@ export class PostCreateComponent implements OnInit {
     lecture_title : new FormControl(),
     lecture_description : new FormControl(),
     lecture_link_1 : new FormControl(),
-    lecture_link_2 : new FormControl()
+    lecture_link_2 : new FormControl(),
+    enableforum : new FormControl()
   })
 
   enableBox1() {
@@ -109,14 +117,33 @@ export class PostCreateComponent implements OnInit {
     p.removeAttribute('hidden');
   }
 
+  AdminPanel(){
+    this.uauth.check_admin().then((response) => {
+      if(response['success'] == true){
+        this.router.navigateByUrl('admin-panel/admin-home')
+      }
+    }, (error) => {
+      alert("You are not Authorized")
+      this.router.navigateByUrl('dashboard/admin')
+    })
+  }
+
+
   constructor(private api_call : FeedApiCallsService,
               private router : Router,
               private cookie : CookieService,
-              private dialog : MatDialog) {
+              private dialog : MatDialog,
+              private uauth : UserAuthService) {
     // user.get_user_profile_details()
     // .subscribe(result => {
     //   this.profile_details = result
     // })
+    api_call.get_subjects().subscribe((res) => {
+      this.subject_array = res['data']
+    }, (error) => {
+      alert("Check console")
+      console.warn(error)
+    })
   }
 
   file: File;

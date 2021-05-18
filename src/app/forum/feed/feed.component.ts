@@ -13,40 +13,46 @@ export class FeedComponent implements OnInit {
 
   feed_call
   cookieExists
-  isAdmin
+  
+  assignment; lecture; video;
 
   constructor(private feed : FeedApiCallsService,
               private cookie : CookieService,
               private router : Router,
-              private uauth : UserAuthService) {
-    this.feed.getData().subscribe((res) => {
-      this.feed_call = res
+              private uauth : UserAuthService) { //TODO: hit admin and coordinator for access check (GET) and redirect to any one
+    this.feed.get_feed().then((res) => {
+      this.feed_call = res['data']
     }, (error) => {
       alert("Check Console")
       console.error(error)
     })
+    // feed.getData().then((res) => {
+    //   this.feed_call = res
+    // }, (error) => {
+    //   console.error(error)
+    // })
    }
 
-  //  async AdminPanel(){
-  //    var res = await this.uauth.check_admin()
-  //    this.isAdmin = res['success']
-  //    if(this.isAdmin == true){
-  //       this.router.navigateByUrl('admin-panel/admin-home')
-  //     }else{
-  //       alert("You are not authorized")
-  //       this.router.navigateByUrl('dashboard/admin')
-  //    //console.warn(res['success'])
-  //   }
-  // }
-
   AdminPanel(){
-    this.uauth.check_admin().subscribe((response) => {
+    this.uauth.check_admin().then((response) => {
       if(response['success'] == true){
         this.router.navigateByUrl('admin-panel/admin-home')
       }
     }, (error) => {
       alert("You are not Authorized")
       this.router.navigateByUrl('dashboard/admin')
+    })
+  }
+
+  logout(){
+    this.uauth.user_logout().then((result) => {
+      if(result['success'] == true){
+        console.log("Successfully logged out")
+        this.cookie.delete('Test')
+      }
+      this.router.navigateByUrl('forum/home')
+    }, (error) => {
+      console.error(error)
     })
   }
 

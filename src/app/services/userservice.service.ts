@@ -8,45 +8,37 @@ import { CookieService } from 'ngx-cookie-service';
 export class UserserviceService {
   constructor(private http : HttpClient, private cookie : CookieService) { }
 
-  api_url = ''
-  auth = 'E8QQ6sdv3iHwGnoufSKfOVzY5n7B6DPlJtN0OLXD9yO9JA46Mx0Ss3TMPwX675t7'
+  api_url = 'a7510e54d810.ngrok.io'
+  auth = 'nVB2UCs5b35BRLDI581k0ffq6F1wE4YLviMlIPPnwsmpTgRG9klgOYVYZQt942LS'
 
   send_registration_data(form_data){
     var api_call = {
       "action" : "signup",
       "data" : {
-          "user_f_name" : form_data.first_name,
-          "user_m_name" : form_data.middle_name,
-          "user_l_name" : form_data.last_name,
-          "user_email" : form_data.email,
-          "user_password" : form_data.password,
-          "user_security_question" : form_data.security_ques,
-          "user_security_answer" : form_data.security_ans
+          "first_name": form_data.first_name,
+          "middle_name": form_data.middle_name,
+          "last_name": form_data.last_name,
+          "email": form_data.email,
+          "password": form_data.password,
+          "telegram_id": null,
+          "security_question": form_data.security_ques,
+          "security_answer": form_data.security_ans,
+          "profile_ref": null
       }
     }
-
     let headers = new HttpHeaders()
     headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json")
-
     let json = JSON.stringify(api_call)
-
     let url = 'https://'+this.api_url+'/api/user/cred/'
-
     return this.http.post(url,json,{headers : headers})
-    //console.warn(json)
   }
 
   get_user_profile_details(){
     let cookieValue = this.cookie.get('Test')
-
     let headers = new HttpHeaders()
     headers = headers.set('Authorization',"Token"+" "+this.auth).set('uauth',"Token"+" "+cookieValue).set('Content-Type',"application/json")
-
     let url = 'https://'+this.api_url+'/api/user/prof/read/0'
-
-    //console.warn(this.http.get(url, {headers:headers}))
     return this.http.get(url, {headers:headers})
-    
   }
 
   submit_user_profile_details(data){
@@ -64,16 +56,14 @@ export class UserserviceService {
     let cookieValue = this.cookie.get('Test')
     let headers = new HttpHeaders()
     headers = headers.set('Authorization',"Token"+" "+this.auth).set('uauth',"Token"+" "+cookieValue).set('Content-Type',"application/json")
-
     var json = JSON.stringify(api_call)
-
     return this.http.post(url,json,{headers:headers})
   }
 
 
   raise_ticket(data,id){
     let url = 'https://'+this.api_url+'/api/analytics/ticket/'
-    var api_call = { "ticket_body" : id+"||"+data.req_type+"||"+data.contact+"||"+data.request }
+    var api_call = { "body" : id+"||"+data.req_type+"||"+data.request }
     var json = JSON.stringify(api_call)
     console.log(json)
     let cookieValue = this.cookie.get('Test')

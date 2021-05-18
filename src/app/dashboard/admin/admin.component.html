@@ -71,16 +71,6 @@
 <div class="container" id="ticket" style="width: 700px;" hidden>
     <form [formGroup]="ticket_form" (ngSubmit)="RaiseTicket(ticket_form.value)">
         <div class="form-group">
-            <label>Contact Info : Email</label>
-            <input type="email" class="form-control" formControlName="contact" [ngClass]="{
-                'is-invalid':ticket_form.get('contact').touched && ticket_form.get('contact').invalid}">
-            <div *ngIf="ticket_form.get('contact').touched && ticket_form.get('contact').invalid"
-                class="invalid-feedback">
-                <div *ngIf="ticket_form.get('contact').errors.required">Email is Required</div>
-                <div *ngIf="ticket_form.get('contact').errors.email">Enter proper email</div>
-            </div>
-        </div>
-        <div class="form-group">
             <label>Special Request</label>
             <input type="text" class="form-control" formControlName="request" [ngClass]="{
                 'is-invalid':ticket_form.get('request').touched && ticket_form.get('request').invalid}">
@@ -98,6 +88,7 @@
                 <option value="admin_access">Admin Access</option>
                 <option value="coordinator_access">Coordinator Access</option>
                 <option value="privilege_escalation">Escalate Privilege</option>
+                <option value="add_subject">Add Subject</option>
             </select>
             <div *ngIf="ticket_form.get('req_type').touched && ticket_form.get('req_type').invalid"
                 class="invalid-feedback">

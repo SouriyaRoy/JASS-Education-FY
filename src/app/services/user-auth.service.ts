@@ -9,12 +9,16 @@ export class UserAuthService {
 
   constructor(private http : HttpClient, private cookie : CookieService) { }
 
-  api_url = ''
-  auth = 'E8QQ6sdv3iHwGnoufSKfOVzY5n7B6DPlJtN0OLXD9yO9JA46Mx0Ss3TMPwX675t7'
+  api_url = 'a7510e54d810.ngrok.io'
+  auth = 'nVB2UCs5b35BRLDI581k0ffq6F1wE4YLviMlIPPnwsmpTgRG9klgOYVYZQt942LS'
+  
+  isAdmin = false
+  isCoor = false
+  isUser = true
 
   public cookieValue = this.cookie.get('Test')
 
-  user_login(formdata) {
+  async user_login(formdata) {
     let api_call = {
       "action" : "signin",
       "data" : {
@@ -24,32 +28,31 @@ export class UserAuthService {
     }
     let url = 'https://'+this.api_url+'/api/user/cred/'
     let json = JSON.stringify(api_call)
-
     let headers = new HttpHeaders()
     headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json")
-    return this.http.post(url, json, {headers : headers})
+    let ret =  await this.http.post(url, json, {headers : headers}).toPromise()
+    if(ret['success']==true){
+      this.cookie.set('Test',ret['data']['JWT'])
+    this.check_admin().then((result1) => {
+      if(result1['success'] == true){
+        this.isAdmin = true
+      }
+    }, (error) => {console.error(error)})
+    this.check_coordinator().then((result2) => {
+      if(result2['success'] == true){
+        this.isCoor = true
+      }
+    }, (error) => {console.error(error)})
+    }
+    
+    return [ret, this.isAdmin, this.isCoor, this.isUser]
   }
 
-  // async check_admin() {
-  //   var isAdmin : boolean
-  //   let url = 'https://'+this.api_url+'/api/admin/cred/0'
-  //   let headers = new HttpHeaders()
-  //   headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json").set('uauth',"Token"+" "+this.cookieValue)
-  //   try{
-  //     var response = await this.http.get(url, {headers:headers}).toPromise()
-  //     console.log(response)
-  //     return response
-  //   }catch(e){
-  //     console.log("Warning", e)
-  //     return {"success": false}
-  //   }   
-  // }
-
-  check_admin() {
+  async check_admin() {
     let url = 'https://'+this.api_url+'/api/admin/cred/0'
     let headers = new HttpHeaders()
     headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json").set('uauth',"Token"+" "+this.cookieValue)
-    var response = this.http.get(url, {headers:headers})
+    var response = await this.http.get(url, {headers:headers}).toPromise()
     console.log(response)
     return response
   }
@@ -61,10 +64,22 @@ export class UserAuthService {
     return this.http.get(url,{headers:headers})
   }
 
-  // check_coordinator_teacher(hash) {
-  //   let api_call
-  //   let json = JSON.stringify(api_call)
-  //   return this.http.post(this.url,json)
-  // }
+
+  async user_logout(){
+    let url = 'https://'+this.api_url+'/api/user/cred/87795962440396049328460600526719'
+    let headers = new HttpHeaders()
+    headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json").set('uauth',"Token"+" "+this.cookieValue)
+    return await this.http.delete(url, {headers:headers}).toPromise()  
+  }
+
+  async check_coordinator(){
+    let url = 'https://'+this.api_url+'/api/admin/cred/0'
+    let headers = new HttpHeaders()
+    headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json").set('uauth',"Token"+" "+this.cookieValue)
+    var response = await this.http.get(url, {headers:headers}).toPromise()
+    console.log(response)
+    return response
+  }
+
 }
 

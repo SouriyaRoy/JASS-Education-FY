@@ -38,6 +38,7 @@ export class SignupComponent implements OnInit {
       data.security_ans=null;
 
     this.user.send_registration_data(data).subscribe((receive) => {
+      console.log(receive)
       if(receive['success']==true){
         this.cookieService.set('Test',receive['data']['JWT'])
         this.router.navigateByUrl('forum/feed')

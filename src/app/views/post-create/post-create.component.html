@@ -63,7 +63,7 @@
                         <h4>Select Subject</h4>
                     </label>
                     <select class="form-control" formControlName="subject">
-                        <option *ngFor="let item of subject_array" value="{{item}}">{{item}}</option>
+                        <option *ngFor="let item of subject_array" value="{{item.subject_id}}">{{item.subject_name}}</option>
                     </select>
                 </div>
                 <br>
@@ -89,6 +89,13 @@
                         <input class="form-check-input" type="checkbox" (click)="enableBox3()">
                         <label class="form-check-label">
                             Video
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox"
+                            formControlName="enableforum">
+                        <label class="form-check-label">
+                            Is a Forum?
                         </label>
                     </div>
                     <!--<div class="form-check">

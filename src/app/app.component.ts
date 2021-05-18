@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
     private router : Router){
     this.cookieExists = this.cookie.check('Test')
     if (this.cookieExists) {
-      console.warn("YES")
+      //console.warn("YES")
       this.router.navigateByUrl('forum/feed')
     }else{
       this.router.navigateByUrl('forum/home')

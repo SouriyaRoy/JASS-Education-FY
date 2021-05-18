@@ -23,7 +23,6 @@ export class AdminComponent implements OnInit {
   }
 
   ticket_form = new FormGroup({
-    contact : new FormControl('',[Validators.required, Validators.email]),
     request : new FormControl('',[Validators.required, Validators.minLength(2)]),
     req_type : new FormControl('',[Validators.required]),
   })
@@ -31,10 +30,10 @@ export class AdminComponent implements OnInit {
   RaiseTicket(data){
     //console.warn(data)
     this.uauth_service.get_user_data().subscribe((response) => {
-      this.user_id = response['data']['user_credential_id']
-      
+      this.user_id = response['data']['id']
+      console.log(this.user_id)
       this.uservice.raise_ticket(data,this.user_id).subscribe((response) => {
-        alert("Ticket Raised Successfully with number : " + response['data']['ticket_id'])
+        alert("Ticket Raised Successfully with number : " + response['data']['id'])
         this.router.navigateByUrl('forum/feed')
       }, (error) => {
         console.error(error)

@@ -31,12 +31,18 @@
                 class="invalid-feedback">
                 <div *ngIf="loginForm.get('password').errors.required">Password is Required</div>
                 <div *ngIf="loginForm.get('password').errors.minlength">Password must be of 8 characters</div>
-                <!-- <div *ngIf = "signupForm.get('password').errors.pattern">Invalid pattern</div> -->
             </div>
         </div>
-        <div class="col-sm-12 center" style="margin-right: 37%;">
-            <button class="center-text" mat-raised-button color="accent" class="reg_button" type="submit"
+        <br>
+        <div class="col-sm-6 center" style="margin-right: 42%; text-align: center;">
+            <button class="center-text" mat-raised-button color="accent" class="reg_button" type="submit" style="width:95px"
                 [disabled]="!loginForm.valid">Login</button>
         </div>
+        <div class="col-sm-6 center" style="text-align: center;">
+            <a style="text-decoration: none;" routerLink="../signup"><button class="btn btn-warning">Go Back</button></a>
+        </div>
     </form>
+    <div id="error_message" style="text-align: center; margin: auto; width: auto; color: red;">
+        <!--shows some error message-->
+    </div>
 </div>
