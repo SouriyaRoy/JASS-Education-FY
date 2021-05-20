@@ -10,7 +10,7 @@ export class UserAuthService {
 
   constructor(private http : HttpClient, private cookie : CookieService) { }
 
-  api_url = '3644378a65e0.ngrok.io'
+  api_url = '8b3ba7fc7573.ngrok.io'
   auth = 'lMyWq54TdEr2CwDoVQGZsAo0Nvekc2G7OgJZIosPrE3e9qJru57lUKUI4up6orny'
   
   public cookieValue = this.cookie.get('Test')
@@ -31,22 +31,22 @@ export class UserAuthService {
     console.log(ret)
 
     if(ret['success']==true){
-      var isAdmin = false; var isCoor = false
+      var check = 0
       this.cookie.set('Test',ret['data']['JWT'])
       await this.check_admin().then((result1) => {
         console.log(result1)
       if(result1['success'] == true){
-        isAdmin = true
+        check++;
       }
     }, (error) => {console.error(error)}, )
 
     await this.check_coordinator().then((result2) => {
       console.log(result2)
       if(result2['success'] == true){
-        isCoor = true
+        check++
       }
     }, (error) => {console.error(error)})
-    return [isAdmin, isCoor]
+    return check
     }
   }
 
@@ -63,7 +63,7 @@ export class UserAuthService {
   get_user_data(){
     let url = 'https://'+this.api_url+'/api/user/cred/0'
     let headers = new HttpHeaders()
-    headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json").set('uauth',"Token"+" "+this.cookieValue)
+    headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json").set('uauth',"Token"+" "+this.cookie.get('Test'))
     return this.http.get(url,{headers:headers})
   }
 
@@ -71,7 +71,7 @@ export class UserAuthService {
   async user_logout(){
     let url = 'https://'+this.api_url+'/api/user/cred/87795962440396049328460600526719'
     let headers = new HttpHeaders()
-    headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json").set('uauth',"Token"+" "+this.cookieValue)
+    headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json").set('uauth',"Token"+" "+this.cookie.get('Test'))
     return await this.http.delete(url, {headers:headers}).toPromise()  
   }
 

@@ -25,30 +25,42 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-sm-6" (click)="LoginAdmin()">
+        <div class="col-sm-6" *ngIf="isAdmin" (click)="LoginAdmin()">
             <a routerLink="#" style="text-decoration: none;">
                 <div class="card text-center border-dark mb-3">
                     <div class="card-header" style="color: black;">
-                        <h5>Admin/Coordinator</h5>
+                        <h5>Admin</h5>
                     </div>
                     <div class="card-body text-dark">
-                        <h5 class="card-title">Will login as per the privilege</h5>
+                        <h5 class="card-title">Will login as Admin</h5>
                     </div>
                 </div>
             </a>
         </div>
-        <div class="col-sm-6" (click)="LoginUser()">
+        <div class="col-sm-6" *ngIf="isCoor" (click)="LoginCoor()">
             <a routerLink="#" style="text-decoration: none;">
                 <div class="card text-center border-dark mb-3">
                     <div class="card-header" style="color: black;">
-                        <h5>User</h5>
+                        <h5>Coordinator</h5>
                     </div>
                     <div class="card-body text-dark">
-                        <h5 class="card-title">Will login as a normal user</h5>
+                        <h5 class="card-title">Will login as Coordinator</h5>
                     </div>
                 </div>
             </a>
         </div>
+    </div>
+    <div class="row" style="padding-left: 22%; padding-right: 22%;" (click)="LoginUser()">
+        <a routerLink="#" style="text-decoration: none;">
+            <div class="card text-center border-dark mb-3">
+                <div class="card-header" style="color: black;">
+                    <h5>User</h5>
+                </div>
+                <div class="card-body text-dark">
+                    <h5 class="card-title">Will login as a normal user</h5>
+                </div>
+            </div>
+        </a>
     </div>
 </div>
 

@@ -8,10 +8,10 @@ import { CookieService } from 'ngx-cookie-service';
 export class FeedApiCallsService {
   [x: string]: any;
 
-  public cookieValue1 = this.cookie.get('Test')
+  //public cookieValue1 = this.cookie.get('Test')
   //public cookieValue2 = this.cookie.get('Role')
 
-  post_url = '3644378a65e0.ngrok.io'
+  post_url = '8b3ba7fc7573.ngrok.io'
   auth = 'lMyWq54TdEr2CwDoVQGZsAo0Nvekc2G7OgJZIosPrE3e9qJru57lUKUI4up6orny'
 
   asCoor = "13416989436929794359012690353783" //subjects under him
@@ -20,7 +20,6 @@ export class FeedApiCallsService {
   public headers = new HttpHeaders()
   headers = this.headers.set('Authorization',"Token"+" "+this.auth)
                         .set('Content-Type',"application/json")
-                        .set('uauth',"Token"+" "+this.cookieValue1)
                         .set('Access-Control-Allow-Origin',"*") 
 
   async submit_assignment_teacher(title, marks, link1, link2) { //TODO :
@@ -92,15 +91,15 @@ export class FeedApiCallsService {
     return await this.http.post(url,json,{headers:this.headers}).toPromise()
   }
 
-  async get_feed(){
+  async get_feed(){ //TODO : feed as per the choice of enlisted subjects
     //console.warn("The cookieval2 is : " + this.cookieValue2)
     let url = ""
-    if(this.cookie.get('Role') == 'Admin'){
+    if(this.cookie.get('Role') == 'Coor'){
       url = "https://"+this.post_url+"/api/content/post/"+this.asCoor
     }else{
       url = "https://"+this.post_url+"/api/content/post/"+this.asUser
     }
-    return await this.http.get(url,{headers:this.headers}).toPromise()
+    return await this.http.get(url,{headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
   }
 
   async get_specific_post(id){ 
@@ -166,7 +165,7 @@ export class FeedApiCallsService {
 
 
 
-  reply(data,id){ //TODO :
+  reply(data,id){ 
     let url = "https://"+this.post_url+"/api/content/reply/"
     let api_call = {
       "forum_id" : id,
@@ -177,11 +176,15 @@ export class FeedApiCallsService {
     return this.http.post(url,json,{headers:this.headers})
   }
 
-  //TODO: Dynamic user data : student, admin, coordinator all have different get ids
-  get_subjects(){
+  reply_of_reply(data,id){
+    
+  }
+
+  
+  get_subjects(){ //TODO : function to call the subjects in drop-down
     //console.warn("The cookieval2 is : " + this.cookieValue2)
     let url = ""
-    if(this.cookie.get('Role') == 'Admin'){ //TODO : make 3 parts
+    if(this.cookie.get('Role') == 'Coor'){ 
       url = "https://"+this.post_url+"/api/content/subject/87795962440396049328460600526719"
     }else{
       url = "https://"+this.post_url+"/api/content/subject/0"

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2'
+import { AdminService } from '../admin.service';
 
 @Component({
   selector: 'app-user',
@@ -8,7 +10,13 @@ import Swal from 'sweetalert2'
 })
 export class UserComponent implements OnInit {
 
-  constructor() { }
+  user_data
+
+  constructor(private admin : AdminService, private router : Router) {
+    admin.get_all_users().then((res) => {
+      this.user_data = res['data']
+    },(error) => {console.error(error)})
+  }
 
   ngOnInit(): void {
   }
@@ -28,8 +36,6 @@ export class UserComponent implements OnInit {
           'All records has been deleted',
           'success'
         )
-      // For more information about handling dismissals please visit
-      // https://sweetalert2.github.io/#handling-dismissals
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire(
           'Cancelled',
@@ -40,4 +46,95 @@ export class UserComponent implements OnInit {
     })
   }
 
+  Delete(id){
+    Swal.fire({
+      title: 'DELETE?',
+      text: 'You will not be able to recover this data!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        this.admin.delete_user(id).then((res) => {
+          console.warn(res)
+          Swal.fire(
+            'Deleted!',
+            'The user has been deleted',
+            'success'
+          )
+          this.router.navigateByUrl('admin-panel/admin-home', { skipLocationChange: true }).then(() => {
+            this.router.navigate(['admin-panel/user']);
+        }); 
+        })
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled',
+          'The operation is Cancelled',
+          'error'
+        )
+      }
+    })
+  }
+
+  MakeAdmin(id){
+    Swal.fire({
+      title: 'Make Admin?',
+      text: 'You will not be able to revert back',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        this.admin.make_admin(id).then((res) => {
+          console.warn(res)
+          Swal.fire(
+            'done!',
+            'The user has been deleted',
+            'success'
+          )
+        //   this.router.navigateByUrl('admin-panel/admin-home', { skipLocationChange: true }).then(() => {
+        //     this.router.navigate(['admin-panel/user']);
+        // }); 
+        })
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled',
+          'The operation is Cancelled',
+          'error'
+        )
+      }
+    })
+  }
+  MakeCoor(id){
+    Swal.fire({
+      title: 'Make Coordinator?',
+      text: 'You will not be able to revert back',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        this.admin.make_coordinator(id).then((res) => {
+          console.warn(res)
+          Swal.fire(
+            'Deleted!',
+            'The user has been deleted',
+            'success'
+          )
+        //   this.router.navigateByUrl('admin-panel/admin-home', { skipLocationChange: true }).then(() => {
+        //     this.router.navigate(['admin-panel/user']);
+        // }); 
+        })
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled',
+          'The operation is Cancelled',
+          'error'
+        )
+      }
+    })
+  }
 }

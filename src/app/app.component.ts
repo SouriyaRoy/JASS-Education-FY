@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import {Router} from '@angular/router'
-import { CookieComponent } from './cookie/cookie.component';
 
 @Component({
   selector: 'app-root',
@@ -12,23 +11,21 @@ export class AppComponent implements OnInit {
   title = 'JASS';
   active = 'top';
 
-  cookieExists
+  //cookieExists
   
   constructor(private cookie : CookieService, 
     private router : Router){
-    this.cookieExists = this.cookie.check('Test')
-    if (this.cookieExists) {
-      //console.warn("YES")
-      this.router.navigateByUrl('forum/feed')
+    if (cookie.check('Test') && (cookie.get('Role') == 'Admin')) {
+      this.router.navigateByUrl('admin-panel/admin-home')
     }else{
       this.router.navigateByUrl('forum/home')
     }
   }
 
-  Logout(){
-    this.cookie.delete('Test')
-    this.router.navigateByUrl('forum/home')
-  }
+  // Logout(){
+  //   this.cookie.delete('Test')
+  //   this.router.navigateByUrl('forum/home')
+  // }
 
   ngOnInit(){
   }

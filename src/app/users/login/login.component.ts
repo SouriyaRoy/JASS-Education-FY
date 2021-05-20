@@ -18,11 +18,10 @@ export class LoginComponent implements OnInit {
     console.warn(formdata)
     await this.uauth.user_login(formdata).then((receive) => {
       console.warn(receive)
-      if(receive[0]==true || receive[1]==true){
-        //this.cook.set('Test',receive['data']['JWT'])
+      if(receive > 0){
         this.router.navigateByUrl('/users/choose')
-        //this.uauth.check_admin().then()
       }else{
+        this.cook.set('Role','User')
         this.router.navigateByUrl('forum/feed')
       }
     }, (error) => {

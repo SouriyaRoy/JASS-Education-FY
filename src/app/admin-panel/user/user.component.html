@@ -39,15 +39,15 @@
       <th>Last Name</th>
       <th style="text-align: center;">Actions</th>
     </tr>
-    <tr>
-      <td>Alfreds Futterkiste</td>
-      <td>Maria Anders</td>
-      <td>Maria Anders</td>
+    <tr *ngFor="let item of user_data">
+      <td>{{item.id}}</td>
+      <td>{{item.first_name}}</td>
+      <td>{{item.last_name}}</td>
       <td style="text-align: center;">
-          <button class="btn btn-danger">Delete</button>&nbsp;
-          <button class="btn btn-warning">Make Admin</button>&nbsp;
-          <button class="btn btn-success">Make Co-Ordinator</button>
+          <button class="btn btn-danger" (click)="Delete(item.id)">Delete</button>&nbsp;
+          <button class="btn btn-warning" (click)="MakeAdmin(item.id)">Make Admin</button>&nbsp;
+          <button class="btn btn-success" (click)="MakeCoor(item.id)">Make Co-Ordinator</button>
       </td>
     </tr>
-
+    <a routerLink = "../user"><button>ok</button></a>
   </table>
