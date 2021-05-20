@@ -42,7 +42,7 @@ export class PostCreateComponent implements OnInit {
 
     if(data.enableforum == true){
       await this.api_call.get_forum_id(Math.random().toString(36).substring(2,7)).then((result) => {
-        random_forum_id = result['data']['forum_id'];
+        random_forum_id = result['data']['id'];
         console.warn(random_forum_id)
       }, (error) => {
         console.warn(error)
@@ -50,8 +50,8 @@ export class PostCreateComponent implements OnInit {
     }
 
     if(data.enableassignment == true){
-      await this.api_call.submit_assignment_teacher(data.assignment_title,data.assignment_description,data.assignment_link_1,data.assignment_link_2).then((result) => {
-        assign_iden = result['data']['assignment_id'];
+      await this.api_call.submit_assignment_teacher(data.assignment_title,data.total_marks,data.assignment_link_1,data.assignment_link_2).then((result) => {
+        assign_iden = result['data']['id'];
         console.error(assign_iden)
       }, (error) => {
         alert("Check Console")
@@ -60,8 +60,8 @@ export class PostCreateComponent implements OnInit {
     }
 
     if(data.enablelecture ==true){
-      await this.api_call.submit_lecture_teacher(data.lecture_title,data.lecture_description,data.lecture_link_1,data.lecture_link_2).then((result) => {
-        lecture_iden = result['data']['lecture_id'];
+      await this.api_call.submit_lecture_teacher(data.lecture_description,data.lecture_link_1,data.lecture_link_2).then((result) => {
+        lecture_iden = result['data']['id'];
         console.warn(lecture_iden)
       }, (error) => {
         alert("Check console")
@@ -90,10 +90,9 @@ export class PostCreateComponent implements OnInit {
     enableassignment : new FormControl(false),
     enablelecture : new FormControl(false),
     assignment_title : new FormControl(),
-    assignment_description : new FormControl(),
+    total_marks : new FormControl(),
     assignment_link_1 : new FormControl(),
     assignment_link_2 : new FormControl(),
-    lecture_title : new FormControl(),
     lecture_description : new FormControl(),
     lecture_link_1 : new FormControl(),
     lecture_link_2 : new FormControl(),
@@ -117,16 +116,16 @@ export class PostCreateComponent implements OnInit {
     p.removeAttribute('hidden');
   }
 
-  AdminPanel(){
-    this.uauth.check_admin().then((response) => {
-      if(response['success'] == true){
-        this.router.navigateByUrl('admin-panel/admin-home')
-      }
-    }, (error) => {
-      alert("You are not Authorized")
-      this.router.navigateByUrl('dashboard/admin')
-    })
-  }
+  // AdminPanel(){
+  //   this.uauth.check_admin().then((response) => {
+  //     if(response['success'] == true){
+  //       this.router.navigateByUrl('admin-panel/admin-home')
+  //     }
+  //   }, (error) => {
+  //     alert("You are not Authorized")
+  //     this.router.navigateByUrl('dashboard/admin')
+  //   })
+  // }
 
 
   constructor(private api_call : FeedApiCallsService,
@@ -140,6 +139,7 @@ export class PostCreateComponent implements OnInit {
     // })
     api_call.get_subjects().subscribe((res) => {
       this.subject_array = res['data']
+      console.warn(this.subject_array)
     }, (error) => {
       alert("Check console")
       console.warn(error)

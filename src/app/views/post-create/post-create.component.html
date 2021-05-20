@@ -63,7 +63,7 @@
                         <h4>Select Subject</h4>
                     </label>
                     <select class="form-control" formControlName="subject">
-                        <option *ngFor="let item of subject_array" value="{{item.subject_id}}">{{item.subject_name}}</option>
+                        <option *ngFor="let item of subject_array" value="{{item.id}}">{{item.name}}</option>
                     </select>
                 </div>
                 <br>
@@ -109,12 +109,8 @@
                 <div class="" id="assignment_hide" hidden>
                     <h3><i>Assignment Details</i></h3><br>
                     <div class="form-group">
-                        <label>Assignment Title</label>
-                        <input type="text" class="form-control" formControlName="assignment_title">
-                    </div>
-                    <div class="form-group">
                         <label>Assignment Description</label>
-                        <input type="text" class="form-control" formControlName="assignment_description">
+                        <input type="text" class="form-control" formControlName="assignment_title">
                     </div>
                     <div class="form-group">
                         <label>Submit Link 1</label>
@@ -126,13 +122,13 @@
                         <input type="text" class="form-control" formControlName="assignment_link_2"
                             placeholder="Start with https://">
                     </div>
+                    <div class="form-group">
+                        <label>Total Assignment</label>
+                        <input type="number" class="form-control" formControlName="total_marks">
+                    </div>
                 </div><br>
                 <div class="" id="lecture_hide" hidden>
                     <h3><i>Lecture Details</i></h3><br>
-                    <div class="form-group">
-                        <label>Lecture Title</label>
-                        <input type="text" class="form-control" formControlName="lecture_title">
-                    </div>
                     <div class="form-group">
                         <label>Lecture Description</label>
                         <input type="text" class="form-control" formControlName="lecture_description">

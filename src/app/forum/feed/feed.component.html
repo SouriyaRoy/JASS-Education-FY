@@ -18,8 +18,8 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="../../app-cookie">Cookie</a>
         </li>
-        <li class="nav-item">
-          <button class="nav-link btn btn-outline-warning" (click)="AdminPanel()">AdminPanel</button>
+        <li class="nav-item" *ngIf="usercookie === 'Admin'">
+          <button class="nav-link btn btn-outline-warning">AdminPanel</button>
         </li>
         <li>
           <a class="nav-link" routerLink="../../video/search_video">Videos</a>
@@ -29,7 +29,7 @@
         <a style="text-decoration: none;" routerLink="../../views/profile"><button
             class="d-flex btn btn-success">Profile</button></a>
       </div>&nbsp;
-      <div>
+      <div *ngIf="usercookie === 'Admin'">
         <a style="text-decoration: none;" routerLink="../../views/post-create"><button
             class="d-flex btn btn-success">Create Post</button></a>
       </div>&nbsp;
@@ -39,7 +39,7 @@
     </div>
   </div>
 </nav>
-<!-- <br><br>
+<br><br>
 <div *ngFor="let item of feed_call">
   <br>
   <div class="container feed-content feed-border">
@@ -47,17 +47,17 @@
     <a [routerLink]='["/views/show-post",item.post_id]'>
       <div class="row">
         <div class="col-md-7">
-          <h5>{{item.post_name}}</h5>
+          <h5>{{item.name}}</h5>
           <div class="row">
-            <div class="col-md-6"><i>{{item.user_credential_id}}</i></div>
-            <div class="col-md-6"><i>{{item.subject_id}}</i></div>
+            <div class="col-md-6"><i>{{item.user_ref}}</i></div>
+            <div class="col-md-6"><i>{{item.subject_ref}}</i></div>
           </div>
         </div>
         <div class="col-md-5">Options Down
           <div class="row" style="padding-top: 10px;">
-            <div class="col-md-4" *ngIf="item.assignment_id"><span class="red-dot"></span>Assignment</div>
-            <div class="col-md-4" *ngIf="item.lecture_id"><span class="green-dot"></span>Lecture</div>
-            <div class="col-md-4" *ngIf="item.video_id"><span class="blue-dot"></span>Video</div>
+            <div class="col-md-4" *ngIf="item.assignment_ref"><span class="red-dot"></span>Assignment</div>
+            <div class="col-md-4" *ngIf="item.lecture_ref"><span class="green-dot"></span>Lecture</div>
+            <div class="col-md-4" *ngIf="item.video_ref"><span class="blue-dot"></span>Video</div>
           </div>
         </div>
       </div>
@@ -65,9 +65,9 @@
     <br>
   </div>
   <br>
-</div> -->
+</div>
 <br><br><br>
-<div *ngFor="let item of feed_call">
+<!-- <div *ngFor="let item of feed_call">
   <br>
   <div class="container feed-content feed-border">
     <br>
@@ -92,7 +92,7 @@
     <br>
   </div>
   <br>
-</div>
+</div> -->
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 

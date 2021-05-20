@@ -1,6 +1,7 @@
 <head>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 </head>
 <nav class="navbar navbar-expand-lg navbar-light bg-warning bg-gradient fixed-top">
     <div class="container-fluid">
@@ -8,7 +9,51 @@
         <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button> -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/users/login">Login</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
 <br><br><br>
-<p>choose works!</p>
+
+<div style="text-align: center; margin: auto; width: auto; padding-top: 5%; padding-bottom: 5%;">
+    <h4><i>Login as</i></h4>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6" (click)="LoginAdmin()">
+            <a routerLink="#" style="text-decoration: none;">
+                <div class="card text-center border-dark mb-3">
+                    <div class="card-header" style="color: black;">
+                        <h5>Admin/Coordinator</h5>
+                    </div>
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">Will login as per the privilege</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-sm-6" (click)="LoginUser()">
+            <a routerLink="#" style="text-decoration: none;">
+                <div class="card text-center border-dark mb-3">
+                    <div class="card-header" style="color: black;">
+                        <h5>User</h5>
+                    </div>
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">Will login as a normal user</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+<br>
+<main>
+    <router-outlet></router-outlet>
+</main>

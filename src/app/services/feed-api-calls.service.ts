@@ -8,30 +8,28 @@ import { CookieService } from 'ngx-cookie-service';
 export class FeedApiCallsService {
   [x: string]: any;
 
-  public cookieValue = this.cookie.get('Test')
+  public cookieValue1 = this.cookie.get('Test')
+  //public cookieValue2 = this.cookie.get('Role')
 
-  post_url = 'a7510e54d810.ngrok.io'
-  auth = 'nVB2UCs5b35BRLDI581k0ffq6F1wE4YLviMlIPPnwsmpTgRG9klgOYVYZQt942LS'
+  post_url = '3644378a65e0.ngrok.io'
+  auth = 'lMyWq54TdEr2CwDoVQGZsAo0Nvekc2G7OgJZIosPrE3e9qJru57lUKUI4up6orny'
 
-  asAdmin = "87795962440396049328460600526719" //all posts
   asCoor = "13416989436929794359012690353783" //subjects under him
-  asStudent = "0"// all subjects enrolled
-
-  public cookieValue = this.cookie.get('Test')
+  asUser = "0"// all subjects enrolled
 
   public headers = new HttpHeaders()
   headers = this.headers.set('Authorization',"Token"+" "+this.auth)
                         .set('Content-Type',"application/json")
-                        .set('uauth',"Token"+" "+this.cookieValue)
-                        .set('Access-Control-Allow-Origin',"*")
+                        .set('uauth',"Token"+" "+this.cookieValue1)
+                        .set('Access-Control-Allow-Origin',"*") 
 
-  async submit_assignment_teacher(title, description, link1, link2) { //TODO :
+  async submit_assignment_teacher(title, marks, link1, link2) { //TODO :
 
     var api_call = {
-      "assignment_name": title,
-      "assignment_body": description,
-      "assignment_external_url_1": link1,
-      "assignment_external_url_2": link2
+      "body": title,
+      "external_url_1": link1,
+      "external_url_2": link2,
+      "total_marks": marks
     }
     let json = JSON.stringify(api_call)
     let url = "https://"+this.post_url+"/api/content/assignment/"
@@ -40,13 +38,12 @@ export class FeedApiCallsService {
     return await this.http.post(url, json,{headers:this.headers}).toPromise()
   }
 
-  async submit_lecture_teacher(title, description, link1, link2) { //TODO :
+  async submit_lecture_teacher(description, link1, link2) { //TODO :
 
     var api_call = {
-      "lecture_name": title,
-      "lecture_body": description,
-      "lecture_external_url_1": link1,
-      "lecture_external_url_2": link2
+      "body": description,
+      "external_url_1": link1,
+      "external_url_2": link2
     }
     let json = JSON.stringify(api_call)
     let url = "https://"+this.post_url+"/api/content/lecture/"
@@ -78,15 +75,15 @@ export class FeedApiCallsService {
     description=null;
 
     var api = {
-      "video_id" : video_id,
+      "video_ref" : video_id,
   
-      "forum_id" : forum_id,
-      "assignment_id" : ass_id,
-      "lecture_id" : lec_id,
-      "subject_id" : subject_id,
+      "forum_ref" : forum_id,
+      "assignment_ref" : ass_id,
+      "lecture_ref" : lec_id,
+      "subject_ref" : subject_id,
                   
-      "post_name" : title,
-      "post_body" : description
+      "name" : title,
+      "body" : description
     }
 
     let json = JSON.stringify(api)
@@ -95,8 +92,14 @@ export class FeedApiCallsService {
     return await this.http.post(url,json,{headers:this.headers}).toPromise()
   }
 
-  async get_feed(){ //TODO :
-    let url = "https://"+this.post_url+"/api/content/post/"+this.asCoor
+  async get_feed(){
+    //console.warn("The cookieval2 is : " + this.cookieValue2)
+    let url = ""
+    if(this.cookie.get('Role') == 'Admin'){
+      url = "https://"+this.post_url+"/api/content/post/"+this.asCoor
+    }else{
+      url = "https://"+this.post_url+"/api/content/post/"+this.asUser
+    }
     return await this.http.get(url,{headers:this.headers}).toPromise()
   }
 
@@ -176,7 +179,13 @@ export class FeedApiCallsService {
 
   //TODO: Dynamic user data : student, admin, coordinator all have different get ids
   get_subjects(){
-    let url = "https://"+this.post_url+"/api/content/subject/"+this.asCoor
+    //console.warn("The cookieval2 is : " + this.cookieValue2)
+    let url = ""
+    if(this.cookie.get('Role') == 'Admin'){ //TODO : make 3 parts
+      url = "https://"+this.post_url+"/api/content/subject/87795962440396049328460600526719"
+    }else{
+      url = "https://"+this.post_url+"/api/content/subject/0"
+    }
     return this.http.get(url, {headers: this.headers})
   }
 

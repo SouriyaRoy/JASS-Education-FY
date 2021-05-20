@@ -12,7 +12,7 @@ import { FeedApiCallsService } from '../../services/feed-api-calls.service';
 export class FeedComponent implements OnInit {
 
   feed_call
-  cookieExists
+  cookieExists; usercookie;
   
   assignment; lecture; video;
 
@@ -33,22 +33,23 @@ export class FeedComponent implements OnInit {
     // })
    }
 
-  AdminPanel(){
-    this.uauth.check_admin().then((response) => {
-      if(response['success'] == true){
-        this.router.navigateByUrl('admin-panel/admin-home')
-      }
-    }, (error) => {
-      alert("You are not Authorized")
-      this.router.navigateByUrl('dashboard/admin')
-    })
-  }
+  // AdminPanel(){
+  //   this.uauth.check_admin().then((response) => {
+  //     if(response['success'] == true){
+  //       this.router.navigateByUrl('admin-panel/admin-home')
+  //     }
+  //   }, (error) => {
+  //     alert("You are not Authorized")
+  //     this.router.navigateByUrl('dashboard/admin')
+  //   })
+  // }
 
   logout(){
     this.uauth.user_logout().then((result) => {
       if(result['success'] == true){
+        this.cookie.deleteAll('Test')
+        this.cookie.delete('Role')
         console.log("Successfully logged out")
-        this.cookie.delete('Test')
       }
       this.router.navigateByUrl('forum/home')
     }, (error) => {
@@ -58,5 +59,6 @@ export class FeedComponent implements OnInit {
 
   ngOnInit(): void {
     this.cookieExists = this.cookie.check('Test')
+    this.usercookie = this.cookie.get('Role')
   }
 }

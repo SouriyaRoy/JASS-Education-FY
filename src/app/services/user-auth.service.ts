@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient,HttpHeaders} from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
+import { delay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -9,13 +10,9 @@ export class UserAuthService {
 
   constructor(private http : HttpClient, private cookie : CookieService) { }
 
-  api_url = 'a7510e54d810.ngrok.io'
-  auth = 'nVB2UCs5b35BRLDI581k0ffq6F1wE4YLviMlIPPnwsmpTgRG9klgOYVYZQt942LS'
+  api_url = '3644378a65e0.ngrok.io'
+  auth = 'lMyWq54TdEr2CwDoVQGZsAo0Nvekc2G7OgJZIosPrE3e9qJru57lUKUI4up6orny'
   
-  isAdmin = false
-  isCoor = false
-  isUser = true
-
   public cookieValue = this.cookie.get('Test')
 
   async user_login(formdata) {
@@ -30,31 +27,37 @@ export class UserAuthService {
     let json = JSON.stringify(api_call)
     let headers = new HttpHeaders()
     headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json")
-    let ret =  await this.http.post(url, json, {headers : headers}).toPromise()
+    let ret = await this.http.post(url, json, {headers : headers}).toPromise()
+    console.log(ret)
+
     if(ret['success']==true){
+      var isAdmin = false; var isCoor = false
       this.cookie.set('Test',ret['data']['JWT'])
-    this.check_admin().then((result1) => {
+      await this.check_admin().then((result1) => {
+        console.log(result1)
       if(result1['success'] == true){
-        this.isAdmin = true
+        isAdmin = true
       }
-    }, (error) => {console.error(error)})
-    this.check_coordinator().then((result2) => {
+    }, (error) => {console.error(error)}, )
+
+    await this.check_coordinator().then((result2) => {
+      console.log(result2)
       if(result2['success'] == true){
-        this.isCoor = true
+        isCoor = true
       }
     }, (error) => {console.error(error)})
+    return [isAdmin, isCoor]
     }
-    
-    return [ret, this.isAdmin, this.isCoor, this.isUser]
   }
 
   async check_admin() {
     let url = 'https://'+this.api_url+'/api/admin/cred/0'
     let headers = new HttpHeaders()
-    headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json").set('uauth',"Token"+" "+this.cookieValue)
+    headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json").set('uauth',"Token"+" "+this.cookie.get('Test'))
     var response = await this.http.get(url, {headers:headers}).toPromise()
     console.log(response)
     return response
+    //return { "success" : true }
   }
 
   get_user_data(){
@@ -73,13 +76,13 @@ export class UserAuthService {
   }
 
   async check_coordinator(){
-    let url = 'https://'+this.api_url+'/api/admin/cred/0'
+    let url = 'https://'+this.api_url+'/api/content/coordinator/0'
     let headers = new HttpHeaders()
-    headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json").set('uauth',"Token"+" "+this.cookieValue)
+    headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json").set('uauth',"Token"+" "+this.cookie.get('Test'))
     var response = await this.http.get(url, {headers:headers}).toPromise()
     console.log(response)
     return response
+    //return { "success" : true }
   }
-
 }
 

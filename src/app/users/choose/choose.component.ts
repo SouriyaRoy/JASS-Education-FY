@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-choose',
@@ -7,7 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChooseComponent implements OnInit {
 
-  constructor() { }
+  constructor(private cookie : CookieService, private router : Router) { }
+
+  LoginAdmin(){
+    this.cookie.set('Role','Admin')
+    this.router.navigateByUrl('forum/feed')
+  }  
+
+  LoginUser(){
+    this.cookie.set('Role','User')
+    this.router.navigateByUrl('forum/feed')
+  }
 
   ngOnInit(): void {
   }

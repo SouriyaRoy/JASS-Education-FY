@@ -8,8 +8,8 @@ import { CookieService } from 'ngx-cookie-service';
 export class UserserviceService {
   constructor(private http : HttpClient, private cookie : CookieService) { }
 
-  api_url = 'a7510e54d810.ngrok.io'
-  auth = 'nVB2UCs5b35BRLDI581k0ffq6F1wE4YLviMlIPPnwsmpTgRG9klgOYVYZQt942LS'
+  api_url = '3644378a65e0.ngrok.io'
+  auth = 'lMyWq54TdEr2CwDoVQGZsAo0Nvekc2G7OgJZIosPrE3e9qJru57lUKUI4up6orny'
 
   send_registration_data(form_data){
     var api_call = {

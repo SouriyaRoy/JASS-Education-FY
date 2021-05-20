@@ -12,14 +12,15 @@ import { UserAuthService } from '../../services/user-auth.service';
 export class LoginComponent implements OnInit {
 
   cookieExists
+  public loading = false
 
   async loginSubmit(formdata){ 
     console.warn(formdata)
-    await this.signin.user_login(formdata).then((receive) => {
+    await this.uauth.user_login(formdata).then((receive) => {
       console.warn(receive)
-      if(receive[0]['success'] == true && (receive[1]==true && receive[2]==true)){
+      if(receive[0]==true || receive[1]==true){
         //this.cook.set('Test',receive['data']['JWT'])
-        this.router.navigateByUrl('../users/choose')
+        this.router.navigateByUrl('/users/choose')
         //this.uauth.check_admin().then()
       }else{
         this.router.navigateByUrl('forum/feed')
@@ -35,8 +36,7 @@ export class LoginComponent implements OnInit {
     password : new FormControl('',[Validators.required, Validators.minLength(8)])
   })
 
-  constructor(private signin : UserAuthService,
-              private cook : CookieService,
+  constructor(private cook : CookieService,
               private router : Router,
               private uauth : UserAuthService) {
 
