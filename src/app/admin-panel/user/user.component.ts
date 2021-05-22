@@ -60,7 +60,7 @@ export class UserComponent implements OnInit {
           console.warn(res)
           Swal.fire(
             'Deleted!',
-            'The user has been deleted',
+            'The User has been Deleted',
             'success'
           )
           this.router.navigateByUrl('admin-panel/admin-home', { skipLocationChange: true }).then(() => {
@@ -90,13 +90,10 @@ export class UserComponent implements OnInit {
         this.admin.make_admin(id).then((res) => {
           console.warn(res)
           Swal.fire(
-            'done!',
-            'The user has been deleted',
+            'Done!',
+            'The User is now an Admin',
             'success'
           )
-        //   this.router.navigateByUrl('admin-panel/admin-home', { skipLocationChange: true }).then(() => {
-        //     this.router.navigate(['admin-panel/user']);
-        // }); 
         })
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire(
@@ -107,6 +104,7 @@ export class UserComponent implements OnInit {
       }
     })
   }
+  
   MakeCoor(id){
     Swal.fire({
       title: 'Make Coordinator?',
@@ -120,13 +118,19 @@ export class UserComponent implements OnInit {
         this.admin.make_coordinator(id).then((res) => {
           console.warn(res)
           Swal.fire(
-            'Deleted!',
-            'The user has been deleted',
+            'Done!',
+            'The User is now a Coordinator',
             'success'
           )
-        //   this.router.navigateByUrl('admin-panel/admin-home', { skipLocationChange: true }).then(() => {
-        //     this.router.navigate(['admin-panel/user']);
-        // }); 
+        }, (error) => {
+          Swal.fire({
+            title: 'User Already a Coordinator',
+            text: '',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'OK',
+            cancelButtonText: 'Close'
+          })
         })
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire(

@@ -21,6 +21,10 @@
                 <li class="nav-item">
                     <a class="nav-link" style="color: white;" routerLink="/admin-panel/admin-cred/list">Credentials</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: white;"
+                        routerLink="/admin-panel/coordinators/list">Coordinators</a>
+                </li>
                 <li>
                     <a class="nav-link" style="color: white;" routerLink="/admin-panel/subjects/view">Subjects</a>
                 </li>
@@ -32,28 +36,26 @@
     </div>
 </nav>
 <br><br><br>
-<h3>Co-Ordinator Priviledge Edit</h3>
+<h3>Co-Ordinator Edit</h3>
 <div class="container">
-    <form>
-        <label for="co_id">Co-Ordinator ID</label>
-        <input type="text" id="co_id" name="co_id"><!-- make it disabled -->
-
-        <!-- auto populate below fields using data from backend and interpolation concept -->
-        <label for="co_name">Co-Ordinator Name</label>
-        <input type="text" id="co_name" name="co_name">
-        <!-- read from backend and only show the subjects already taken by co-ordinator boxes should be ticked from before -->
-        <!-- <input type="checkbox" [checked]="item.check == 'true'"> use this logic-->
-        <fieldset>
-            <legend>Already Has Priviledge For:</legend>
-            <input type="checkbox" id="subject1" name="" value="">
-            <label for="subject1"> Subject Name</label><br>
-        </fieldset>
-
-        <fieldset>
-            <legend>Asking Priviledge For:</legend>
-            <input type="checkbox" id="subject1" name="" value="">
-            <label for="subject1"> Subject Name</label><br>
-        </fieldset>
+    <!-- <form [formGroup]="coor_edit" (ngSubmit)="Edit(coor_edit.value)">
+        <label for="coor_name">Co-Ordinator Name</label>
+        <input type="text" class="form-control" formControlName="coor_name" value="{{user}}" disabled>
+        <br>
+        <label for="subject_under">Subjects under him/her</label>
+        <ul>
+            <li *ngFor="let item of subject_array">{{item}}</li>
+        </ul>
+        <br>
+        <div class="form-group">
+            <label for="Subjects">
+                <h4>Select Subject</h4>
+            </label>
+            <select class="form-control" formControlName="subject_name">
+                <option *ngFor="let item of subject_array" value="{{item.id}}">{{item.name}}</option>
+            </select>
+        </div>
+        <br>
         <input type="submit" value="Submit">
-    </form>
+    </form> -->
 </div>

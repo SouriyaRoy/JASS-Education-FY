@@ -25,6 +25,9 @@
                     <a class="nav-link" style="color: white;" routerLink="/admin-panel/coordinators/list">Coordinators</a>
                 </li>
                 <li>
+                    <a class="nav-link" style="color: white;" routerLink="/admin-panel/subjects/view">Subjects</a>
+                </li>
+                <li>
                     <a class="nav-link" style="color: white;" routerLink="/admin-panel/tickets">Tickets</a>
                 </li>
             </ul>
@@ -35,13 +38,13 @@
 <h3>Subject Creation</h3>
 
 <div class="container">
-    <form>
+    <form [formGroup]="subject_create" (ngSubmit)="subject(subject_create.value)">
         <label for="sub_name">Subject Name</label>
-        <input type="text" id="sub_name" name="sub_name">
+        <input type="text" class="form-control" formControlName="subject_name">
 
         <label for="subject">Subject Description</label>
-        <textarea id="subject_desc" name="subject_desc" placeholder="Write something.." style="height:200px"></textarea>
+        <textarea class="form-control" formControlName="subject_description" placeholder="Write something.." style="height:200px"></textarea>
 
-        <input type="submit" value="submit">
+        <button type="submit" class="btn btn-primary">Create</button>
     </form>
 </div>

@@ -36,9 +36,9 @@ export class PostCreateComponent implements OnInit {
 
   async PostSubmit(data){
 
-    var assign_iden
-    var lecture_iden
-    var random_forum_id
+    var assign_iden = ""
+    var lecture_iden = ""
+    var random_forum_id = ""
 
     if(data.enableforum == true){
       await this.api_call.get_forum_id(Math.random().toString(36).substring(2,7)).then((result) => {

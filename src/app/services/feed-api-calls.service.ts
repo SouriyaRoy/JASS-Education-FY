@@ -11,7 +11,7 @@ export class FeedApiCallsService {
   //public cookieValue1 = this.cookie.get('Test')
   //public cookieValue2 = this.cookie.get('Role')
 
-  post_url = '8b3ba7fc7573.ngrok.io'
+  post_url = 'https://ec2-13-232-247-239.ap-south-1.compute.amazonaws.com'//'21ed5cde83ca.ngrok.io'
   auth = 'lMyWq54TdEr2CwDoVQGZsAo0Nvekc2G7OgJZIosPrE3e9qJru57lUKUI4up6orny'
 
   asCoor = "13416989436929794359012690353783" //subjects under him
@@ -31,10 +31,10 @@ export class FeedApiCallsService {
       "total_marks": marks
     }
     let json = JSON.stringify(api_call)
-    let url = "https://"+this.post_url+"/api/content/assignment/"
+    let url = this.post_url+"/api/content/assignment/"
 
     console.warn(json)
-    return await this.http.post(url, json,{headers:this.headers}).toPromise()
+    return await this.http.post(url, json,{headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
   }
 
   async submit_lecture_teacher(description, link1, link2) { //TODO :
@@ -45,10 +45,10 @@ export class FeedApiCallsService {
       "external_url_2": link2
     }
     let json = JSON.stringify(api_call)
-    let url = "https://"+this.post_url+"/api/content/lecture/"
+    let url = this.post_url+"/api/content/lecture/"
 
     console.warn(json)
-    return await this.http.post(url, json,{headers:this.headers}).toPromise()
+    return await this.http.post(url, json,{headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
   }
 
   async post_submit(ass_id, lec_id, video_id, subject_id, forum_id,title,description){
@@ -87,17 +87,17 @@ export class FeedApiCallsService {
 
     let json = JSON.stringify(api)
     //console.log(json)
-    let url = "https://"+this.post_url+"/api/content/post/"
-    return await this.http.post(url,json,{headers:this.headers}).toPromise()
+    let url = this.post_url+"/api/content/post/"
+    return await this.http.post(url,json,{headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
   }
 
   async get_feed(){ //TODO : feed as per the choice of enlisted subjects
     //console.warn("The cookieval2 is : " + this.cookieValue2)
     let url = ""
     if(this.cookie.get('Role') == 'Coor'){
-      url = "https://"+this.post_url+"/api/content/post/"+this.asCoor
+      url = this.post_url+"/api/content/post/"+this.asCoor
     }else{
-      url = "https://"+this.post_url+"/api/content/post/"+this.asUser
+      url = this.post_url+"/api/content/post/"+this.asUser
     }
     return await this.http.get(url,{headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
   }
@@ -107,13 +107,13 @@ export class FeedApiCallsService {
 
     let ass_id, lec_id, video_id, user_id, post_url, ass_url, lecture_url, video_url, user_url, post_details, ass_details, lec_details, video_details, user_details
 
-    post_url = "https://"+this.post_url+"/api/content/post/"+id;
-    ass_url = "https://"+this.post_url+"/api/content/assignment/"
-    lecture_url = "https://"+this.post_url+"/api/content/lecture/"
-    video_url = "https://"+this.post_url+"/api/content/video/"
-    user_url = "https://"+this.post_url+"/api/user/cred/"
+    post_url = this.post_url+"/api/content/post/"+id;
+    ass_url = this.post_url+"/api/content/assignment/"
+    lecture_url = this.post_url+"/api/content/lecture/"
+    video_url = this.post_url+"/api/content/video/"
+    user_url = this.post_url+"/api/user/cred/"
 
-    await this.http.get(post_url,{headers:this.headers}).toPromise().then((post) => {
+    await this.http.get(post_url,{headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise().then((post) => {
       post_details = post
       ass_id = post['data']['assignment_id'];
       lec_id = post['data']['lecture_id'];
@@ -125,7 +125,7 @@ export class FeedApiCallsService {
     })
 
     if(ass_id != null){
-      await this.http.get(ass_url+ass_id,{headers:this.headers}).toPromise().then((res1) => {
+      await this.http.get(ass_url+ass_id,{headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise().then((res1) => {
         ass_details = res1
       }, (error) => {
         alert("Check console")
@@ -134,7 +134,7 @@ export class FeedApiCallsService {
     }
     
     if(lec_id != null){
-      await this.http.get(lecture_url+lec_id,{headers:this.headers}).toPromise().then((res2) => {
+      await this.http.get(lecture_url+lec_id,{headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise().then((res2) => {
         lec_details = res2
       }, (error) => {
         alert("Check console")
@@ -143,7 +143,7 @@ export class FeedApiCallsService {
     }
     
     if(video_id != null){
-      await this.http.get(video_url+video_id,{headers:this.headers}).toPromise().then((res3) => {
+      await this.http.get(video_url+video_id,{headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise().then((res3) => {
         lec_details = res3
       }, (error) => {
         alert("Check console")
@@ -152,7 +152,7 @@ export class FeedApiCallsService {
     }
 
     if(user_id != null){
-      await this.http.get(user_url+user_id,{headers:this.headers}).toPromise().then((res4) => {
+      await this.http.get(user_url+user_id,{headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise().then((res4) => {
         user_details = res4
       }, (error) => {
         alert("Check console")
@@ -166,14 +166,14 @@ export class FeedApiCallsService {
 
 
   reply(data,id){ 
-    let url = "https://"+this.post_url+"/api/content/reply/"
+    let url = this.post_url+"/api/content/reply/"
     let api_call = {
       "forum_id" : id,
       "reply_body" : data
   }
     let json = JSON.stringify(api_call)
     //console.log(json)
-    return this.http.post(url,json,{headers:this.headers})
+    return this.http.post(url,json,{headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))})
   }
 
   reply_of_reply(data,id){
@@ -185,21 +185,21 @@ export class FeedApiCallsService {
     //console.warn("The cookieval2 is : " + this.cookieValue2)
     let url = ""
     if(this.cookie.get('Role') == 'Coor'){ 
-      url = "https://"+this.post_url+"/api/content/subject/87795962440396049328460600526719"
+      url = this.post_url+"/api/content/subject/87795962440396049328460600526719"
     }else{
-      url = "https://"+this.post_url+"/api/content/subject/0"
+      url = this.post_url+"/api/content/subject/0"
     }
-    return this.http.get(url, {headers: this.headers})
+    return this.http.get(url, {headers: this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))})
   }
 
 
   async get_forum_id(data){
-    let url = "https://"+this.post_url+"/api/content/forum/"
+    let url = this.post_url+"/api/content/forum/"
     let api_call = {
       "forum_name" : data
     }
     let json = JSON.stringify(api_call)
-    return await this.http.post(url, json, {headers:this.headers}).toPromise()
+    return await this.http.post(url, json, {headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
   }
 
 

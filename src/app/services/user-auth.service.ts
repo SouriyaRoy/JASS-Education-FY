@@ -10,7 +10,7 @@ export class UserAuthService {
 
   constructor(private http : HttpClient, private cookie : CookieService) { }
 
-  api_url = '8b3ba7fc7573.ngrok.io'
+  api_url = 'https://ec2-13-232-247-239.ap-south-1.compute.amazonaws.com'//'21ed5cde83ca.ngrok.io'
   auth = 'lMyWq54TdEr2CwDoVQGZsAo0Nvekc2G7OgJZIosPrE3e9qJru57lUKUI4up6orny'
   
   public cookieValue = this.cookie.get('Test')
@@ -23,7 +23,7 @@ export class UserAuthService {
           "password" : formdata.password
       }
     }
-    let url = 'https://'+this.api_url+'/api/user/cred/'
+    let url = this.api_url+'/api/user/cred/'
     let json = JSON.stringify(api_call)
     let headers = new HttpHeaders()
     headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json")
@@ -51,7 +51,7 @@ export class UserAuthService {
   }
 
   async check_admin() {
-    let url = 'https://'+this.api_url+'/api/admin/cred/0'
+    let url = this.api_url+'/api/admin/cred/0'
     let headers = new HttpHeaders()
     headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json").set('uauth',"Token"+" "+this.cookie.get('Test'))
     var response = await this.http.get(url, {headers:headers}).toPromise()
@@ -61,7 +61,7 @@ export class UserAuthService {
   }
 
   get_user_data(){
-    let url = 'https://'+this.api_url+'/api/user/cred/0'
+    let url = this.api_url+'/api/user/cred/0'
     let headers = new HttpHeaders()
     headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json").set('uauth',"Token"+" "+this.cookie.get('Test'))
     return this.http.get(url,{headers:headers})
@@ -69,14 +69,14 @@ export class UserAuthService {
 
 
   async user_logout(){
-    let url = 'https://'+this.api_url+'/api/user/cred/87795962440396049328460600526719'
+    let url = this.api_url+'/api/user/cred/87795962440396049328460600526719'
     let headers = new HttpHeaders()
     headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json").set('uauth',"Token"+" "+this.cookie.get('Test'))
     return await this.http.delete(url, {headers:headers}).toPromise()  
   }
 
   async check_coordinator(){
-    let url = 'https://'+this.api_url+'/api/content/coordinator/0'
+    let url = this.api_url+'/api/content/coordinator/0'
     let headers = new HttpHeaders()
     headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json").set('uauth',"Token"+" "+this.cookie.get('Test'))
     var response = await this.http.get(url, {headers:headers}).toPromise()

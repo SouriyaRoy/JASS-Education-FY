@@ -25,6 +25,9 @@
                     <a class="nav-link" style="color: white;" routerLink="/admin-panel/coordinators/list">Coordinators</a>
                 </li>
                 <li>
+                    <a class="nav-link" style="color: white;" routerLink="/admin-panel/subjects/view">Subjects</a>
+                </li>
+                <li>
                     <a class="nav-link" style="color: white;" routerLink="/admin-panel/tickets">Tickets</a>
                 </li>
             </ul>
@@ -33,6 +36,9 @@
 </nav>
 <br><br><br>
 <h3>Subjects</h3>
+<div class="container" style="text-align: center;">
+    <a routerLink="../create"><button class="btn btn-primary">Create Subject</button></a>
+</div>
 <table style="margin-left: 15%;">
     <tr>
         <th>Subject ID</th>
@@ -40,12 +46,12 @@
         <th>Subject Description</th>
         <th style="text-align: center;">Actions</th>
     </tr>
-    <tr>
-        <td>Alfreds Futterkiste</td>
-        <td>Maria Anders</td>
-        <td>{{description}}..............</td>
+    <tr *ngFor="let item of subject_data">
+        <td>{{item.id}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.description | slice:0:30}}..</td>
         <td style="text-align: center;">
-            <button class="btn btn-danger">Delete</button>&nbsp;|
+            <button class="btn btn-danger" (click)="Delete(item.id)">Delete</button>&nbsp;|
             <button class="btn btn-primary" routerLink="../edit">Edit</button>
         </td>
     </tr>

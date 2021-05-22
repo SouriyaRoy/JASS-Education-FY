@@ -15,10 +15,12 @@ export class AppComponent implements OnInit {
   
   constructor(private cookie : CookieService, 
     private router : Router){
-    if (cookie.check('Test') && (cookie.get('Role') == 'Admin')) {
+    if (this.cookie.check('Test') && (this.cookie.get('Role') == 'Admin')) {
       this.router.navigateByUrl('admin-panel/admin-home')
+    }else if(this.cookie.check('Test') && ((this.cookie.get('Role') == 'Coor') || (this.cookie.get('Role') == 'User'))){
+      this.router.navigate(['forum/feed'])
     }else{
-      this.router.navigateByUrl('forum/home')
+      this.router.navigate(['forum/home'])
     }
   }
 

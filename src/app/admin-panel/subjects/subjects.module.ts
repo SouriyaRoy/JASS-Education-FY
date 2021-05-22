@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { SubjectsRoutingModule } from './subjects-routing.module';
 import { ViewComponent } from './view/view.component';
 import { CreateComponent } from './create/create.component';
@@ -15,7 +15,9 @@ import { EditComponent } from './edit/edit.component';
   ],
   imports: [
     CommonModule,
-    SubjectsRoutingModule
+    SubjectsRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   exports: [
     ViewComponent,

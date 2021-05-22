@@ -23,6 +23,9 @@
                     <a class="nav-link" style="color: white;" routerLink="/admin-panel/coordinators/list">Coordinators</a>
                 </li>
                 <li>
+                    <a class="nav-link" style="color: white;" routerLink="/admin-panel/subjects/view">Subjects</a>
+                </li>
+                <li>
                     <a class="nav-link" style="color: white;" routerLink="/admin-panel/tickets">Tickets</a>
                 </li>
             </ul>
@@ -34,12 +37,9 @@
     
     <div class="container">
       <form >
-        <label for="sub_id">Subject ID</label>
-        <input type="text" id="sub_id" name="sub_id"><!-- make it disabled -->
-
         <!-- auto populate below fields using data from backend and interpolation concept -->
         <label for="sub_name">Subject Name</label>
-        <input type="text" id="sub_name" name="sub_name">
+        <input type="text" id="sub_name" name="sub_name" value="some">
     
         <label for="subject">Subject Description</label>
         <textarea id="subject_desc" name="subject_desc" placeholder="Write something.." style="height:200px"></textarea>

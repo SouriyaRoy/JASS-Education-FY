@@ -8,7 +8,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class UserserviceService {
   constructor(private http : HttpClient, private cookie : CookieService) { }
 
-  api_url = '8b3ba7fc7573.ngrok.io'
+  api_url = 'https://ec2-13-232-247-239.ap-south-1.compute.amazonaws.com'//'21ed5cde83ca.ngrok.io'
   auth = 'lMyWq54TdEr2CwDoVQGZsAo0Nvekc2G7OgJZIosPrE3e9qJru57lUKUI4up6orny'
 
   send_registration_data(form_data){
@@ -29,7 +29,7 @@ export class UserserviceService {
     let headers = new HttpHeaders()
     headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json")
     let json = JSON.stringify(api_call)
-    let url = 'https://'+this.api_url+'/api/user/cred/'
+    let url = this.api_url+'/api/user/cred/'
     return this.http.post(url,json,{headers : headers})
   }
 
@@ -37,7 +37,7 @@ export class UserserviceService {
     let cookieValue = this.cookie.get('Test')
     let headers = new HttpHeaders()
     headers = headers.set('Authorization',"Token"+" "+this.auth).set('uauth',"Token"+" "+cookieValue).set('Content-Type',"application/json")
-    let url = 'https://'+this.api_url+'/api/user/prof/read/0'
+    let url = this.api_url+'/api/user/prof/read/0'
     return this.http.get(url, {headers:headers})
   }
 
@@ -62,7 +62,7 @@ export class UserserviceService {
 
 
   raise_ticket(data,id){
-    let url = 'https://'+this.api_url+'/api/analytics/ticket/'
+    let url = this.api_url+'/api/analytics/ticket/'
     var api_call = { "body" : id+"||"+data.req_type+"||"+data.request }
     var json = JSON.stringify(api_call)
     console.log(json)
