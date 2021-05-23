@@ -38,24 +38,26 @@
 <br><br><br>
 <h3>Co-Ordinator Edit</h3>
 <div class="container">
-    <!-- <form [formGroup]="coor_edit" (ngSubmit)="Edit(coor_edit.value)">
+    <form [formGroup]="coor_edit" (ngSubmit)="Edit(coor_edit.value)">
         <label for="coor_name">Co-Ordinator Name</label>
         <input type="text" class="form-control" formControlName="coor_name" value="{{user}}" disabled>
         <br>
         <label for="subject_under">Subjects under him/her</label>
-        <ul>
-            <li *ngFor="let item of subject_array">{{item}}</li>
-        </ul>
+        <div *ngFor="let subject of all_subjects">
+            <div *ngFor="let item of subject_array">
+                <p *ngIf="item == subject.id">{{subject.name}}</p>
+            </div>
+        </div>
         <br>
         <div class="form-group">
             <label for="Subjects">
                 <h4>Select Subject</h4>
             </label>
-            <select class="form-control" formControlName="subject_name">
-                <option *ngFor="let item of subject_array" value="{{item.id}}">{{item.name}}</option>
+            <select class="form-control" formControlName="subject_name" style="height: 70px;">
+                <option *ngFor="let item of all_subjects" value="{{item.id}}">{{item.name}}</option>
             </select>
         </div>
         <br>
-        <input type="submit" value="Submit">
-    </form> -->
+        <button class="btn btn-success" type="submit">Add Subject</button>
+    </form>
 </div>

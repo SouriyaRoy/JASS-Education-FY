@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router'
 import { AdminService } from '../../admin.service';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-edit',
@@ -13,30 +15,62 @@ export class EditComponent implements OnInit {
   subject_array
   all_subjects
   user
+  options
+
+  coor_edit = new FormGroup({
+    coor_name : new FormControl({value:'', disabled:true},[Validators.required]),
+    subject_name : new FormControl('',[Validators.required])
+  })
 
   constructor(private route : ActivatedRoute, private router : Router, private admin : AdminService) { }
 
   async ngOnInit(): Promise<void> {
     this.route.params.subscribe(params => {
       this.identity = params.id
-      //console.log(this.identity)
     })
 
     await this.admin.get_coor(this.identity).then((res) => {
-      console.log(res)
-      this.subject_array = res['data']['subject']
+      console.log("Coor Subject")
+      this.subject_array = res['data']['subject'] //store the subjects of the given coordinator
+      console.log(this.subject_array)
     })
 
     await this.admin.get_user(this.identity).then((res) => {
-      console.log(res)
-      this.user =res['data']
+      this.user =res
+      console.log(this.user)
     })
 
     await this.admin.get_all_subjects().then((res) =>{
-      console.log(res)
+      console.log("All Subjects")
       this.all_subjects = res['data']
+      console.warn(this.all_subjects)
     })
 
+  }
+
+  async delete_subject_coor(data){
+    console.warn(data)
+    // await this.admin.edit_delete_subject_coor(data,this.identity).then((res) => {
+    //   console.log(res)
+    // }, (error) => {console.error(error)})
+  }
+
+  async Edit(data){
+    await this.admin.edit_coor(data, this.identity).then((res) => {
+      console.warn(res)
+      this.router.navigateByUrl('admin-panel/admin-home', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['admin-panel/coordinators/list']);
+    }); 
+    },(error) => {
+      Swal.fire({
+        title: 'Subject Assigned',
+        text: 'This subject is already assigned to '+ this.user,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'OK',
+        cancelButtonText: 'Close'
+      })
+    })
   }
 }
 

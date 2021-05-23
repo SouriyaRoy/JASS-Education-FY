@@ -52,7 +52,7 @@
         <td>{{item.description | slice:0:30}}..</td>
         <td style="text-align: center;">
             <button class="btn btn-danger" (click)="Delete(item.id)">Delete</button>&nbsp;|
-            <button class="btn btn-primary" routerLink="../edit">Edit</button>
+            <button class="btn btn-primary" [routerLink]='["../edit",item.id]'>Edit</button>
         </td>
     </tr>
 </table>

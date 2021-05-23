@@ -11,7 +11,7 @@ export class FeedApiCallsService {
   //public cookieValue1 = this.cookie.get('Test')
   //public cookieValue2 = this.cookie.get('Role')
 
-  post_url = 'https://ec2-13-232-247-239.ap-south-1.compute.amazonaws.com'//'21ed5cde83ca.ngrok.io'
+  post_url = 'http://ec2-13-232-247-239.ap-south-1.compute.amazonaws.com'//'21ed5cde83ca.ngrok.io'
   auth = 'lMyWq54TdEr2CwDoVQGZsAo0Nvekc2G7OgJZIosPrE3e9qJru57lUKUI4up6orny'
 
   asCoor = "13416989436929794359012690353783" //subjects under him

@@ -9,7 +9,7 @@ export class AdminService {
 
   constructor(private cookie : CookieService, private http : HttpClient) { }
 
-  post_url = 'https://ec2-13-232-247-239.ap-south-1.compute.amazonaws.com'//'21ed5cde83ca.ngrok.io'
+  post_url = 'http://ec2-13-232-247-239.ap-south-1.compute.amazonaws.com'//'21ed5cde83ca.ngrok.io'
   auth = 'lMyWq54TdEr2CwDoVQGZsAo0Nvekc2G7OgJZIosPrE3e9qJru57lUKUI4up6orny'
 
   asAdmin = "87795962440396049328460600526719"
@@ -30,6 +30,45 @@ export class AdminService {
   async get_coor(id){
     let url = this.post_url+"/api/content/coordinator/"+id
     return await this.http.get(url, {headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
+  }
+
+  async get_subject(id){
+    let url = this.post_url+"/api/content/subject/"+id
+    return await this.http.get(url, {headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
+  }
+
+  //OPTIMIZE: PUT calls down
+
+  async edit_subject(name, description, id){
+    //console.log(id,data)
+    let url = this.post_url+"/api/content/subject/"+id
+    let api_call = {
+      "name" : name,
+      "description" : description
+    }
+    let json = JSON.stringify(api_call)
+    //console.log(json)
+    return await this.http.put(url, json, {headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
+  }
+
+  async edit_coor(data,id){
+    let url = this.post_url+"/api/content/coordinator/"+id
+    let api_call = {
+      "subject_id" : data.subject_name
+    }
+    let json = JSON.stringify(api_call)
+    console.warn(data)
+    return await this.http.put(url, json, {headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
+  }
+
+  async edit_delete_subject_coor(data,id){
+    let url = this.post_url+"/api/content/coordinator/"+id
+    let api_call = {
+      "subject_id" : -data
+    }
+    let json = JSON.stringify(api_call)
+    console.warn(data)
+    return await this.http.put(url, json, {headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
   }
 
   //OPTIMIZE : get_all calls down
@@ -97,6 +136,7 @@ export class AdminService {
     let url = this.post_url+"/api/content/subject/"+id
     return await this.http.delete(url, {headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
   }
+
 
   //OPTIMIZE : create calls down
 

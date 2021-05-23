@@ -17,27 +17,27 @@ export class ShowPostComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
 
     this.route.params.subscribe(params => {
       this.identity = params.id
     })
 
-    // this.feed.get_specific_post(this.identity).then((res) => {
-    //   this.data = res
-    // }, (error) => {
-    //   alert("Check Console")
-    //   console.warn(error)
-    // })
-
-    this.feed.getspecificPost(this.identity).then((res) => {
-      // this.forum_id = res[1][0]['id']
+    this.feed.get_specific_post(this.identity).then((res) => {
       this.data = res
-      console.warn(this.data)
-    }, (error => {
+    }, (error) => {
       alert("Check Console")
-      console.error(error)
-    }))
+      console.warn(error)
+    })
+
+    // await this.feed.getspecificPost(this.identity).then((res) => {
+    //   // this.forum_id = res[1][0]['id']
+    //   this.data = res
+    //   console.warn(this.data)
+    // }, (error => {
+    //   alert("Check Console")
+    //   console.error(error)
+    // }))
   }
 
   [x: string]: any;
