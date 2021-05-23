@@ -1,0 +1,66 @@
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+</head>
+<nav class="navbar navbar-expand-lg navbar-light bg-dark bg-gradient fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand mb-0 h1" style="color:white" routerLink="/admin-panel/admin-home">Admin Panel</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" style="color: white;" routerLink="/admin-panel/admin-home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: white;" routerLink="/admin-panel/user">Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: white;" routerLink="/admin-panel/admin-cred/list">Credentials</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: white;"
+                        routerLink="/admin-panel/coordinators/list">Coordinators</a>
+                </li>
+                <li>
+                    <a class="nav-link" style="color: white;" routerLink="/admin-panel/subjects/view">Subjects</a>
+                </li>
+                <li>
+                    <a class="nav-link" style="color: white;" routerLink="/admin-panel/tickets">Tickets</a>
+                </li>
+            </ul>
+            <div>
+                <button class="d-flex btn btn-danger" style="color: white;" (click)="logout()">Logout</button>
+            </div>
+        </div>
+    </div>
+</nav>
+<br><br><br>
+<h3>Tickets</h3>
+<button style="margin-left: 47%;" class="btn btn-danger" (click)="opensweetalert()">Delete All</button>
+<br>
+<table style="margin-left: 15%;">
+    <tr>
+        <th>Ticket ID</th>
+        <th>User Name</th>
+        <th>Request Type</th>
+        <th style="text-align: center;">Actions</th>
+    </tr>
+
+    <tr *ngFor="let item of ticket_data; let i = index">
+        <td>{{item.id}}</td>
+        <td>{{data[i].toString()}}</td>
+        <td>{{item.body.toString().split("||")[1]}}</td>
+        <td style="text-align: center;">
+            <button class="btn btn-danger" (click)="Delete(item.id)">Delete</button>&nbsp;
+            <button class="btn btn-success" (click)="MarkDone(item.id)">Mark as Done</button>&nbsp;
+            <button class="btn btn-warning" button mat-raised-button
+            matTooltip="Info about the action"
+            aria-label="Button that displays a tooltip when focused or hovered over">Details</button>
+        </td>
+    </tr>
+    
+</table>

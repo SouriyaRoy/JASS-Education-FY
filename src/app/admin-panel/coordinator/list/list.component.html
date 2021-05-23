@@ -43,7 +43,7 @@
     </tr>
     <tr *ngFor="let item of coor_data; let i = index">
       <td>{{item.coordinator.id}}</td>
-      <td>{{coor_name[i] | json}}</td>
+      <td>{{coor_name[i].toString()}}</td>
       <td style="text-align: center;">
           <button class="btn btn-danger" (click)="Delete(item.coordinator.user_ref)">Delete</button>&nbsp;
           <button class="btn btn-primary" [routerLink]='["../edit",item.coordinator.user_ref]'>Edit</button>
