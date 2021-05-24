@@ -29,7 +29,7 @@ export class AdminComponent implements OnInit {
 
   RaiseTicket(data){
     //console.warn(data)
-    this.uauth_service.get_user_data().subscribe((response) => {
+    this.uauth_service.get_user_data().then((response) => {
       this.user_id = response['data']['id']
       console.log(this.user_id)
       this.uservice.raise_ticket(data,this.user_id).subscribe((response) => {

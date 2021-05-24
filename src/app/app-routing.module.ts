@@ -28,6 +28,10 @@ const routes: Routes = [
   {
     path:'admin-panel', loadChildren:() => import('./admin-panel/admin-panel.module')
     .then(mod => mod.AdminPanelModule)
+  },
+  {
+    path:'courses', loadChildren:() => import('./courses/courses.module')
+    .then(mod => mod.CoursesModule)
   }
 ];
 

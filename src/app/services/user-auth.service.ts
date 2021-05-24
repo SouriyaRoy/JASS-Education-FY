@@ -60,11 +60,11 @@ export class UserAuthService {
     //return { "success" : true }
   }
 
-  get_user_data(){
+  async get_user_data(){
     let url = this.api_url+'/api/user/cred/0'
     let headers = new HttpHeaders()
     headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json").set('uauth',"Token"+" "+this.cookie.get('Test'))
-    return this.http.get(url,{headers:headers})
+    return await this.http.get(url,{headers:headers}).toPromise()
   }
 
 
@@ -84,5 +84,14 @@ export class UserAuthService {
     return response
     //return { "success" : true }
   }
+
+  // async get_user(id){
+  //   let url =this.api_url+"/api/user/cred/"+id
+  //   let headers = new HttpHeaders()
+  //   headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json").set('uauth',"Token"+" "+this.cookie.get('Test'))
+  //   let ret = await this.http.get(url,{headers:headers}).toPromise()
+  //   let full_name = ret['data']['first_name'] + " " + ret['data']['last_name']
+  //   return full_name
+  // }
 }
 

@@ -23,7 +23,6 @@ export class FeedApiCallsService {
                         .set('Access-Control-Allow-Origin',"*") 
 
   async submit_assignment_teacher(title, marks, link1, link2) { //TODO :
-
     var api_call = {
       "body": title,
       "external_url_1": link1,
@@ -32,13 +31,11 @@ export class FeedApiCallsService {
     }
     let json = JSON.stringify(api_call)
     let url = this.post_url+"/api/content/assignment/"
-
     console.warn(json)
     return await this.http.post(url, json,{headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
   }
 
   async submit_lecture_teacher(description, link1, link2) { //TODO :
-
     var api_call = {
       "body": description,
       "external_url_1": link1,
@@ -46,7 +43,6 @@ export class FeedApiCallsService {
     }
     let json = JSON.stringify(api_call)
     let url = this.post_url+"/api/content/lecture/"
-
     console.warn(json)
     return await this.http.post(url, json,{headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
   }
@@ -104,9 +100,7 @@ export class FeedApiCallsService {
 
   async get_specific_post(id){ 
     console.warn(id)
-
     let ass_id, lec_id, video_id, user_id, post_url, ass_url, lecture_url, video_url, user_url, post_details, ass_details, lec_details, video_details, user_details
-
     post_url = this.post_url+"/api/content/post/"+id;
     ass_url = this.post_url+"/api/content/assignment/"
     lecture_url = this.post_url+"/api/content/lecture/"
@@ -163,8 +157,6 @@ export class FeedApiCallsService {
     return [post_details, ass_details, lec_details, video_details, user_details]
   }
 
-
-
   reply(data,id){ 
     let url = this.post_url+"/api/content/reply/"
     let api_call = {
@@ -180,8 +172,9 @@ export class FeedApiCallsService {
     
   }
 
-  
-  get_subjects(){ //TODO : function to call the subjects in drop-down
+  //OPTIMIZE : Get calls down
+
+  get_subjects(){ 
     //console.warn("The cookieval2 is : " + this.cookieValue2)
     let url = ""
     if(this.cookie.get('Role') == 'Coor'){ 
@@ -192,6 +185,15 @@ export class FeedApiCallsService {
     return this.http.get(url, {headers: this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))})
   }
 
+  async get_enrolled_subjects(){
+    let url = this.post_url+"/api/personal/enroll/0"
+    return await this.http.get(url , {headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
+  }
+
+  async get_specific_subject(id){
+    let url = this.post_url+"/api/content/subject/"+id
+    return await this.http.get(url, {headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
+  }
 
   async get_forum_id(data){
     let url = this.post_url+"/api/content/forum/"
@@ -201,6 +203,21 @@ export class FeedApiCallsService {
     let json = JSON.stringify(api_call)
     return await this.http.post(url, json, {headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
   }
+
+  //OPTIMIZE : enroll for a subject down here
+
+  async enroll_for_subject(data){
+    let url = this.post_url+"/api/personal/enroll/"
+    let api_call = {
+      "subject_ref" : data.subject_id
+    }
+    let json = JSON.stringify(api_call)
+    console.warn(json)
+    return await this.http.post(url, json, {headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
+  }
+
+
+  
 
 
 
