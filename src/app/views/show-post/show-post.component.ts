@@ -47,7 +47,7 @@ export class ShowPostComponent implements OnInit {
   form_data
   upvote = 100
   downvote = 67
-  forum_id = "2"
+  forum_id = ""
   isAssignment = "2"; isLecture = "6"; isVideo = "2"
 
 
@@ -126,4 +126,16 @@ export class ShowPostComponent implements OnInit {
     })
   }
   
+  logout(){
+    this.uauth.user_logout().then((result) => {
+      if(result['success'] == true){
+        this.cookie.deleteAll('Test')
+        this.cookie.delete('Role')
+        console.log("Successfully logged out")
+      }
+      this.router.navigateByUrl('forum/home')
+    }, (error) => {
+      console.error(error)
+    })
+  }
 }

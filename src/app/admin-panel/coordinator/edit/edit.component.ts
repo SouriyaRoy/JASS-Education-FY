@@ -17,6 +17,37 @@ export class EditComponent implements OnInit {
   user
   options
 
+  opensweetalert(data){
+    Swal.fire({
+      title: 'DELETE?',
+      text: 'Are you sure you want to remove this subject from this Coordinator?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.value) {
+        this.admin.edit_delete_subject_coor(data,this.identity).then((res) => {
+          console.warn(res)
+          Swal.fire(
+            'Deleted!',
+            'The Subject has been removed from the Coordinator',
+            'success'
+          )
+          this.router.navigateByUrl('admin-panel/admin-home', { skipLocationChange: true }).then(() => {
+            this.router.navigate(['admin-panel/coordinators/edit/'+this.identity]);
+        }); 
+        })
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled',
+          'Operation is cancelled',
+          'error'
+        )
+      }
+    })
+  }
+
   coor_edit = new FormGroup({
     coor_name : new FormControl({value:'', disabled:true},[Validators.required]),
     subject_name : new FormControl('',[Validators.required])
@@ -48,18 +79,11 @@ export class EditComponent implements OnInit {
 
   }
 
-  async delete_subject_coor(data){
-    console.warn(data)
-    // await this.admin.edit_delete_subject_coor(data,this.identity).then((res) => {
-    //   console.log(res)
-    // }, (error) => {console.error(error)})
-  }
-
   async Edit(data){
     await this.admin.edit_coor(data, this.identity).then((res) => {
       console.warn(res)
       this.router.navigateByUrl('admin-panel/admin-home', { skipLocationChange: true }).then(() => {
-        this.router.navigate(['admin-panel/coordinators/list']);
+        this.router.navigate(['admin-panel/coordinators/edit/'+this.identity]);
     }); 
     },(error) => {
       Swal.fire({

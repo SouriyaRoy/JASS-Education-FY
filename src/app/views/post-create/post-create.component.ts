@@ -181,4 +181,17 @@ export class PostCreateComponent implements OnInit {
     this.cookieExists = this.cookie.check('Test')
   }
 
+  logout(){
+    this.uauth.user_logout().then((result) => {
+      if(result['success'] == true){
+        this.cookie.deleteAll('Test')
+        this.cookie.delete('Role')
+        console.log("Successfully logged out")
+      }
+      this.router.navigateByUrl('forum/home')
+    }, (error) => {
+      console.error(error)
+    })
+  }
+
 }

@@ -40,7 +40,7 @@ export class TicketsComponent implements OnInit {
   opensweetalert(){
     Swal.fire({
       title: 'Are you sure?',
-      text: 'You will not be able to recover this imaginary file!',
+      text: 'You will not be able to recover the data',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes, delete it!',
@@ -52,6 +52,68 @@ export class TicketsComponent implements OnInit {
           'All records has been deleted',
           'success'
         )
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled',
+          'The operation is Cancelled',
+          'error'
+        )
+      }
+    })
+  }
+
+  Delete(id){
+    Swal.fire({
+      title: 'DELETE?',
+      text: 'You will not be able to recover this data!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        this.admin.delete_ticket(id).then((res) => {
+          console.warn(res)
+          Swal.fire(
+            'Deleted!',
+            'The Ticket has been Deleted',
+            'success'
+          )
+          this.router.navigateByUrl('admin-panel/admin-home', { skipLocationChange: true }).then(() => {
+            this.router.navigate(['admin-panel/tickets']);
+        }); 
+        })
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled',
+          'The operation is Cancelled',
+          'error'
+        )
+      }
+    })
+  }
+
+  MarkDone(id){
+    Swal.fire({
+      title: 'Mark as Done?',
+      text: 'You will not be able to revert',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        this.admin.edit_ticket_solved(id).then((res) => {
+          console.warn(res)
+          Swal.fire(
+            'DONE!',
+            'The Ticket has been marked as Done',
+            'success'
+          )
+          this.router.navigateByUrl('admin-panel/admin-home', { skipLocationChange: true }).then(() => {
+            this.router.navigate(['admin-panel/tickets']);
+        }); 
+        })
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire(
           'Cancelled',

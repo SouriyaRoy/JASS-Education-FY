@@ -45,13 +45,13 @@
         <label for="subject_under">Subjects under him/her</label>
         <div *ngFor="let subject of all_subjects">
             <div *ngFor="let item of subject_array">
-                <p *ngIf="item == subject.id">{{subject.name}}</p>
+                <p *ngIf="item == subject.id" (click)="opensweetalert(item)">{{subject.name}}</p>
             </div>
         </div>
         <br>
         <div class="form-group">
             <label for="Subjects">
-                <h4>Select Subject</h4>
+                <h5>Add Subject to Coordinator</h5>
             </label>
             <select class="form-control" formControlName="subject_name" style="height: 70px;">
                 <option *ngFor="let item of all_subjects" value="{{item.id}}">{{item.name}}</option>
