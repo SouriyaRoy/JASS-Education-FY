@@ -1,4 +1,5 @@
 import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { ReturnStatement } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -99,7 +100,7 @@ export class FeedApiCallsService {
   }
 
   async get_specific_post(id){ 
-    console.warn(id)
+    //console.warn(id)
     let ass_id, lec_id, video_id, user_id, post_url, ass_url, lecture_url, video_url, user_url, post_details, ass_details, lec_details, video_details, user_details
     post_url = this.post_url+"/api/content/post/"+id;
     ass_url = this.post_url+"/api/content/assignment/"
@@ -109,18 +110,21 @@ export class FeedApiCallsService {
 
     await this.http.get(post_url,{headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise().then((post) => {
       post_details = post
-      ass_id = post['data']['assignment_id'];
-      lec_id = post['data']['lecture_id'];
-      video_id = post['data']['video_id'];
-      user_id = post['data']['user_credential_id']
+      //console.warn(post_details)
+      ass_id = post['data']['assignment_ref'];
+      lec_id = post['data']['lecture_ref'];
+      //video_id = post['data']['id'];
+      user_id = post['data']['user_ref']
     }, (error) => {
       alert("Check console")
       console.error(error)
     })
 
     if(ass_id != null){
+      //console.log("ass",ass_id)
       await this.http.get(ass_url+ass_id,{headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise().then((res1) => {
         ass_details = res1
+        //console.warn(ass_details)
       }, (error) => {
         alert("Check console")
         console.error(error)
@@ -128,48 +132,61 @@ export class FeedApiCallsService {
     }
     
     if(lec_id != null){
+      //console.log("lec",lec_id)
       await this.http.get(lecture_url+lec_id,{headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise().then((res2) => {
         lec_details = res2
+        //console.warn(lec_details)
       }, (error) => {
         alert("Check console")
         console.error(error)
       })
     }
     
-    if(video_id != null){
-      await this.http.get(video_url+video_id,{headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise().then((res3) => {
-        lec_details = res3
-      }, (error) => {
-        alert("Check console")
-        console.error(error)
-      })
-    }
+    // if(video_id != null){
+    //   await this.http.get(video_url+video_id,{headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise().then((res3) => {
+    //     lec_details = res3
+    //   }, (error) => {
+    //     alert("Check console")
+    //     console.error(error)
+    //   })
+    // }
 
     if(user_id != null){
+      //console.log("user",user_id)
       await this.http.get(user_url+user_id,{headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise().then((res4) => {
         user_details = res4
+        //console.warn(user_details)
       }, (error) => {
         alert("Check console")
         console.error(error)
       })
     }
 
-    return [post_details, ass_details, lec_details, video_details, user_details]
+    return [post_details, ass_details, lec_details, user_details]
   }
 
-  reply(data,id){ 
+  //OPTIMIZE : Reply post calls here
+
+  async reply(data,id){ 
     let url = this.post_url+"/api/content/reply/"
     let api_call = {
-      "forum_id" : id,
-      "reply_body" : data
+      "forum_ref" : id,
+      "body" : data.reply
   }
     let json = JSON.stringify(api_call)
     //console.log(json)
-    return this.http.post(url,json,{headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))})
+    return await this.http.post(url,json,{headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
   }
 
-  reply_of_reply(data,id){
-    
+  async reply_of_reply(data,id){
+    let url = this.post_url+"/api/content/replyD/"
+    let api_call = {
+      "reply_ref" : id,
+      "body" : data.replyofreply
+    }
+    let json = JSON.stringify(api_call)
+    console.warn(json)
+    return await this.http.post(url,json,{headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
   }
 
   //OPTIMIZE : Get calls down
@@ -202,6 +219,28 @@ export class FeedApiCallsService {
     }
     let json = JSON.stringify(api_call)
     return await this.http.post(url, json, {headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
+  }
+
+  async get_reply_id(forum_id){
+    let url = this.post_url+"/api/content/forum/"+forum_id
+    let replies = await this.http.get(url , {headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
+    return replies['data']['reply']
+  }
+
+  async get_replies(reply_id){
+    let url = this.post_url+"/api/content/reply/"+reply_id
+    return await this.http.get(url, {headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
+  }
+
+  async get_replytoreply_id(reply_id){
+    let url = this.post_url+"/api/content/reply/"+reply_id
+    let ret = await this.http.get(url,{headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
+    return ret['data']['reply2']
+  }
+
+  async get_replytoreply(replytoreply_id){
+    let url = this.post_url+"/api/content/replyD/"+replytoreply_id
+    return await this.http.get(url,{headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
   }
 
   //OPTIMIZE : enroll for a subject down here

@@ -28,24 +28,28 @@ export class UserAuthService {
     let headers = new HttpHeaders()
     headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json")
     let ret = await this.http.post(url, json, {headers : headers}).toPromise()
-    console.log(ret)
+    //console.log(ret)
 
     if(ret['success']==true){
       var check = 0
       this.cookie.set('Test',ret['data']['JWT'])
       await this.check_admin().then((result1) => {
-        console.log(result1)
+        //console.log(result1)
       if(result1['success'] == true){
         check++;
       }
-    }, (error) => {console.error(error)}, )
+    }, (error) => {
+      //console.error(error)
+    })
 
     await this.check_coordinator().then((result2) => {
-      console.log(result2)
+      //console.log(result2)
       if(result2['success'] == true){
         check++
       }
-    }, (error) => {console.error(error)})
+    }, (error) => {
+      //console.error(error)
+    })
     return check
     }
   }
@@ -67,6 +71,12 @@ export class UserAuthService {
     return await this.http.get(url,{headers:headers}).toPromise()
   }
 
+  async get_specific_user_data(id){
+    let url = this.api_url+'/api/user/cred/'+id
+    let headers = new HttpHeaders()
+    headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json").set('uauth',"Token"+" "+this.cookie.get('Test'))
+    return await this.http.get(url,{headers:headers}).toPromise()
+  }
 
   async user_logout(){
     let url = this.api_url+'/api/user/cred/87795962440396049328460600526719'
@@ -80,7 +90,7 @@ export class UserAuthService {
     let headers = new HttpHeaders()
     headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json").set('uauth',"Token"+" "+this.cookie.get('Test'))
     var response = await this.http.get(url, {headers:headers}).toPromise()
-    console.log(response)
+    //console.log(response)
     return response
     //return { "success" : true }
   }

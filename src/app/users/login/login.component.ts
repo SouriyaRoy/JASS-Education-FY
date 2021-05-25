@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
       console.warn(receive)
       if(receive > 0){
         this.router.navigateByUrl('/users/choose')
-      }else{
+      }else if(receive == 0){
         this.cook.set('Role','User')
         this.router.navigateByUrl('forum/feed')
       }

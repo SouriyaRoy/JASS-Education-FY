@@ -37,7 +37,7 @@
     </div>
 </nav>
 <br><br><br>
-<h5 style="margin-left: 8%;">Thread</h5>
+<h5 style="margin-left: 8%;">{{data[0].data.name}}</h5>
 <br>
 <!--//TODO: From here starts the post view section-->
 <!-- <div class="topics__body container">
@@ -130,14 +130,14 @@
 
                 <div class="topic__caption">
                     <div class="topic__name">
-                        <a href="#">{{data[0].title}}</a>
+                        <a href="#">{{data[3].data.first_name}}</a>
                     </div>
-                    <div class="topic__date"><i class="icon-Watch_Later"></i>{{data.made_date}}</div>
+                    <div class="topic__date"><i class="icon-Watch_Later"></i>{{data[0].data.made_date}}</div>
                 </div>
             </div>
             <div class="topic__content">
                 <div class="topic__text">
-                    <p>{{data[0].body}}</p>
+                    <p>{{data[0].data.body}}</p>
                 </div>
                 <div class="topic__footer">
                     <div class="topic__footer-likes">
@@ -163,7 +163,7 @@
 
 <div class="container" style="border: 1px black;">
     <div class="row">
-        <div class="col-sm-4" *ngIf="isAssignment" (click)="showAssignment()">
+        <div class="col-sm-4" *ngIf="isAssignment" (click)="showAssignment(data)">
             <a routerLink="#">
                 <div class="card text-center border-dark mb-3">
                     <div class="card-header" style="color: black;">
@@ -176,7 +176,7 @@
                 </div>
             </a>
         </div>
-        <div class="col-sm-4" *ngIf="isLecture" (click)="showLecture()">
+        <div class="col-sm-4" *ngIf="isLecture" (click)="showLecture(data)">
             <a routerLink="#">
                 <div class="card text-center border-dark mb-3">
                     <div class="card-header" style="color: black;">
@@ -220,24 +220,24 @@
         <h5>Replies</h5>
     </div>
     <!--//TODO: From here starts the reply section-->
-    <div class="topic container" *ngFor="let item of data[1]">
+    <div class="topic container" *ngFor="let item of replies; let i = index; let flag = index">
         <div class="topic__head">
             <div class="topic__caption">
                 <div class="topic__name">
-                    <a href="#">{{item.email}}</a>
+                    <a href="#">{{user_data[i].data.email.toString()}}</a>
                 </div>
                 <div class="topic__date">
                     <div class="topic__user topic__user--pos-r">
                         <p style="padding-top: 15px;">replied to</p>
-                        <a href="#" class="topic__user-name">{{data[0].title}}</a>
+                        <a href="#" class="topic__user-name">{{data[3].data.first_name}}</a>
                     </div>
-                    <i class="icon-Watch_Later"></i>06 May, 2017
+                    <i class="icon-Watch_Later"></i>{{item.data.reply.made_date}}
                 </div>
             </div>
         </div>
         <div class="topic__content">
             <div class="topic__text">
-                <p>{{item.body}}</p>
+                <p>{{item.data.reply.body}}</p>
             </div>
             <div class="topic__footer">
                 <div class="topic__footer-likes">
@@ -251,33 +251,32 @@
                     </div>
                 </div>
                 <div class="topic__footer-share">
-                    <a><button class="btn btn-warning" (click)="showReplyofReply(item.id)">Reply</button></a>
+                    <a><button class="btn btn-warning" (click)="showReplies(item.data.reply.id, new)">Show Replies</button></a>
+                    <a><button class="btn btn-warning" (click)="showReplyofReply(item.data.reply.id)">Reply</button></a>
                 </div>
             </div>
         </div>
         <br>
-        <form [formGroup]="replyofreply_form" (ngSubmit)="ReplyofreplySubmit(replyofreply_form.value)">
-            <div class="container" id="replyofreply-{{item.id}}" style="margin-left: 4%;" hidden>
+        <form [formGroup]="replyofreply_form" (ngSubmit)="ReplyofreplySubmit(replyofreply_form.value, item.data.reply.id)">
+            <div class="container" id="replyofreply-{{item.data.reply.id}}" style="margin-left: 4%;" hidden>
                 <textarea formControlName="replyofreply" cols="155" rows="5"></textarea>
                 <br>
                 <button type="submit" class="btn btn-warning">Reply to this Comment</button>
             </div>
         </form>
         <br>
-        <div class="topic topic--comment">
+        <div class="topic topic--comment" *ngFor="let item of replytoreply; let new = index" id="reply_{{new}}">
             <div class="topic__head">
                 <div class="topic__caption">
                     <div class="topic__name">
-                        <a href="#">Larry</a>
+                        <a href="#">{{user_data_2[new].data.first_name.toString()}}</a>
                     </div>
                 </div>
                 <a class="topic__arrow topic__arrow--up"><i class="icon-Arrow_Up"></i></a>
             </div>
             <div class="topic__content">
                 <div class="topic__text">
-                    <p>Can you stop ADP, and create new option for author can create coupon code, Author will give for
-                        their
-                        customer. It's better than now.</p>
+                    <p>{{replytoreply[new].data.body.toString()}}</p>
                 </div>
             </div>
         </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router'
+import { UserAuthService } from 'src/app/services/user-auth.service';
 import Swal from 'sweetalert2';
 import { FeedApiCallsService } from '../../services/feed-api-calls.service';
 
@@ -13,7 +14,8 @@ export class ShowPostComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private feed: FeedApiCallsService) {
+    private feed: FeedApiCallsService,
+    private uauth : UserAuthService) {
 
   }
 
@@ -23,32 +25,47 @@ export class ShowPostComponent implements OnInit {
       this.identity = params.id
     })
 
-    this.feed.get_specific_post(this.identity).then((res) => {
+    await this.feed.get_specific_post(this.identity).then((res) => {
       this.data = res
+      this.forum_id = res[0].data.forum_ref
+      this.isAssignment = res[0].data.assignment_ref
+      this.isLecture = res[0].data.lecture_ref
+      this.isVideo = res[0].data.video_ref
+      //console.log(this.data)
     }, (error) => {
       alert("Check Console")
       console.warn(error)
     })
 
-    // await this.feed.getspecificPost(this.identity).then((res) => {
-    //   // this.forum_id = res[1][0]['id']
-    //   this.data = res
-    //   console.warn(this.data)
-    // }, (error => {
-    //   alert("Check Console")
-    //   console.error(error)
-    // }))
+    await this.feed.get_reply_id(this.forum_id).then((res) => {
+      //console.warn(res)
+      for(let item of res){
+        this.feed.get_replies(item).then((res) => {
+          this.replies.push(res)
+          this.uauth.get_specific_user_data(res['data']['reply']['user_ref']).then((res2) => {
+            this.user_data.push(res2)
+          },(err) => {console.error(err)})
+        },(error) => {
+          console.error(error)
+        })
+      }
+      console.warn(this.replies, this.user_data)
+    },(error) => {console.error(error)})
+
   }
 
   [x: string]: any;
-
+  public replies = new Array()
+  public user_data = new Array()
+  public replytoreply = new Array()
+  public user_data_2 = new Array()
   identity: any
   data: any
   form_data
   upvote = 100
   downvote = 67
   forum_id = ""
-  isAssignment = "2"; isLecture = "6"; isVideo = "2"
+  isAssignment = ""; isLecture = ""; isVideo = "";
 
 
   reply_form = new FormGroup({
@@ -76,39 +93,71 @@ export class ShowPostComponent implements OnInit {
     rep.removeAttribute('hidden')
   }
 
-  ReplySubmit(form_data) {
-    console.warn(form_data, this.data['data']['forum_id'])
-    this.feed.reply(form_data, this.data['data']['forum_id']).subscribe((result) => {
-      console.log(result)
+  async ReplySubmit(form_data) {
+    //console.warn(form_data,this.data[0]['data']['forum_ref'])
+    await this.feed.reply(form_data, this.data[0]['data']['forum_ref']).then((result) => {
+      //console.log(result)
+      this.router.navigateByUrl('forum/home', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['views/show-post/'+this.identity]);
+    }); 
     }, (error) => {
       alert("Check Console")
       console.warn(error)
     })
   }
 
-  ReplyofreplySubmit(data) {
-    console.warn(data)
+  async ReplyofreplySubmit(data,id) {
+    //console.warn(data,id)
+    await this.feed.reply_of_reply(data,id).then((res) => {
+      //console.log(res)
+      this.router.navigateByUrl('forum/home', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['views/show-post/'+this.identity]);
+    }); 
+    },(error) => {
+      console.error(error)
+    })
   }
 
-  showAssignment(){
+  async showReplies(reply_id, id){
+    console.warn(reply_id,id)
+    this.replytoreply = []
+    this.user_data_2 = []
+    await this.feed.get_replytoreply_id(reply_id).then((res) => {
+      //console.log(res)
+      for(let item of res){
+        this.feed.get_replytoreply(item).then((res1) => {
+          this.replytoreply.push(res1)
+          this.uauth.get_specific_user_data(res1['data']['user_ref']).then((res2) => {
+            this.user_data_2.push(res2)
+          },(error) => {console.error(error)})
+        },(err) => {console.error(err)})
+      }
+      console.log(this.replytoreply, this.user_data_2)
+    },(error) => {console.error(error)})
+    console.log(document.getElementById('reply_'+id))
+  }
+
+  showAssignment(res){
+    //console.warn(res)
     Swal.fire({
-      title: 'Assignment',
+      title: 'Assignment Details',
       html:
-        'Assignment Name<br><br>' +
-        'Description<br><br> ' +
-        'and other HTML tags',
+        '<br>' + res[1].data.assignment.body + '<br><br>' +
+        'Link1 : ' + res[1].data.assignment.external_url_1 + '<br><br>' +
+        'Link2 : ' + res[1].data.assignment.external_url_2 + '<br><br>' +
+        'Total Marks : ' + res[1].data.assignment.total_score ,
       showCloseButton: true,
       showCancelButton: true
     })
   }
 
-  showLecture(){
+  showLecture(res){
     Swal.fire({
-      title: 'Lecture',
+      title: 'Lecture Details',
       html:
-        'Assignment Name<br><br>' +
-        'Description<br><br> ' +
-        'and other HTML tags',
+      '<br>' + res[2].data.body + '<br><br>' +
+      'Link1 : ' + res[2].data.external_url_1 + '<br><br>' +
+      'Link2 : ' + res[2].data.external_url_2 + '<br><br>' ,
       showCloseButton: true,
       showCancelButton: true
     })
@@ -118,7 +167,7 @@ export class ShowPostComponent implements OnInit {
     Swal.fire({
       title: 'Video',
       html:
-        'Assignment Name<br><br>' +
+        'Video ID<br><br>' +
         'Description<br><br> ' +
         'and other HTML tags',
       showCloseButton: true,
