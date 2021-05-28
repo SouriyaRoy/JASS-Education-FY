@@ -1,0 +1,20 @@
+.center{
+    margin: auto;
+    width: 60%;
+    padding: 10px;
+}
+.center-text{
+    margin: auto;
+    width: 60%;
+    padding: 10px;
+    text-align: center;
+}
+.pos{
+    padding-left: 300px;
+}
+input.ng-invalid{
+    border-right: 5px solid red;
+}
+.reg_button{
+    margin-left: 320px;
+}

@@ -43,9 +43,10 @@
         <input type="text" class="form-control" formControlName="coor_name" value="{{user}}" disabled>
         <br>
         <label for="subject_under">Subjects under him/her</label>
+        <p style="color: red;">Click on a subject to delete it from the coordinator</p>
         <div *ngFor="let subject of all_subjects">
             <div *ngFor="let item of subject_array">
-                <p *ngIf="item == subject.id" (click)="opensweetalert(item)">{{subject.name}}</p>
+                <p *ngIf="item == subject.id" (click)="opensweetalert(item)"><b>{{subject.name}}</b></p>
             </div>
         </div>
         <br>

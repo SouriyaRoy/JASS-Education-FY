@@ -1,13 +1,15 @@
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 </head>
 <nav class="navbar navbar-expand-lg navbar-light bg-warning bg-gradient fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand mb-0 h1" routerLink="../../forum/home">JASS</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
@@ -27,3 +29,25 @@
     </div>
 </nav>
 <br><br><br>
+<div class="container" style="text-align: center;">
+    <br>
+    <h4>Student Submission for {{assignment_details.data.assignment.body}}</h4>
+    <br>
+    <form [formGroup]="submissionForm" (ngSubmit)="submissionSubmit(submissionForm.value)">
+        <div class="col-sm-6 center">
+            <textarea class="form-control" formControlName="sub_body" placeholder="Enter your Submission" [ngClass]="{
+            'is-invalid':submissionForm.get('sub_body').touched && submissionForm.get('sub_body').invalid}"></textarea>
+            <div *ngIf="submissionForm.get('sub_body').touched && submissionForm.get('sub_body').invalid" class="invalid-feedback">
+                <div *ngIf="submissionForm.get('sub_body').errors.required">Body is Required</div>
+            </div>
+        </div>
+        <div class="col-sm-6 center">
+            <input type="text" class="form-control" formControlName="ext_link_1" placeholder="Start with https://">
+        </div>
+        <div class="col-sm-6 center">
+            <input type="text" class="form-control" formControlName="ext_link_2" placeholder="Start with https://">
+        </div>
+        <br>
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+</div>

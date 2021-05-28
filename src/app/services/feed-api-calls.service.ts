@@ -243,7 +243,12 @@ export class FeedApiCallsService {
     return await this.http.get(url,{headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
   }
 
-  //OPTIMIZE : enroll for a subject down here
+  async get_assignment_details(assignment_id){
+    let url = this.post_url+"/api/content/assignment/"+assignment_id
+    return await this.http.get(url, {headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
+  }
+
+  //OPTIMIZE : enroll/unenroll for a subject down here
 
   async enroll_for_subject(data){
     let url = this.post_url+"/api/personal/enroll/"
@@ -255,7 +260,31 @@ export class FeedApiCallsService {
     return await this.http.post(url, json, {headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
   }
 
+  async unenroll_subject(id){
+    let url = this.post_url+"/api/personal/enroll/"+id
+    return await this.http.delete(url, {headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
+  }
 
+  //OPTIMIZE : post calls down here
+
+  async post_submission(data,assignment_id){
+    let url = this.post_url+"/api/personal/submission//"
+    if(data.ext_link_1 == ""){
+      data.ext_link_1 = null
+    }
+    if(data.ext_link_2 == ""){
+      data.ext_link_2 = null
+    }
+    let api_call = {
+      "assignment_ref": assignment_id,
+      "body": data.sub_body,
+      "external_url_1": data.ext_link_1,
+      "external_url_2": data.ext_link_2
+    }
+    let json = JSON.stringify(api_call)
+    console.log(json)
+    return await this.http.post(url, json, {headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
+  }
   
 
 

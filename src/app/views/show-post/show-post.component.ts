@@ -28,7 +28,7 @@ export class ShowPostComponent implements OnInit {
     await this.feed.get_specific_post(this.identity).then((res) => {
       this.data = res
       this.forum_id = res[0].data.forum_ref
-      this.isAssignment = res[0].data.assignment_ref
+      this.isAssignment = res[0].data.assignment_ref //TODO : check if user already submitted assignment, if yes show appropriate mssg
       this.isLecture = res[0].data.lecture_ref
       this.isVideo = res[0].data.video_ref
       //console.log(this.data)
@@ -138,7 +138,7 @@ export class ShowPostComponent implements OnInit {
   }
 
   showAssignment(res){
-    //console.warn(res)
+    console.warn(res)
     Swal.fire({
       title: 'Assignment Details',
       html:
@@ -147,7 +147,12 @@ export class ShowPostComponent implements OnInit {
         'Link2 : ' + res[1].data.assignment.external_url_2 + '<br><br>' +
         'Total Marks : ' + res[1].data.assignment.total_score ,
       showCloseButton: true,
-      showCancelButton: true
+      showCancelButton: true,
+      confirmButtonText: 'Submit'
+    }).then((result) => {
+      if (result.value) {
+        this.router.navigateByUrl("/courses/submission/"+res[0]['data']['assignment_ref'])
+      } 
     })
   }
 

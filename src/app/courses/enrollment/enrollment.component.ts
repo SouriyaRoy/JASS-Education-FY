@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FeedApiCallsService } from 'src/app/services/feed-api-calls.service';
 import { UserAuthService } from 'src/app/services/user-auth.service';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-enrollment',
@@ -34,7 +35,8 @@ export class EnrollmentComponent implements OnInit {
       this.enrolled_subjects = res['data']['subject']
       for(let item of this.enrolled_subjects){
         this.feed.get_specific_subject(item).then((res)=> {
-          this.show_subjects.push(res['data']['name'])
+          this.show_subjects.push(res)
+          //console.warn(this.show_subjects)
         },(error) => {console.error(error)})
       }
       console.log(this.show_subjects)
@@ -45,12 +47,32 @@ export class EnrollmentComponent implements OnInit {
     subject_id : new FormControl()
   })
 
-  Add_subject(data){
+  async Add_subject(data){
     //console.log(data.subject_id)
-    this.feed.enroll_for_subject(data).then((res) => {
+    await this.feed.enroll_for_subject(data).then((res) => {
       this.router.navigateByUrl('forum/home', { skipLocationChange: true }).then(() => {
         this.router.navigate(['courses/enroll']);
     }); 
+    },(error) => {
+      Swal.fire(
+        'Please Insert a Subject',
+        'Insert a subject to enroll yourself',
+        'info'
+      )
+    })
+  }
+
+  async DeleteSubject(subject_id){ //TODO : insert sweetalert for confirmation
+    await this.feed.unenroll_subject(subject_id).then((res) => {
+      this.router.navigateByUrl('forum/home', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['courses/enroll']);
+    }); 
+    },(error) => {
+      Swal.fire(
+        'Cannot Delete the Subject',
+        'Operation not Done',
+        'info'
+      )
     })
   }
 }

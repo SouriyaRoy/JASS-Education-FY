@@ -33,9 +33,10 @@
 <br><br>
 <div class="container">
     <h5>Already Enrolled For:</h5><p *ngIf="(show_subjects.length)==0">Enrollment Not Done</p>
+    <p style="color: red;">Click on a subject to unenroll</p>
     <ul>
-        <li *ngFor="let item of show_subjects">
-            {{item.toString()}}
+        <li *ngFor="let item of show_subjects" (click)="DeleteSubject(item.data.id)">
+            {{item.data.name.toString()}}
         </li>
     </ul>
 </div>

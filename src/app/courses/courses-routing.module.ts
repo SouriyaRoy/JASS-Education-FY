@@ -9,7 +9,7 @@ const routes: Routes = [
     component: EnrollmentComponent
   },
   {
-    path:'submission',
+    path:'submission/:id',
     component:SubmissionComponent
   }
 ];
