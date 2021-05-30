@@ -106,7 +106,7 @@ export class FeedApiCallsService {
     ass_url = this.post_url+"/api/content/assignment/"
     lecture_url = this.post_url+"/api/content/lecture/"
     video_url = this.post_url+"/api/content/video/"
-    user_url = this.post_url+"/api/user/cred/"
+    user_url = this.post_url+"/api/auth/user/cred/"
 
     await this.http.get(post_url,{headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise().then((post) => {
       post_details = post
@@ -245,6 +245,16 @@ export class FeedApiCallsService {
 
   async get_assignment_details(assignment_id){
     let url = this.post_url+"/api/content/assignment/"+assignment_id
+    return await this.http.get(url, {headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
+  }
+
+  async get_all_submissions(){
+    let url = ""
+    if(this.cookie.get('Role') == 'Coor'){
+      url = this.post_url+"/api/personal/submission/87795962440396049328460600526719/0/"
+    }else{
+      url = this.post_url+"/api/personal/submission/"+this.asUser+"/0/"
+    }
     return await this.http.get(url, {headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
   }
 

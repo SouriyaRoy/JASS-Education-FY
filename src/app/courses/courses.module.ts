@@ -4,12 +4,14 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 import { CoursesRoutingModule } from './courses-routing.module';
 import { EnrollmentComponent } from './enrollment/enrollment.component';
 import { SubmissionComponent } from './submission/submission.component';
+import { ViewSubmissionsComponent } from './view-submissions/view-submissions.component';
 
 
 @NgModule({
   declarations: [
     EnrollmentComponent,
-    SubmissionComponent
+    SubmissionComponent,
+    ViewSubmissionsComponent
   ],
   imports: [
     CommonModule,
@@ -19,7 +21,8 @@ import { SubmissionComponent } from './submission/submission.component';
   ],
   exports: [
     EnrollmentComponent,
-    SubmissionComponent
+    SubmissionComponent,
+    ViewSubmissionsComponent
   ]
 })
 export class CoursesModule { }

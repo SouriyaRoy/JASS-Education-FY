@@ -1,0 +1,65 @@
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+</head>
+<nav class="navbar navbar-expand-lg navbar-light bg-warning bg-gradient fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand mb-0 h1" routerLink="../../forum/home">JASS</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="../../forum/feed">Feed</a>
+                </li>
+                <li class="nav-item" *ngIf="usercookie === 'User'">
+                    <a class="nav-link" routerLink="../../dashboard/student">Dashboard</a>
+                </li>
+                <li class="nav-item" *ngIf="usercookie === 'Coor'">
+                    <a class="nav-link" routerLink="../../dashboard/teacher">Dashboard</a>
+                </li>
+                <li class="nav-item" *ngIf="usercookie === 'Coor'">
+                    <button class="nav-link btn btn-outline-warning">Ticket</button>
+                </li>
+                <!-- <li>
+            <a class="nav-link" routerLink="../../video/search_video">Videos</a>
+          </li> -->
+            </ul>
+            <div>
+                <a style="text-decoration: none;" routerLink="../../../views/profile"><button
+                        class="d-flex btn btn-success">Profile</button></a>
+            </div>&nbsp;
+            <div *ngIf="usercookie === 'Coor'">
+                <a style="text-decoration: none;" routerLink="../../../views/post-create"><button
+                        class="d-flex btn btn-success">Create Post</button></a>
+            </div>&nbsp;
+            <!-- <div>
+          <button class="d-flex btn btn-outline-success" (click)="logout()">Logout</button>
+        </div> -->
+        </div>
+    </div>
+</nav>
+<br><br><br>
+<h3>ShowComment Try</h3>
+<!-- <button style="margin-left: 47%;" class="btn btn-danger" (click)="opensweetalert()">Delete All</button> -->
+<table style="margin-left: 15%;">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Reply</th>
+        <th style="text-align: center;">Actions</th>
+    </tr>
+    <tr *ngFor="let item of data1; let i = index">
+        <td>{{item.data.reply.body}}</td>
+        <td>{{item.data.user_ref.first_name}} {{item[i].data.user_ref.last_name}}</td>
+        <!-- <td>{{item.data.reply.body}}</td> -->
+        <!-- <td style="text-align: center;">
+            <button class="btn btn-danger" (click)="Delete(item.id)">Delete</button>&nbsp;
+            <button class="btn btn-warning" (click)="MakeAdmin(item.id)">Make Admin</button>&nbsp;
+            <button class="btn btn-success" (click)="MakeCoor(item.id)">Make Co-Ordinator</button>
+        </td> -->
+    </tr>
+</table>

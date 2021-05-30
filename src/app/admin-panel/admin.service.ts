@@ -21,7 +21,7 @@ export class AdminService {
   //OPTIMIZE : get_specific calls down
 
   async get_user(id){
-    let url =this.post_url+"/api/user/cred/"+id
+    let url =this.post_url+"/api/auth/user/cred/"+id
     let ret = await this.http.get(url,{headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
     let full_name = ret['data']['first_name'] + " " + ret['data']['last_name']
     return full_name
@@ -88,7 +88,7 @@ export class AdminService {
   }
 
   async get_all_users(){
-    let url = this.post_url+"/api/user/cred/"+this.asAdmin
+    let url = this.post_url+"/api/auth/user/cred/"+this.asAdmin
     return await this.http.get(url,{headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise() 
   }
 
@@ -111,7 +111,7 @@ export class AdminService {
   //OPTIMIZE : make calls down
 
   async make_admin(id){ //make body
-    let url = this.post_url+"/api/admin/cred/"
+    let url = this.post_url+"/api/auth/admin/cred/"
     let api_call = {
       "user_id" : id
     }
@@ -132,7 +132,7 @@ export class AdminService {
 //OPTIMIZE : delete calls down
 
   async delete_user(id){
-    let url = this.post_url+"/api/user/cred/"+id
+    let url = this.post_url+"/api/auth/user/cred/"+id
     return await this.http.delete(url,{headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
   }
 

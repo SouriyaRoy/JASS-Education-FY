@@ -23,7 +23,7 @@ export class UserAuthService {
           "password" : formdata.password
       }
     }
-    let url = this.api_url+'/api/user/cred/'
+    let url = this.api_url+'/api/auth/user/cred/'
     let json = JSON.stringify(api_call)
     let headers = new HttpHeaders()
     headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json")
@@ -55,7 +55,7 @@ export class UserAuthService {
   }
 
   async check_admin() {
-    let url = this.api_url+'/api/admin/cred/0'
+    let url = this.api_url+'/api/auth/admin/cred/0'
     let headers = new HttpHeaders()
     headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json").set('uauth',"Token"+" "+this.cookie.get('Test'))
     var response = await this.http.get(url, {headers:headers}).toPromise()
@@ -65,21 +65,21 @@ export class UserAuthService {
   }
 
   async get_user_data(){
-    let url = this.api_url+'/api/user/cred/0'
+    let url = this.api_url+'/api/auth/user/cred/0'
     let headers = new HttpHeaders()
     headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json").set('uauth',"Token"+" "+this.cookie.get('Test'))
     return await this.http.get(url,{headers:headers}).toPromise()
   }
 
   async get_specific_user_data(id){
-    let url = this.api_url+'/api/user/cred/'+id
+    let url = this.api_url+'/api/auth/user/cred/'+id
     let headers = new HttpHeaders()
     headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json").set('uauth',"Token"+" "+this.cookie.get('Test'))
     return await this.http.get(url,{headers:headers}).toPromise()
   }
 
   async user_logout(){
-    let url = this.api_url+'/api/user/cred/87795962440396049328460600526719'
+    let url = this.api_url+'/api/auth/user/cred/87795962440396049328460600526719'
     let headers = new HttpHeaders()
     headers = headers.set('Authorization',"Token"+" "+this.auth).set('Content-Type',"application/json").set('uauth',"Token"+" "+this.cookie.get('Test'))
     return await this.http.delete(url, {headers:headers}).toPromise()  

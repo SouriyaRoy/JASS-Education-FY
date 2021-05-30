@@ -1,0 +1,28 @@
+table {
+    margin-top: 50px;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 70%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+  .block {
+    display: block;
+    width: 10%;
+    border: none;
+    background-color: #449ccf;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+  }
+  h3 {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}

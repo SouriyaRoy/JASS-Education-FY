@@ -25,10 +25,23 @@ export class ShowPostComponent implements OnInit {
       this.identity = params.id
     })
 
+    await this.feed.get_all_submissions().then((res) => {
+      if(res['data'].length == 0){
+        this.isAssignment = "1"
+      }else{
+        this.isAssignment = "0"
+      }
+    })
+
     await this.feed.get_specific_post(this.identity).then((res) => {
       this.data = res
       this.forum_id = res[0].data.forum_ref
-      this.isAssignment = res[0].data.assignment_ref //TODO : check if user already submitted assignment, if yes show appropriate mssg
+      if(this.isAssignment == "1"){
+        this.isAssignment = res[0].data.assignment_ref 
+      }else{
+        this.isAssignment = null
+      }
+      //TODO : check if user already submitted assignment, if yes show appropriate mssg
       this.isLecture = res[0].data.lecture_ref
       this.isVideo = res[0].data.video_ref
       //console.log(this.data)
@@ -38,18 +51,32 @@ export class ShowPostComponent implements OnInit {
     })
 
     await this.feed.get_reply_id(this.forum_id).then((res) => {
-      //console.warn(res)
+      // console.warn(res)
       for(let item of res){
         this.feed.get_replies(item).then((res) => {
-          this.replies.push(res)
+          //this.replies.push(res)
           this.uauth.get_specific_user_data(res['data']['reply']['user_ref']).then((res2) => {
-            this.user_data.push(res2)
+            //this.user_data.push(res2) //TODO : merge user_data to reply
+            
+            res['data']['reply']['user_ref'] = res2['data']
+            // console.warn(res['data']['reply']['user_ref'])
+            this.replies.push(res)
           },(err) => {console.error(err)})
         },(error) => {
           console.error(error)
         })
       }
-      console.warn(this.replies, this.user_data)
+      console.warn(this.replies)
+
+      // this.replies.sort((a,b) =>{
+      //   if(a.reply.id < b.reply.id){
+      //    return -1
+      //   }else if (a.reply.id > b.reply.id){
+      //     return 1
+      //   }
+      //   return 0
+      // })
+      // console.warn(this.replies, this.user_data) //TODO : sort replies in descending order (obj.reply.id)
     },(error) => {console.error(error)})
 
   }
@@ -106,36 +133,36 @@ export class ShowPostComponent implements OnInit {
     })
   }
 
-  async ReplyofreplySubmit(data,id) {
-    //console.warn(data,id)
-    await this.feed.reply_of_reply(data,id).then((res) => {
-      //console.log(res)
-      this.router.navigateByUrl('forum/home', { skipLocationChange: true }).then(() => {
-        this.router.navigate(['views/show-post/'+this.identity]);
-    }); 
-    },(error) => {
-      console.error(error)
-    })
-  }
+  // async ReplyofreplySubmit(data,id) {
+  //   //console.warn(data,id)
+  //   await this.feed.reply_of_reply(data,id).then((res) => {
+  //     //console.log(res)
+  //     this.router.navigateByUrl('forum/home', { skipLocationChange: true }).then(() => {
+  //       this.router.navigate(['views/show-post/'+this.identity]);
+  //   }); 
+  //   },(error) => {
+  //     console.error(error)
+  //   })
+  // }
 
-  async showReplies(reply_id, id){
-    console.warn(reply_id,id)
-    this.replytoreply = []
-    this.user_data_2 = []
-    await this.feed.get_replytoreply_id(reply_id).then((res) => {
-      //console.log(res)
-      for(let item of res){
-        this.feed.get_replytoreply(item).then((res1) => {
-          this.replytoreply.push(res1)
-          this.uauth.get_specific_user_data(res1['data']['user_ref']).then((res2) => {
-            this.user_data_2.push(res2)
-          },(error) => {console.error(error)})
-        },(err) => {console.error(err)})
-      }
-      console.log(this.replytoreply, this.user_data_2)
-    },(error) => {console.error(error)})
-    console.log(document.getElementById('reply_'+id))
-  }
+  // async showReplies(reply_id, id){
+  //   console.warn(reply_id,id)
+  //   this.replytoreply = []
+  //   this.user_data_2 = []
+  //   await this.feed.get_replytoreply_id(reply_id).then((res) => {
+  //     //console.log(res)
+  //     for(let item of res){
+  //       this.feed.get_replytoreply(item).then((res1) => {
+  //         this.replytoreply.push(res1)
+  //         this.uauth.get_specific_user_data(res1['data']['user_ref']).then((res2) => {
+  //           this.user_data_2.push(res2)
+  //         },(error) => {console.error(error)})
+  //       },(err) => {console.error(err)})
+  //     }
+  //     console.log(this.replytoreply, this.user_data_2)
+  //   },(error) => {console.error(error)})
+  //   console.log(document.getElementById('reply_'+id))
+  // }
 
   showAssignment(res){
     console.warn(res)
@@ -192,4 +219,5 @@ export class ShowPostComponent implements OnInit {
       console.error(error)
     })
   }
+
 }
