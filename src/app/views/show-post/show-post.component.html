@@ -125,12 +125,12 @@
     </div>
 </form>
 
-<div *ngIf="forum_id; else noForum" class="container">
+<!-- <div *ngIf="forum_id; else noForum" class="container">
     <div class="container" style="margin-top: 2%; margin-bottom: 2%;">
         <h5>Replies</h5>
-    </div>
+    </div> -->
     <!--//TODO: From here starts the reply section-->
-    <div class="topic container" *ngFor="let item of replies;">
+    <!-- <div class="topic container" *ngFor="let item of replies;">
         <div class="topic__head">
             <div class="topic__caption">
                 <div class="topic__name">
@@ -161,44 +161,21 @@
                     </div>
                 </div>
                 <div class="topic__footer-share">
-                    <!-- <a><button class="btn btn-warning" (click)="showReplies(item.data.reply.id, new)">Show Replies</button></a> -->
+                    <a><button class="btn btn-warning" (click)="showReplies(item.data.reply.id, new)">Show Replies</button></a>
                     <a><button class="btn btn-warning" (click)="showReplyofReply(item.data.reply.id)">Reply</button></a>
                 </div>
             </div>
         </div>
         <br>
-        <form [formGroup]="replyofreply_form" (ngSubmit)="ReplyofreplySubmit(replyofreply_form.value, item.data.reply.id)">
-            <div class="container" id="replyofreply-{{item.data.reply.id}}" style="margin-left: 4%;" hidden>
-                <textarea formControlName="replyofreply" cols="155" rows="5"></textarea>
-                <br>
-                <button type="submit" class="btn btn-warning">Reply to this Comment</button>
-            </div>
-        </form>
-        <br>
-        <!-- <div class="topic topic--comment" *ngFor="let item of replytoreply; let new = index" id="reply_{{new}}">
-            <div class="topic__head">
-                <div class="topic__caption">
-                    <div class="topic__name">
-                        <a href="#">{{user_data_2[new].data.first_name.toString()}}</a>
-                    </div>
-                </div>
-                <a class="topic__arrow topic__arrow--up"><i class="icon-Arrow_Up"></i></a>
-            </div>
-            <div class="topic__content">
-                <div class="topic__text">
-                    <p>{{replytoreply[new].data.body.toString()}}</p>
-                </div>
-            </div>
-        </div> -->
-    </div>
+    </div> -->
     <br>
     <button class="btn btn-warning" style="width: 100%; margin-top: 5%;" [routerLink]='["../../../forum/show-comments",identity]'>Show More</button>
-</div>
-<ng-template #noForum>
+<!-- </div> -->
+<!-- <ng-template #noForum>
     <div style="text-align: center; margin: auto; width: auto;">
         <span>There are no replies to this post or this is not a forum</span>
     </div>
-</ng-template>
+</ng-template> -->
 
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

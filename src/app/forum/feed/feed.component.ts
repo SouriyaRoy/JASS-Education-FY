@@ -44,10 +44,10 @@ export class FeedComponent implements OnInit {
   //   })
   // }
 
-  logout(){
-    this.uauth.user_logout().then((result) => {
+  async logout(){
+    await this.uauth.user_logout().then((result) => {
       if(result['success'] == true){
-        this.cookie.deleteAll('Test')
+        this.cookie.delete('Test')
         this.cookie.delete('Role')
         console.log("Successfully logged out")
       }

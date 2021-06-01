@@ -182,7 +182,7 @@ export class FeedApiCallsService {
     let url = this.post_url+"/api/content/replyD/"
     let api_call = {
       "reply_ref" : id,
-      "body" : data.replyofreply
+      "body" : data.reprep
     }
     let json = JSON.stringify(api_call)
     console.warn(json)
@@ -251,9 +251,9 @@ export class FeedApiCallsService {
   async get_all_submissions(){
     let url = ""
     if(this.cookie.get('Role') == 'Coor'){
-      url = this.post_url+"/api/personal/submission/87795962440396049328460600526719/0/"
+      url = this.post_url+"/api/personal/submission_normal/87795962440396049328460600526719/0/"
     }else{
-      url = this.post_url+"/api/personal/submission/"+this.asUser+"/0/"
+      url = this.post_url+"/api/personal/submission_normal/"+this.asUser+"/0/"
     }
     return await this.http.get(url, {headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
   }

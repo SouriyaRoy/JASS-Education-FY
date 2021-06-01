@@ -13,13 +13,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="../../forum/feed">Feed</a>
+                    <a class="nav-link" routerLink="../../../forum/feed">Feed</a>
                 </li>
                 <li class="nav-item" *ngIf="usercookie === 'User'">
-                    <a class="nav-link" routerLink="../../dashboard/student">Dashboard</a>
+                    <a class="nav-link" routerLink="../../../dashboard/student">Dashboard</a>
                 </li>
                 <li class="nav-item" *ngIf="usercookie === 'Coor'">
-                    <a class="nav-link" routerLink="../../dashboard/teacher">Dashboard</a>
+                    <a class="nav-link" routerLink="../../../dashboard/teacher">Dashboard</a>
                 </li>
                 <li class="nav-item" *ngIf="usercookie === 'Coor'">
                     <button class="nav-link btn btn-outline-warning">Ticket</button>
@@ -43,23 +43,67 @@
     </div>
 </nav>
 <br><br><br>
-<h3>ShowComment Try</h3>
+<h5>ShowComment Try</h5>
+<br><br><br>
 <!-- <button style="margin-left: 47%;" class="btn btn-danger" (click)="opensweetalert()">Delete All</button> -->
-<table style="margin-left: 15%;">
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Reply</th>
-        <th style="text-align: center;">Actions</th>
-    </tr>
-    <tr *ngFor="let item of data1; let i = index">
-        <td>{{item.data.reply.body}}</td>
-        <td>{{item.data.user_ref.first_name}} {{item[i].data.user_ref.last_name}}</td>
-        <!-- <td>{{item.data.reply.body}}</td> -->
-        <!-- <td style="text-align: center;">
-            <button class="btn btn-danger" (click)="Delete(item.id)">Delete</button>&nbsp;
-            <button class="btn btn-warning" (click)="MakeAdmin(item.id)">Make Admin</button>&nbsp;
-            <button class="btn btn-success" (click)="MakeCoor(item.id)">Make Co-Ordinator</button>
-        </td> -->
-    </tr>
-</table>
+<div class="topic container" *ngFor="let item of data1;">
+    <div class="topic__head">
+        <div class="topic__caption">
+            <div class="topic__name">
+                <a href="#">{{item.data.reply.user_ref.first_name}} {{item.data.reply.user_ref.last_name}}</a>
+            </div>
+            <div class="topic__date">
+                <!-- <div class="topic__user topic__user--pos-r">
+                    <p style="padding-top: 15px;">replied to</p>
+                    <a href="#" class="topic__user-name">{{data[3].data.first_name}}</a>
+                </div> -->
+                <i class="icon-Watch_Later"></i>{{item.data.reply.made_date}}
+            </div>
+        </div>
+    </div>
+    <div class="topic__content">
+        <div class="topic__text">
+            <p>{{item.data.reply.body}}</p>
+        </div>
+        <div class="topic__footer">
+            <div class="topic__footer-likes">
+                <div>
+                    <a><button class="btn btn-success">Upvote</button></a>
+                    <span>137</span>
+                </div>
+                <div>
+                    <a><button class="btn btn-danger">Downvote</button></a>
+                    <span>02</span>
+                </div>
+            </div>
+            <div class="topic__footer-share">
+                <!-- <a><button class="btn btn-warning" (click)="showReplies(item.data.reply.id, new)">Show Replies</button></a> -->
+                <a><button class="btn btn-warning" (click)="show(item.data.reply.id)">Reply</button></a>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container" id="replyofreply-{{item.data.reply.id}}" style="margin-left: 4%;" hidden>
+        <form [formGroup]="reprepsubmit" (ngSubmit)="reprepsubform(reprepsubmit.value, item.data.reply.id)">
+            <textarea formControlName="reprep" style="width: 98%;"></textarea>
+            <br>
+            <button type="submit" class="btn btn-warning">Reply to this Comment</button>
+        </form>
+    </div>
+    <br>
+    <div class="topic topic--comment" *ngFor="let item2 of item.data.reply2; let new = index">
+        <div class="topic__head">
+            <div class="topic__caption">
+                <div class="topic__name">
+                    <a href="#">{{item.data.reply2[new].user_ref.first_name}}</a>
+                </div>
+            </div>
+            <a class="topic__arrow topic__arrow--up"><i class="icon-Arrow_Up"></i></a>
+        </div>
+        <div class="topic__content">
+            <div class="topic__text">
+                <p>{{item2.body}}</p>
+            </div>
+        </div>
+    </div>
+</div>
