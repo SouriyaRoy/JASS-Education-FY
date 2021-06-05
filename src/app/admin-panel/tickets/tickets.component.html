@@ -39,28 +39,60 @@
     </div>
 </nav>
 <br><br><br>
-<h3>Tickets</h3>
-<button style="margin-left: 47%;" class="btn btn-danger" (click)="opensweetalert()">Delete All</button>
-<br>
+<div style="text-align: center;">
+    <h3>Unsolved Tickets</h3>
+    <br>
+    <button class="btn btn-danger" (click)="opensweetalert()">Delete All</button>&nbsp;
+    <button class="btn btn-success" (click)="show_solved_tickets()">Show Solved Tickets</button>
+</div>
 <table style="margin-left: 15%;">
     <tr>
         <th>Ticket ID</th>
+        <th>User ID</th>
         <th>User Name</th>
         <th>Request Type</th>
         <th style="text-align: center;">Actions</th>
     </tr>
 
-    <tr *ngFor="let item of ticket_data; let i = index"> <!--//TODO: Change ticket format as normal json-->
+    <tr *ngFor="let item of data1"> <!--//TODO: Change ticket format as normal json-->
         <td>{{item.id}}</td>
-        <td>{{data[i]}}</td>
-        <td>{{item.body.split("||")[1]}}</td>
+        <td>{{item.user_ref.id}}</td>
+        <td>{{item.user_ref.first_name}} {{item.user_ref.last_name}}</td>
+        <td>{{item.body.req_type}}</td>
         <td style="text-align: center;">
             <button class="btn btn-danger" (click)="Delete(item.id)">Delete</button>&nbsp;
             <button class="btn btn-success" (click)="MarkDone(item.id)">Mark as Done</button>&nbsp;
             <button class="btn btn-warning" button mat-raised-button
-            matTooltip="Info about the action"
+            matTooltip={{item.body.request}}
             aria-label="Button that displays a tooltip when focused or hovered over">Details</button>
         </td>
     </tr>
-    
 </table>
+<br><br><br>
+<div *ngIf="show_solved">
+    <h3 style="text-align: center;">Solved Tickets</h3>
+    <table style="margin-left: 15%;">
+        <tr>
+            <th>Ticket ID</th>
+            <th>User ID</th>
+            <th>User Name</th>
+            <th>Request Type</th>
+            <th style="text-align: center;">Actions</th>
+        </tr>
+    
+        <tr *ngFor="let item of data2"> <!--//TODO: Change ticket format as normal json-->
+            <td>{{item.id}}</td>
+            <td>{{item.user_ref.id}}</td>
+            <td>{{item.user_ref.first_name}} {{item.user_ref.last_name}}</td>
+            <td>{{item.body.req_type}}</td>
+            <td style="text-align: center;">
+                <button class="btn btn-danger" (click)="Delete(item.id)">Delete</button>&nbsp;
+                <!-- <button class="btn btn-success" (click)="MarkDone(item.id)">Mark as Done</button>&nbsp; -->
+                <button class="btn btn-warning" button mat-raised-button
+                matTooltip={{item.body.request}}
+                aria-label="Button that displays a tooltip when focused or hovered over">Details</button>
+            </td>
+        </tr>
+        
+    </table>
+</div>

@@ -28,7 +28,7 @@
                         class="d-flex btn btn-success">Create Post</button></a>
             </div>&nbsp;
             <div>
-                <button class="d-flex btn btn-outline-success">Logout</button>
+                <button class="d-flex btn btn-outline-success" (click)="logout()">Logout</button>
             </div>
         </div>
     </div>
@@ -56,11 +56,11 @@
             <a routerLink="#">
                 <div class="card text-center border-dark mb-3">
                     <div class="card-header" style="color: black;">
-                        <h5>Raise Ticket</h5>
+                        <h5>Ticket</h5>
                     </div>
                     <div class="card-body text-dark">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <h5 class="card-title">Raise a ticket</h5>
+                        <p class="card-text">You can raise a ticket for your privilege escalation</p>
                     </div>
                 </div>
             </a>
@@ -85,10 +85,10 @@
             <select class="form-control" formControlName="req_type" [ngClass]="{
                 'is-invalid':ticket_form.get('req_type').touched && ticket_form.get('req_type').invalid}">
                 <option value="none" selected>--Select--</option>
-                <option value="admin_access">Admin Access</option>
-                <option value="coordinator_access">Coordinator Access</option>
-                <option value="privilege_escalation">Escalate Privilege</option>
-                <option value="add_subject">Add Subject</option>
+                <option value="Admin Access">Admin Access</option>
+                <option value="Coordinator Access">Coordinator Access</option>
+                <option value="Privilege Escalation">Escalate Privilege</option>
+                <option value="Add Subject">Add Subject</option>
             </select>
             <div *ngIf="ticket_form.get('req_type').touched && ticket_form.get('req_type').invalid"
                 class="invalid-feedback">

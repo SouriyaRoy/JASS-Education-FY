@@ -102,11 +102,15 @@ export class AdminService {
     return await this.http.get(url,{headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise() 
   }
 
-  async get_all_tickets(){
-    let url = this.post_url+"/api/analytics/ticket/0"
+  async get_all_unsolved_tickets(){
+    let url = this.post_url+"/api/analytics/ticket/87795962440396049328460600526719"
     return await this.http.get(url,{headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise() 
   }
 
+  async get_all_solved_tickets(){
+    let url = this.post_url+"/api/analytics/ticket/13416989436929794359012690353783"
+    return await this.http.get(url,{headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise() 
+  }
 
   //OPTIMIZE : make calls down
 

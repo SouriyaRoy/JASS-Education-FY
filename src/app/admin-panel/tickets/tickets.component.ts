@@ -13,9 +13,12 @@ import { AdminService } from '../admin.service';
 })
 export class TicketsComponent implements OnInit {
 
-  ticket_data
-  split_data
-  public data = new Array()
+  unsolved_ticket_data
+  public data1 = new Array()
+  show_solved = 0
+  solved_ticket_data
+  public data2 = new Array()
+
 
   constructor(private uauth : UserAuthService, 
               private cookie : CookieService, 
@@ -24,17 +27,38 @@ export class TicketsComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    await this.admin.get_all_tickets().then((res) => {
-      this.ticket_data = res['data']
-      for(let i of this.ticket_data){
-        this.split_data = (i['body'].split("||"))
-        //console.log(this.split_data)
-        this.admin.get_user(this.split_data[0]).then((res) => {
-          this.data.push(res)
-        },(error) => {console.error(error)})
+    await this.admin.get_all_unsolved_tickets().then((res) => {
+      console.warn(res['data'])
+      this.unsolved_ticket_data = res['data']
+      for(let i=0; i<this.unsolved_ticket_data.length; i++){
+        this.uauth.get_specific_user_data(this.unsolved_ticket_data[i].user_ref).then((res2) => {
+          this.unsolved_ticket_data[i].user_ref = res2['data']
+          this.data1.push(this.unsolved_ticket_data[i])
+        })
       }
     },(error) => {console.error(error)})
-    //console.warn(this.data)
+    console.warn(this.data1)
+  }
+
+  show_solved_tickets(){
+    if(this.show_solved == 0){
+      this.show_solved = 1
+    }else if(this.show_solved == 1){
+      this.show_solved = 0
+    }
+    this.data2 = []
+    this.solved_ticket_data = null
+    this.admin.get_all_solved_tickets().then((res) => {
+      console.warn(res['data'])
+      this.solved_ticket_data = res['data']
+      for(let i=0; i<this.solved_ticket_data.length; i++){
+        this.uauth.get_specific_user_data(this.solved_ticket_data[i].user_ref).then((res2) => {
+          this.solved_ticket_data[i].user_ref = res2['data']
+          this.data2.push(this.solved_ticket_data[i])
+        })
+      }
+    },(error) => {console.error(error)})
+    console.warn(this.data2)
   }
 
   opensweetalert(){

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { UserAuthService } from 'src/app/services/user-auth.service';
 import { UserserviceService } from 'src/app/services/userservice.service';
 
@@ -13,13 +14,10 @@ export class AdminComponent implements OnInit {
 
   user_id
 
-  constructor(private uauth_service : UserAuthService,
+  constructor(private uauth : UserAuthService,
               private uservice : UserserviceService,
-              private router : Router) {
-    //router.navigateByUrl('admin-panel/admin-home')
-    // uauth_service.check_admin().subscribe(result => {
-    //   console.warn(result)
-    // })
+              private router : Router,
+              private cookie : CookieService) {
   }
 
   ticket_form = new FormGroup({
@@ -28,21 +26,16 @@ export class AdminComponent implements OnInit {
   })
 
   RaiseTicket(data){
-    //console.warn(data)
-    this.uauth_service.get_user_data().then((response) => {
-      this.user_id = response['data']['id']
-      console.log(this.user_id)
-      this.uservice.raise_ticket(data,this.user_id).subscribe((response) => {
-        alert("Ticket Raised Successfully with number : " + response['data']['id'])
-        this.router.navigateByUrl('forum/feed')
-      }, (error) => {
-        console.error(error)
-      })
-    }, (error) => {
+    console.warn(data)
+    this.uservice.raise_ticket(data).then((res) => {
+      //console.log(res['data'])
+      alert("Ticket Raised Successfully with number : " + res['data']['id'])
+      this.router.navigateByUrl('forum/home', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['dashboard/admin']);
+    }); 
+    },(error) => {
       console.error(error)
     })
-
-    
   }
 
   ngOnInit(): void {
@@ -51,5 +44,18 @@ export class AdminComponent implements OnInit {
   show_ticket(){
     let p = document.getElementById('ticket');
     p.removeAttribute('hidden');
+  }
+
+  logout(){
+    this.uauth.user_logout().then((result) => {
+      if(result['success'] == true){
+        this.cookie.delete('Test')
+        this.cookie.delete('Role')
+        console.log("Successfully logged out")
+      }
+      this.router.navigateByUrl('forum/home')
+    }, (error) => {
+      console.error(error)
+    })
   }
 }

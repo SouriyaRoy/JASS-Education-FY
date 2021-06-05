@@ -63,15 +63,20 @@ export class UserserviceService {
   }
 
 
-  raise_ticket(data,id){
+  async raise_ticket(data){
     let url = this.api_url+'/api/analytics/ticket/'
-    var api_call = { "body" : id+"||"+data.req_type+"||"+data.request }
+    var api_call = {
+      "body" : {
+          "request":data.request, 
+          "req_type":data.req_type
+      }
+    }
     var json = JSON.stringify(api_call)
     console.log(json)
     let cookieValue = this.cookie.get('Test')
     let headers = new HttpHeaders()
     headers = headers.set('Authorization',"Token"+" "+this.auth).set('uauth',"Token"+" "+cookieValue).set('Content-Type',"application/json")
-    return this.http.post(url,json,{headers:headers})
+    return await this.http.post(url,json,{headers:headers}).toPromise()
   }
 
 }
