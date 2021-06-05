@@ -43,8 +43,8 @@
     </div>
 </nav>
 <br><br><br>
-<h5>ShowComment Try</h5>
-<br><br><br>
+<h5 style="text-align: center;">Comments Section</h5>
+<br><br>
 <!-- <button style="margin-left: 47%;" class="btn btn-danger" (click)="opensweetalert()">Delete All</button> -->
 <div class="topic container" *ngFor="let item of data1;">
     <div class="topic__head">
@@ -95,7 +95,7 @@
         <div class="topic__head">
             <div class="topic__caption">
                 <div class="topic__name">
-                    <a href="#">{{item.data.reply2[new].user_ref.first_name}}</a>
+                    <a href="#">{{item.data.reply2[new].user_ref.first_name}} {{item.data.reply2[new].user_ref.last_name}}</a>
                 </div>
             </div>
             <a class="topic__arrow topic__arrow--up"><i class="icon-Arrow_Up"></i></a>

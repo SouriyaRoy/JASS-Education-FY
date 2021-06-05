@@ -9,7 +9,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MatButtonModule } from '@angular/material/button'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { CookieService } from 'ngx-cookie-service';
-import { CookieComponent } from './cookie/cookie.component';
 import { AlertService } from './services/alert.service';
 import { YoutubeService } from './services/youtube.service';
 import { UserAuthService } from './services/user-auth.service';
@@ -18,7 +17,6 @@ import { UserserviceService } from './services/userservice.service';
 @NgModule({
   declarations: [
     AppComponent,
-    CookieComponent,
   ],
   imports: [
     BrowserModule,

@@ -73,7 +73,7 @@
 
 <div class="container" style="border: 1px black;">
     <div class="row">
-        <div class="col-sm-4" (click)="showAssignment(data)">
+        <div class="col-sm-4" (click)="showAssignment(data)" *ngIf="isAssignment">
             <!-- *ngIf="isAssignment" -->
             <a routerLink="#">
                 <div class="card text-center border-dark mb-3">
@@ -87,7 +87,7 @@
                 </div>
             </a>
         </div>
-        <div class="col-sm-4" (click)="showLecture(data)">
+        <div class="col-sm-4" (click)="showLecture(data)" *ngIf="isLecture">
             <!-- *ngIf="isLecture" -->
             <a routerLink="#">
                 <div class="card text-center border-dark mb-3">
@@ -171,7 +171,7 @@
         <br>
     </div> -->
     <br>
-    <button class="btn btn-warning" style="width: 100%; margin-top: 5%;" [routerLink]='["../../../forum/show-comments",identity]'>Show More</button>
+    <button class="btn btn-warning" style="width: 80%; margin-top: 5%; margin-left: 10%;" [routerLink]='["../../../forum/show-comments",identity]' *ngIf="forum_id">Show Replies</button>
 <!-- </div> -->
 <!-- <ng-template #noForum>
     <div style="text-align: center; margin: auto; width: auto;">

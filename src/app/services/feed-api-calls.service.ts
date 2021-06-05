@@ -249,7 +249,8 @@ export class FeedApiCallsService {
   }
 
   async check_submissions_for_user(id){
-    let url = this.post_url+"/api/content/assignment/"+id //TODO : use this for assignment submission
+    let url = this.post_url+"/api/content/assignment/"+id
+    return await this.http.get(url, {headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
   }
 
   async get_all_submissions(){

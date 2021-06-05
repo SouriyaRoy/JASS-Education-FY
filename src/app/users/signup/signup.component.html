@@ -11,7 +11,7 @@
     </div>
 </nav>
 <br><br><br>
-<div class="container" style="text-align: center;">
+<div class="container" style="text-align: center; margin-top: 5%;">
     <h2 class="pos" >Sign Up</h2>
     <form [formGroup]="signupForm" (ngSubmit)="formSubmit(signupForm.value)">
         <br>
@@ -67,12 +67,12 @@
                 <input type="text" class="form-control" formControlName="security_ans"
                     placeholder="User Security Answer.">
             </div>
-        </div><br>
+        </div><br><br>
         <div>
-            <button mat-raised-button color="accent" class="reg_button" type="submit"
+            <button mat-raised-button color="accent" class="reg_button" type="submit" style="margin-left: 0px;"
                 [disabled]="!signupForm.valid">Register</button>
             &nbsp;|&nbsp;
-            <button mat-raised-button color="accent" style="position: relative;" routerLink="../login">Login</button>
+            <button mat-raised-button color="accent" routerLink="../login">Login</button>
         </div>
     </form>
 

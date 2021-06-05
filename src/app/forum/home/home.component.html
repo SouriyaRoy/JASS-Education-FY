@@ -24,23 +24,11 @@
                         <a class="nav-link" routerLink="../../users/signup">Signup</a>
                     </li>
                 </div>
-
-                <div *ngIf="!cookieExists">
-                    <li class="nav-item">
-                        <a class="nav-link" routerLink="../../app-cookie">Cookie</a>
-                    </li>
-                </div>
-
                 <div *ngIf="cookieExists">
                     <li>
                         <a class="nav-link" routerLink="../../video/search_video">Videos</a>
                     </li>
-                </div>
-
-                <li>
-                    <a class="nav-link" routerLink="../../users/choose">Choose</a>
-                </li>
-                
+                </div>                
             </ul>
             <!-- <form class="d-flex"> -->
             <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->

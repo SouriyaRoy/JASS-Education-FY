@@ -38,16 +38,19 @@ export class ShowPostComponent implements OnInit {
 
     await this.feed.get_specific_post(this.identity).then((res) => {
       this.data = res
-      //console.log(res, this.isAssignment)
-      this.feed.get_all_submissions().then((res2) => {
+      console.log(this.data)
+      this.feed.check_submissions_for_user(res[0].data.assignment_ref).then((res2) => {
         console.log(res2)
+        if(res2['data']['submission'].length == 0){
+          console.log(res2['data']['submission'].length)
+          this.isAssignment = 1
+        }else{
+          console.log(res2['data']['submission'].length)
+          this.isAssignment = 0
+        }
+        console.warn(this.isAssignment)
       })
       this.forum_id = res[0].data.forum_ref
-      if(this.isAssignment == "1"){
-        this.isAssignment = res[0].data.assignment_ref 
-      }else{
-        this.isAssignment = null
-      }
       this.isLecture = res[0].data.lecture_ref
       this.isVideo = res[0].data.video_ref
       //console.log(this.data)
@@ -56,22 +59,22 @@ export class ShowPostComponent implements OnInit {
       console.warn(error)
     })
 
-    await this.feed.get_reply_id(this.forum_id).then((res) => {
-      // console.warn(res)
-      for(let item of res){
-        this.feed.get_replies(item).then((res) => {
-          //this.replies.push(res)
-          this.uauth.get_specific_user_data(res['data']['reply']['user_ref']).then((res2) => {            
-            res['data']['reply']['user_ref'] = res2['data']
-            // console.warn(res['data']['reply']['user_ref'])
-            this.replies.push(res)
-          },(err) => {console.error(err)})
-        },(error) => {
-          console.error(error)
-        })
-      }
-      console.warn(this.replies)
-    },(error) => {console.error(error)})
+    // await this.feed.get_reply_id(this.forum_id).then((res) => {
+    //   // console.warn(res)
+    //   for(let item of res){
+    //     this.feed.get_replies(item).then((res) => {
+    //       //this.replies.push(res)
+    //       this.uauth.get_specific_user_data(res['data']['reply']['user_ref']).then((res2) => {            
+    //         res['data']['reply']['user_ref'] = res2['data']
+    //         // console.warn(res['data']['reply']['user_ref'])
+    //         this.replies.push(res)
+    //       },(err) => {console.error(err)})
+    //     },(error) => {
+    //       console.error(error)
+    //     })
+    //   }
+    //   console.warn(this.replies)
+    // },(error) => {console.error(error)})
 
   }
 
@@ -86,12 +89,22 @@ export class ShowPostComponent implements OnInit {
   upvote = 100
   downvote = 67
   forum_id = ""
-  isAssignment = ""; isLecture = ""; isVideo = "";
+  isAssignment; isLecture; isVideo;
 
 
   reply_form = new FormGroup({
     reply: new FormControl()
   })
+
+  async ReplySubmit(data){
+    //console.log(this.forum_id, data)
+    this.feed.reply(data, this.forum_id).then((res) => {
+      //console.warn(res)
+      this.router.navigateByUrl('forum/home', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['forum/show-comments/'+this.identity]);
+      }); 
+    })
+  }
 
   Upvote() {
     var p = document.getElementById('upvote')
@@ -106,23 +119,6 @@ export class ShowPostComponent implements OnInit {
     let rep = document.getElementById('reply')
     rep.removeAttribute('hidden')
   }
-  // showReplyofReply(id) {
-  //   let rep = document.getElementById('replyofreply-'+id)
-  //   rep.removeAttribute('hidden')
-  // }
-
-  // async ReplySubmit(form_data) {
-  //   //console.warn(form_data,this.data[0]['data']['forum_ref'])
-  //   await this.feed.reply(form_data, this.data[0]['data']['forum_ref']).then((result) => {
-  //     //console.log(result)
-  //     this.router.navigateByUrl('forum/home', { skipLocationChange: true }).then(() => {
-  //       this.router.navigate(['views/show-post/'+this.identity]);
-  //   }); 
-  //   }, (error) => {
-  //     alert("Check Console")
-  //     console.warn(error)
-  //   })
-  // }
 
   showAssignment(res){
     console.warn(res)
