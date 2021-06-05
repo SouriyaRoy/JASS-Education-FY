@@ -33,31 +33,33 @@ export class UserserviceService {
     return this.http.post(url,json,{headers : headers})
   }
 
-  get_user_profile_details(){
+  async get_user_profile_details(){
     let cookieValue = this.cookie.get('Test')
     let headers = new HttpHeaders()
     headers = headers.set('Authorization',"Token"+" "+this.auth).set('uauth',"Token"+" "+cookieValue).set('Content-Type',"application/json")
-    let url = this.api_url+'/api/user/prof/read/0'
-    return this.http.get(url, {headers:headers})
+    let url = this.api_url+'/api/auth/user/prof/0'
+    return await this.http.get(url, {headers:headers}).toPromise()
   }
 
-  submit_user_profile_details(data){
-    let url = 'http://'+this.api_url+'/api/user/prof/edit/0'
+  async submit_user_profile_details(data){ //TODO : pass user id from user_cred
+    let url = 'http://'+this.api_url+'/api/auth/user/prof/'
     var api_call = {
-      "user_profile_headline" : data.headline,
-      "user_bio" : data.bio,
-      "user_english_efficiency" : data.english,
-      "user_git_profile" : data.github,
-      "user_likedin_profile" : data.linkedin,
-      "user_profile_pic" : null,
-      "user_roll_number" : data.rollno,
-      "prime" : true
+      "headline" : data.headline,
+      "bio" : data.bio,
+      "english_efficiency" : data.english,
+      "git_profile" : data.github,
+      "linkedin_profile" : data.linkedin,
+      // "user_profile_pic" : null,
+      "roll_number" : data.rollno,
+      "prime" : true,
+      "image_ref": null
     }
     let cookieValue = this.cookie.get('Test')
     let headers = new HttpHeaders()
     headers = headers.set('Authorization',"Token"+" "+this.auth).set('uauth',"Token"+" "+cookieValue).set('Content-Type',"application/json")
     var json = JSON.stringify(api_call)
-    return this.http.post(url,json,{headers:headers})
+    console.log(json)
+    return await this.http.put(url,json,{headers:headers}).toPromise() //TODO : change to put and create post somewhere else
   }
 
 

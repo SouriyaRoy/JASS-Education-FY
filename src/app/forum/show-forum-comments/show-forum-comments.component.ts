@@ -91,8 +91,8 @@ export class ShowForumCommentsComponent implements OnInit {
     },(error) => { console.error(error)})
   }
 
-  async logout(){
-    await this.uauth.user_logout().then((result) => {
+  logout(){
+    this.uauth.user_logout().then((result) => {
       if(result['success'] == true){
         this.cookie.delete('Test')
         this.cookie.delete('Role')

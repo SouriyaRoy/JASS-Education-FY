@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router'
+import { CookieService } from 'ngx-cookie-service';
 import { UserAuthService } from 'src/app/services/user-auth.service';
 import Swal from 'sweetalert2';
 import { FeedApiCallsService } from '../../services/feed-api-calls.service';
@@ -15,28 +16,32 @@ export class ShowPostComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private router: Router,
     private feed: FeedApiCallsService,
-    private uauth : UserAuthService) {
+    private uauth : UserAuthService,
+    private cookie : CookieService) {
 
   }
 
   async ngOnInit(): Promise<void> {
-    this.cookieExists = this.cookie.check('Test')
+    //this.cookieExists = this.cookie.check('Test')
 
     this.route.params.subscribe(params => {
       this.identity = params.id
     })
 
-    await this.feed.get_all_submissions().then((res) => {
-      if(res['data'].length == 0){
-        this.isAssignment = "1"
-      }else{
-        this.isAssignment = "0"
-      }
-    })
+    // this.feed.get_all_submissions().then((res) => {
+    //   if(res['data'].length == 0){
+    //     this.isAssignment = "1"
+    //   }else{
+    //     this.isAssignment = "0"
+    //   }
+    // })
 
     await this.feed.get_specific_post(this.identity).then((res) => {
       this.data = res
-      console.log(this.data)
+      //console.log(res, this.isAssignment)
+      this.feed.get_all_submissions().then((res2) => {
+        console.log(res2)
+      })
       this.forum_id = res[0].data.forum_ref
       if(this.isAssignment == "1"){
         this.isAssignment = res[0].data.assignment_ref 
@@ -162,8 +167,8 @@ export class ShowPostComponent implements OnInit {
     })
   }
   
-  async logout(){
-    await this.uauth.user_logout().then((result) => {
+  logout(){
+    this.uauth.user_logout().then((result) => {
       if(result['success'] == true){
         this.cookie.delete('Test')
         this.cookie.delete('Role')

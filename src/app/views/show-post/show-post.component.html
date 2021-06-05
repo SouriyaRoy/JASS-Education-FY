@@ -73,7 +73,8 @@
 
 <div class="container" style="border: 1px black;">
     <div class="row">
-        <div class="col-sm-4" *ngIf="isAssignment" (click)="showAssignment(data)">
+        <div class="col-sm-4" (click)="showAssignment(data)">
+            <!-- *ngIf="isAssignment" -->
             <a routerLink="#">
                 <div class="card text-center border-dark mb-3">
                     <div class="card-header" style="color: black;">
@@ -86,7 +87,8 @@
                 </div>
             </a>
         </div>
-        <div class="col-sm-4" *ngIf="isLecture" (click)="showLecture(data)">
+        <div class="col-sm-4" (click)="showLecture(data)">
+            <!-- *ngIf="isLecture" -->
             <a routerLink="#">
                 <div class="card text-center border-dark mb-3">
                     <div class="card-header" style="color: black;">

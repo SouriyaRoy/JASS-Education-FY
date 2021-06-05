@@ -50,10 +50,10 @@
         <th style="text-align: center;">Actions</th>
     </tr>
 
-    <tr *ngFor="let item of ticket_data; let i = index">
+    <tr *ngFor="let item of ticket_data; let i = index"> <!--//TODO: Change ticket format as normal json-->
         <td>{{item.id}}</td>
-        <td>{{data[i].toString()}}</td>
-        <td>{{item.body.toString().split("||")[1]}}</td>
+        <td>{{data[i]}}</td>
+        <td>{{item.body.split("||")[1]}}</td>
         <td style="text-align: center;">
             <button class="btn btn-danger" (click)="Delete(item.id)">Delete</button>&nbsp;
             <button class="btn btn-success" (click)="MarkDone(item.id)">Mark as Done</button>&nbsp;

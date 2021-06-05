@@ -29,42 +29,24 @@
     </div>
 </nav>
 <br><br><br>
-<div class="container" style="text-align: center;" *ngIf="isStudent">
-    <h3>My Submissions</h3>
+<div class="container" style="text-align: center;">
+    <h3>All Submissions</h3>
     <!-- <button style="margin-left: 47%;" class="btn btn-danger" (click)="opensweetalert()">Delete All</button> -->
     <table style="margin-left: 15%;">
         <tr>
             <th>Submission ID</th>
-            <th>Assignment Name</th>
+            <th>Student Name</th>
             <th>Marks</th>
-            <!-- <th style="text-align: center;">Actions</th> -->
-        </tr>
-        <tr *ngFor="let item of submission_data">
-            <td>{{item.id}}</td>
-            <td>{{item.assignment_ref.body}}</td>
-            <td>{{item.marks}}</td>
-            <!-- <td style="text-align: center;">
-                <button class="btn btn-danger" (click)="Delete(item.id)">Delete</button>&nbsp;
-                <button class="btn btn-warning" (click)="MakeAdmin(item.id)">Make Admin</button>&nbsp;
-                <button class="btn btn-success" (click)="MakeCoor(item.id)">Make Co-Ordinator</button>
-            </td> -->
-        </tr>
-    </table>
-</div>
-<div class="container" style="text-align: center;" *ngIf="isCoor">
-    <h3>Student Submissions</h3>
-    <!-- <button style="margin-left: 47%;" class="btn btn-danger" (click)="opensweetalert()">Delete All</button> -->
-    <table style="margin-left: 15%;">
-        <tr>
-            <th>Assignment Name</th>
-            <th>Total Marks</th>
             <th style="text-align: center;">Actions</th>
         </tr>
-        <tr *ngFor="let item of show_data">
-            <td>{{item.assignment.body}}</td>
-            <td>{{item.assignment.total_score}}</td>
+        <tr *ngFor="let item of data">
+            <td>{{item.id}}</td>
+            <td>{{item.user_ref.first_name}} {{item.user_ref.last_name}}</td>
+            <td>{{item.marks}}</td>
             <td style="text-align: center;">
-                <button class="btn btn-warning" [routerLink]='["/courses/view/",item.assignment.id]'>View Submissions</button>
+                <button class="btn btn-success" (click)="ViewSubmission(item)">Check Submission</button>&nbsp;
+                <!-- <button class="btn btn-warning" (click)="MakeAdmin(item.id)">Make Admin</button>&nbsp; -->
+                <!-- <button class="btn btn-success" (click)="MakeCoor(item.id)">Make Co-Ordinator</button> -->
             </td>
         </tr>
     </table>

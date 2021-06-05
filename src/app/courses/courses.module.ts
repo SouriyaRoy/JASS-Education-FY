@@ -5,13 +5,15 @@ import { CoursesRoutingModule } from './courses-routing.module';
 import { EnrollmentComponent } from './enrollment/enrollment.component';
 import { SubmissionComponent } from './submission/submission.component';
 import { ViewSubmissionsComponent } from './view-submissions/view-submissions.component';
+import { ViewSpecAssignmentComponent } from './view-spec-assignment/view-spec-assignment.component';
 
 
 @NgModule({
   declarations: [
     EnrollmentComponent,
     SubmissionComponent,
-    ViewSubmissionsComponent
+    ViewSubmissionsComponent,
+    ViewSpecAssignmentComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +24,8 @@ import { ViewSubmissionsComponent } from './view-submissions/view-submissions.co
   exports: [
     EnrollmentComponent,
     SubmissionComponent,
-    ViewSubmissionsComponent
+    ViewSubmissionsComponent,
+    ViewSpecAssignmentComponent
   ]
 })
 export class CoursesModule { }

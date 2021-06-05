@@ -12,7 +12,7 @@ export class FeedApiCallsService {
   //public cookieValue1 = this.cookie.get('Test')
   //public cookieValue2 = this.cookie.get('Role')
 
-  post_url = 'http://ec2-52-66-137-123.ap-south-1.compute.amazonaws.com'//'21ed5cde83ca.ngrok.io'
+  post_url = 'http://ec2-52-66-137-123.ap-south-1.compute.amazonaws.com'//change to jassguru
   auth = 'lMyWq54TdEr2CwDoVQGZsAo0Nvekc2G7OgJZIosPrE3e9qJru57lUKUI4up6orny'
 
   asCoor = "13416989436929794359012690353783" //subjects under him
@@ -248,6 +248,10 @@ export class FeedApiCallsService {
     return await this.http.get(url, {headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
   }
 
+  async check_submissions_for_user(id){
+    let url = this.post_url+"/api/content/assignment/"+id //TODO : use this for assignment submission
+  }
+
   async get_all_submissions(){
     let url = ""
     if(this.cookie.get('Role') == 'Coor'){
@@ -255,6 +259,16 @@ export class FeedApiCallsService {
     }else{
       url = this.post_url+"/api/personal/submission_normal/"+this.asUser+"/0/"
     }
+    return await this.http.get(url, {headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
+  }
+
+  async get_coor_ass_submissions(){
+    let url = this.post_url+"/api/content/assignment/0"
+    return await this.http.get(url, {headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
+  }
+
+  async get_submissions_under_specific_assignment(assignment_id){
+    let url = this.post_url+"/api/personal/submission_normal/87795962440396049328460600526719/"+assignment_id+"/"
     return await this.http.get(url, {headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
   }
 
@@ -278,7 +292,7 @@ export class FeedApiCallsService {
   //OPTIMIZE : post calls down here
 
   async post_submission(data,assignment_id){
-    let url = this.post_url+"/api/personal/submission//"
+    let url = this.post_url+"/api/personal/submission_normal//"
     if(data.ext_link_1 == ""){
       data.ext_link_1 = null
     }
@@ -296,6 +310,17 @@ export class FeedApiCallsService {
     return await this.http.post(url, json, {headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
   }
   
+  //OPTIMIZE : put calls down here
+
+  async put_marks(assignment_id, submission_id, marks){
+    let url = this.post_url+"/api/content/assignment_mark/"+assignment_id+"/"+submission_id
+    let api_call = {
+      "marks" : marks
+    }
+    let json = JSON.stringify(api_call)
+    //console.log(json)
+    return await this.http.put(url, json, {headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
+  }
 
 
 

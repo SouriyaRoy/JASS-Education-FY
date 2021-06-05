@@ -55,16 +55,13 @@
 
                 <div class="col-md-6">
                     <div class="about-in">
-                        <p>Hello I'm Şener.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud
-                            exercitation ullamco laboris nisi ut aliquip ex ea
-                            commodo consequat.</p>
+                        <p>{{user_data.data.bio}}</p>
 
                         <div id="social">
                             <a class="facebookBtn smGlobalBtn" href="#"></a>
                             <a class="twitterBtn smGlobalBtn" href="#"></a>
                             <a class="googleplusBtn smGlobalBtn" href="#"></a>
-                            <a class="linkedinBtn smGlobalBtn" href="#"></a>
+                            <a class="linkedinBtn smGlobalBtn" href="{{user_data.data.git_profile}}"></a>
                             <a class="pinterestBtn smGlobalBtn" href="#"></a>
                             <a class="tumblrBtn smGlobalBtn" href="#"></a>
                             <a class="rssBtn smGlobalBtn" href="#"></a>
@@ -79,12 +76,12 @@
                 <div class="details-left">
                     <h3>Contact <i>Details</i></h3>
                     <ul>
-                        <li>Age </li>
-                        <li>Country </li>
-                        <li>Adress</li>
+                        <li>English Efficiency </li>
+                        <li>Roll Number </li>
+                        <!-- <li>Adress</li>
                         <li>E-mail</li>
                         <li>Phone</li>
-                        <li>Position</li>
+                        <li>Position</li> -->
                     </ul>
                 </div>
             </div>
@@ -92,12 +89,12 @@
             <div class="col-md-3 col-xs-6">
                 <div class="detail-right">
                     <ul>
-                        <li>24</li>
-                        <li>Turkey</li>
-                        <li>Pendik-İstanbul</li>
+                        <li>{{user_data.data.english_efficiency}}</li>
+                        <li>{{user_data.data.roll_number}}</li>
+                        <!-- <li>Pendik-İstanbul</li>
                         <li>senerov@senerov.com</li>
                         <li>0534 344 44 44</li>
-                        <li>Free</li>
+                        <li>Free</li> -->
                     </ul>
                 </div>
             </div>

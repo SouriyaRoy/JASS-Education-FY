@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { UserAuthService } from 'src/app/services/user-auth.service';
+import { UserserviceService } from 'src/app/services/userservice.service';
 
 @Component({
   selector: 'app-profile',
@@ -10,9 +11,15 @@ import { UserAuthService } from 'src/app/services/user-auth.service';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private uauth : UserAuthService, private router : Router, private cookie : CookieService) { }
+  user_data
 
-  ngOnInit(): void {
+  constructor(private uauth : UserAuthService, private router : Router, private cookie : CookieService, private user : UserserviceService) { }
+
+  async ngOnInit(): Promise<void> {
+    this.user.get_user_profile_details().then((res) => {
+      // console.warn(res)
+      this.user_data = res
+    })
   }
 
   logout(){
