@@ -52,12 +52,9 @@
                 <div class="topic__footer">
                     <div class="topic__footer-likes">
                         <div>
-                            <a><button class="btn btn-success" (click)="Upvote()">Upvote</button></a>
-                            <span id="upvote">{{upvote}}</span>
-                        </div>
-                        <div>
-                            <a><button class="btn btn-danger" (click)="Downvote()">Downvote</button></a>
-                            <span id="downvote">{{downvote}}</span>
+                            <i class="fa fa-arrow-up" style="font-size: 30px; color: green;" (click)="Vote(1)"></i>&nbsp;&nbsp;&nbsp;
+                            <span id="upvote" style="font-size: 20px;">{{upvote - downvote}}</span>&nbsp;&nbsp;&nbsp;
+                            <i class="fa fa-arrow-down" style="font-size: 30px; color: red;" (click)="Vote(0)"></i>
                         </div>
                     </div>
                     <div class="topic__footer-share" *ngIf="forum_id">

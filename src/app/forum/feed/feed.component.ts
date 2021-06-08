@@ -22,6 +22,7 @@ export class FeedComponent implements OnInit {
               private uauth : UserAuthService) { //TODO: hit admin and coordinator for access check (GET) and redirect to any one
     this.feed.get_feed().then((res) => {
       this.feed_call = res['data']
+      console.warn(this.feed_call)
     }, (error) => {
       alert("Check Console")
       console.error(error)

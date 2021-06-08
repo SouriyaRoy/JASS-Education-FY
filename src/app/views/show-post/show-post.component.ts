@@ -38,6 +38,8 @@ export class ShowPostComponent implements OnInit {
 
     await this.feed.get_specific_post(this.identity).then((res) => {
       this.data = res
+      this.upvote = this.data[0].data.up
+      this.downvote = this.data[0].data.down
       console.log(this.data)
       this.feed.check_submissions_for_user(res[0].data.assignment_ref).then((res2) => {
         console.log(res2)
@@ -86,8 +88,8 @@ export class ShowPostComponent implements OnInit {
   identity: any
   data: any
   form_data
-  upvote = 100
-  downvote = 67
+  upvote
+  downvote
   forum_id = ""
   isAssignment; isLecture; isVideo;
 
@@ -106,13 +108,26 @@ export class ShowPostComponent implements OnInit {
     })
   }
 
-  Upvote() {
-    var p = document.getElementById('upvote')
-    p.innerHTML = (this.upvote + 1).toString()
-  }
-  Downvote() {
-    var p = document.getElementById('downvote')
-    p.innerHTML = (this.downvote + 1).toString()
+  upclick = 1; downclick = 1;
+
+  async Vote(data){
+    if(data == 1 && (this.upclick == 1 || this.upclick == 0)){
+      this.upclick++;
+      this.downclick--;
+      this.upvote++;
+      await this.feed.post_vote(1, this.identity).then((res) => {
+        console.warn(res)
+      })
+      //console.log(this.upvote)
+    }else if(data ==0 && (this.downclick == 1 || this.downclick == 0)){
+      this.downclick++;
+      this.upclick--;
+      this.downvote++;
+      await this.feed.post_vote(0, this.identity).then((res) => {
+        console.warn(res)
+      })
+      //console.log(this.upvote)
+    }
   }
 
   showReply() {

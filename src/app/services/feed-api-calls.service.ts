@@ -12,7 +12,7 @@ export class FeedApiCallsService {
   //public cookieValue1 = this.cookie.get('Test')
   //public cookieValue2 = this.cookie.get('Role')
 
-  post_url = 'http://ec2-52-66-137-123.ap-south-1.compute.amazonaws.com'//change to jassguru
+  post_url = 'http://jass.guru'//change to jassguru ec2-52-66-137-123.ap-south-1.compute.amazonaws.com
   auth = 'lMyWq54TdEr2CwDoVQGZsAo0Nvekc2G7OgJZIosPrE3e9qJru57lUKUI4up6orny'
 
   asCoor = "13416989436929794359012690353783" //subjects under him
@@ -323,6 +323,37 @@ export class FeedApiCallsService {
     return await this.http.put(url, json, {headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
   }
 
+  //OPTIMIZE : voting system
+
+  async post_vote(upordown, post_id){
+    let url = ""
+    if(upordown == 1){
+      url = this.post_url+"/api/content/votes/post/"+post_id+"/u"
+    }else{
+      url = this.post_url+"/api/content/votes/post/"+post_id+"/d"
+    }
+    return await this.http.get(url, {headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
+  }
+
+  async reply_vote(upordown, reply_id){
+    let url = ""
+    if(upordown == 1){
+      url = this.post_url+"/api/content/votes/reply/"+reply_id+"/u"
+    }else{
+      url = this.post_url+"/api/content/votes/reply/"+reply_id+"/d"
+    }
+    return await this.http.get(url, {headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
+  }
+
+  async replyD_vote(upordown, reply_id){
+    let url = ""
+    if(upordown == 1){
+      url = this.post_url+"/api/content/votes/replyD/"+reply_id+"/u"
+    }else{
+      url = this.post_url+"/api/content/votes/replyD/"+reply_id+"/d"
+    }
+    return await this.http.get(url, {headers:this.headers.set('uauth',"Token"+" "+this.cookie.get('Test'))}).toPromise()
+  }
 
 
 
@@ -330,6 +361,9 @@ export class FeedApiCallsService {
 
 
 
+
+
+  
 
 
 
