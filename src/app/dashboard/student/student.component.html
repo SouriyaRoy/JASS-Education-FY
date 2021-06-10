@@ -26,14 +26,15 @@
         </div>
     </div>
 </nav>
-<br><br><br>
+<br><br><br><br><br><br>
 <div class="heading">
-    <h2>Student</h2>
+    <h2>{{name}}'s Dashboard</h2>
 </div>
+<br>
 <div class="content-admin-home">
     <div class="row">
         <div class="col-sm-6">
-            <a routerLink="#">
+            <a routerLink="../../views/profile">
                 <div class="card text-center border-dark mb-3">
                     <div class="card-header" style="color: black;"><h5>Profile</h5></div>
                     <div class="card-body text-dark">
@@ -43,19 +44,6 @@
                 </div>
             </a>
         </div>
-        <div class="col-sm-6">
-            <a routerLink="#">
-                <div class="card text-center border-dark mb-3">
-                    <div class="card-header" style="color: black;"><h5>Assignments</h5></div>
-                    <div class="card-body text-dark">
-                        <h5 class="card-title">Check your assignments</h5>
-                        <p class="card-text">Click here to see your assignments</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div>
-    <div class="row">
         <div class="col-sm-6">
             <a routerLink="../../courses/view-submissions">
                 <div class="card text-center border-dark mb-3">
@@ -67,6 +55,30 @@
                 </div>
             </a>
         </div>
+        <!-- <div class="col-sm-6">
+            <a routerLink="#">
+                <div class="card text-center border-dark mb-3">
+                    <div class="card-header" style="color: black;"><h5>Assignments</h5></div>
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">Check your assignments</h5>
+                        <p class="card-text">Click here to see your assignments</p>
+                    </div>
+                </div>
+            </a>
+        </div> -->
+    </div>
+    <div class="row">
+        <!-- <div class="col-sm-6">
+            <a routerLink="../../courses/view-submissions">
+                <div class="card text-center border-dark mb-3">
+                    <div class="card-header" style="color: black;"><h5>Submissions</h5></div>
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">Submit your assignments here</h5>
+                        <p class="card-text">Click to submit</p>
+                    </div>
+                </div>
+            </a>
+        </div> -->
         <div class="col-sm-6">
             <a routerLink="#">
                 <div class="card text-center border-dark mb-3">
@@ -78,8 +90,6 @@
                 </div>
             </a>
         </div>
-    </div>
-    <div class="row">
         <div class="col-sm-6">
             <a routerLink="../../courses/enroll">
                 <div class="card text-center border-dark mb-3">
@@ -91,7 +101,20 @@
                 </div>
             </a>
         </div>
-        <div class="col-sm-6">
+    </div>
+    <div class="row">
+        <!-- <div class="col-sm-6">
+            <a routerLink="../../courses/enroll">
+                <div class="card text-center border-dark mb-3">
+                    <div class="card-header" style="color: black;"><h5>Courses Enrolled</h5></div>
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">See a list of enrolled Courses</h5>
+                        <p class="card-text">You can enroll yourself to a specific course</p>
+                    </div>
+                </div>
+            </a>
+        </div> -->
+        <!-- <div class="col-sm-12">
             <a routerLink="#">
                 <div class="card text-center border-dark mb-3">
                     <div class="card-header" style="color: black;"><h5>Notifications</h5></div>
@@ -101,7 +124,7 @@
                     </div>
                 </div>
             </a>
-        </div>
+        </div> -->
     </div>
 </div>
 <main><router-outlet></router-outlet></main>

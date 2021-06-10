@@ -13,7 +13,7 @@ export class FeedApiCallsService {
   //public cookieValue2 = this.cookie.get('Role')
 
   post_url = 'http://jass.guru'//change to jassguru ec2-52-66-137-123.ap-south-1.compute.amazonaws.com
-  auth = 'lMyWq54TdEr2CwDoVQGZsAo0Nvekc2G7OgJZIosPrE3e9qJru57lUKUI4up6orny'
+  auth = 'sv6I4QY6jvj8WOkyohuGptgoRgQqxGaIri3GedcGzEmTS2GX58JlOiF5ybJPkLMM'
 
   asCoor = "13416989436929794359012690353783" //subjects under him
   asUser = "0"// all subjects enrolled
@@ -28,7 +28,7 @@ export class FeedApiCallsService {
       "body": title,
       "external_url_1": link1,
       "external_url_2": link2,
-      "total_marks": marks
+      "total_score": marks
     }
     let json = JSON.stringify(api_call)
     let url = this.post_url+"/api/content/assignment/"
@@ -373,23 +373,6 @@ export class FeedApiCallsService {
 
 
   
-  async getData() { //FIX: Delete this later
-    let get_url = "https://jsonplaceholder.typicode.com/posts"
-    var ret =  await this.http.get(get_url).toPromise()
-    console.warn(ret)
-    return ret
-  }
-  async getspecificPost(id){
-    let get_posturl = "https://jsonplaceholder.typicode.com/posts/"+id
-    let get_commenturl = "https://jsonplaceholder.typicode.com/comments?postId="+id
-    let post =  await this.http.get(get_posturl).toPromise()
-    let comments = await this.http.get(get_commenturl).toPromise()
-    return [post,comments]
-  }
-  async getreplies(id){
-    let get_url = "https://jsonplaceholder.typicode.com/comments?postId="+id
-    return await this.http.get(get_url).toPromise()
-  }
-
+  
   constructor(private http: HttpClient, private cookie : CookieService) { }
 }

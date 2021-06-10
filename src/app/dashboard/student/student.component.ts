@@ -10,9 +10,15 @@ import { UserAuthService } from 'src/app/services/user-auth.service';
 })
 export class StudentComponent implements OnInit {
 
+  name;
+
   constructor(private uauth : UserAuthService, private cookie : CookieService, private router : Router) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    await this.uauth.get_user_data().then((res) => {
+      this.name = res['data']['first_name']+" "+res['data']['last_name']
+      console.log(this.name)
+    })
   }
 
   logout(){

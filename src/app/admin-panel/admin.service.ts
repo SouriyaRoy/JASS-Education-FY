@@ -9,8 +9,8 @@ export class AdminService {
 
   constructor(private cookie : CookieService, private http : HttpClient) { }
 
-  post_url = 'http://ec2-52-66-137-123.ap-south-1.compute.amazonaws.com'//'21ed5cde83ca.ngrok.io'
-  auth = 'lMyWq54TdEr2CwDoVQGZsAo0Nvekc2G7OgJZIosPrE3e9qJru57lUKUI4up6orny'
+  post_url = 'http://jass.guru'//'21ed5cde83ca.ngrok.io'
+  auth = 'sv6I4QY6jvj8WOkyohuGptgoRgQqxGaIri3GedcGzEmTS2GX58JlOiF5ybJPkLMM'
 
   asAdmin = "87795962440396049328460600526719"
   

@@ -15,13 +15,19 @@
                 <li class="nav-item">
                     <a class="nav-link" routerLink="../../forum/feed">Feed</a>
                 </li>
+                <!-- <li class="nav-item" ngIf="!isCoor">
+                    <a class="nav-link" routerLink="../../dashboard/student">Dashboard</a>
+                </li>
+                <li class="nav-item" *ngIf="isCoor">
+                    <a class="nav-link" routerLink="../../dashboard/teacher">Dashboard</a>
+                </li> -->
             </ul>
-            <!-- <div>
+            <div>
                 <a style="text-decoration: none;" routerLink="../../views/profile"><button class="d-flex btn btn-success">Profile</button></a>
-            </div>&nbsp; -->
-            <!-- <div>
+            </div>&nbsp;
+            <div *ngIf="isCoor">
                 <a style="text-decoration: none;" routerLink="../../views/post-create"><button class="d-flex btn btn-success">Create Post</button></a>
-            </div>&nbsp; -->
+            </div>&nbsp;
             <div>
                 <button class="d-flex btn btn-outline-success" (click)="logout()">Logout</button>
             </div>
@@ -31,23 +37,22 @@
 <br><br><br>
 <div class="container" style="text-align: center;" *ngIf="isStudent">
     <h3>My Submissions</h3>
+    <p style="color: green;">Click on a Assignment Name to show it</p>
     <!-- <button style="margin-left: 47%;" class="btn btn-danger" (click)="opensweetalert()">Delete All</button> -->
     <table style="margin-left: 15%;">
         <tr>
             <th>Submission ID</th>
             <th>Assignment Name</th>
             <th>Marks</th>
-            <!-- <th style="text-align: center;">Actions</th> -->
+            <th style="text-align: center;">Actions</th>
         </tr>
-        <tr *ngFor="let item of submission_data">
+        <tr *ngFor="let item of submission_data" style="height: 45px;">
             <td>{{item.id}}</td>
-            <td>{{item.assignment_ref.body}}</td>
+            <td (click)="showsub(item)">{{item.assignment_ref.body}}</td>
             <td>{{item.marks}}</td>
-            <!-- <td style="text-align: center;">
-                <button class="btn btn-danger" (click)="Delete(item.id)">Delete</button>&nbsp;
-                <button class="btn btn-warning" (click)="MakeAdmin(item.id)">Make Admin</button>&nbsp;
-                <button class="btn btn-success" (click)="MakeCoor(item.id)">Make Co-Ordinator</button>
-            </td> -->
+            <td style="text-align: center;">
+                <button class="btn btn-primary" (click)="Edit(item.id)" *ngIf="!item.checked">Edit</button>&nbsp;
+            </td>
         </tr>
     </table>
 </div>

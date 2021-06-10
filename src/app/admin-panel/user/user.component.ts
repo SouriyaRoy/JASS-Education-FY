@@ -123,6 +123,7 @@ export class UserComponent implements OnInit {
             'success'
           )
         }, (error) => {
+          console.error(error) //path:error.message = ADMIN_DOES_NOT_HAVE_CAGP_PRIVILEGE //USER_NOT_ADMIN_OR_DOES_NOT_HAVE_CAGP_PRIVILEGE
           Swal.fire({
             title: 'User Already a Coordinator',
             text: '',

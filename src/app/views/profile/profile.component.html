@@ -15,15 +15,15 @@
                 <li class="nav-item">
                     <a class="nav-link" routerLink="../../forum/feed">Feed</a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" routerLink="../../app-cookie">Cookie</a>
-                </li>
+                </li> -->
             </ul>
             <div>
                 <a style="text-decoration: none;" routerLink="../../views/profile"><button
                         class="d-flex btn btn-success">Profile</button></a>
             </div>&nbsp;
-            <div>
+            <div *ngIf="isCoor">
                 <a style="text-decoration: none;" routerLink="../../views/post-create"><button
                         class="d-flex btn btn-success">Create Post</button></a>
             </div>&nbsp;
@@ -38,30 +38,31 @@
 
 <body>
 
-    <div class="top-photo col-md-12 ">
+    <!-- <div class="top-photo col-md-12 "> -->
         <!-- <img src="https://senerov.com/w1.jpg"> -->
-        <h3>Şener YILMAZ</h3>
+        <!-- <h3>Şener YILMAZ</h3>
         <h5>Front-End-Developer</h5>
     </div>
 
-    <div class="user">
+    <div class="user"> -->
         <!-- <img src="https://senerov.com/avatar.jpg"> -->
-    </div>
+    <!-- </div> -->
 
     <div class="container-fluid" style="margin-left: 50px;">
         <div class="row">
             <div class="about" col-md-6>
-                <h3>About<i>Me</i></h3>
+                <h3>About &nbsp;&nbsp;<i>{{user_name.data.first_name}} {{user_name.data.last_name}}</i></h3>
 
                 <div class="col-md-6">
                     <div class="about-in">
+                        <p>{{user_data.data.headline}}</p>
                         <p>{{user_data.data.bio}}</p>
 
                         <div id="social">
                             <a class="facebookBtn smGlobalBtn" href="#"></a>
                             <a class="twitterBtn smGlobalBtn" href="#"></a>
                             <a class="googleplusBtn smGlobalBtn" href="#"></a>
-                            <a class="linkedinBtn smGlobalBtn" href="{{user_data.data.git_profile}}"></a>
+                            <a class="linkedinBtn smGlobalBtn" href="http://jass.guru{{user_data.data.git_profile}}"></a>
                             <a class="pinterestBtn smGlobalBtn" href="#"></a>
                             <a class="tumblrBtn smGlobalBtn" href="#"></a>
                             <a class="rssBtn smGlobalBtn" href="#"></a>
@@ -74,14 +75,14 @@
             <br>
             <div class="col-md-3 col-xs-6">
                 <div class="details-left">
-                    <h3>Contact <i>Details</i></h3>
+                    <h3><i>Details</i></h3>
                     <ul>
                         <li>English Efficiency </li>
                         <li>Roll Number </li>
-                        <!-- <li>Adress</li>
+                        <!-- <li>Telegram</li> -->
                         <li>E-mail</li>
-                        <li>Phone</li>
-                        <li>Position</li> -->
+                        <!-- <li>Phone</li> -->
+                        <!-- <li>Position</li> -->
                     </ul>
                 </div>
             </div>
@@ -91,10 +92,10 @@
                     <ul>
                         <li>{{user_data.data.english_efficiency}}</li>
                         <li>{{user_data.data.roll_number}}</li>
-                        <!-- <li>Pendik-İstanbul</li>
-                        <li>senerov@senerov.com</li>
-                        <li>0534 344 44 44</li>
-                        <li>Free</li> -->
+                        <!-- <li>{{user_name.data.telegram_id}}</li> -->
+                        <li>{{user_name.data.email}}</li>
+                        <!-- <li>0534 344 44 44</li> -->
+                        <!-- <li>Free</li> -->
                     </ul>
                 </div>
             </div>

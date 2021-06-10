@@ -11,7 +11,7 @@ export class UserAuthService {
   constructor(private http : HttpClient, private cookie : CookieService) { }
 
   api_url = 'http://jass.guru'//'21ed5cde83ca.ngrok.io'
-  auth = 'lMyWq54TdEr2CwDoVQGZsAo0Nvekc2G7OgJZIosPrE3e9qJru57lUKUI4up6orny'
+  auth = 'sv6I4QY6jvj8WOkyohuGptgoRgQqxGaIri3GedcGzEmTS2GX58JlOiF5ybJPkLMM'
   
   public cookieValue = this.cookie.get('Test')
 

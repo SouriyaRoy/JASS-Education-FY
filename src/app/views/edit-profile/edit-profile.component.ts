@@ -13,14 +13,26 @@ import { UserserviceService } from '../../services/userservice.service';
 export class EditProfileComponent implements OnInit {
 
   allDetails; headline; bio; ee; gitlink; linkedlink; roll; user_since;
+  user_id; isCoor;
 
   userDetails(){
 
   }
 
   EditSubmit(data){
-    this.user.submit_user_profile_details(data).then((res) => {
+    // console.log(data)
+    data.bio = (data.bio == "")? this.bio : data.bio
+    data.english = (data.english == "")? this.ee : data.english
+    data.github = (data.github == "")? this.gitlink : data.github
+    data.headline = (data.headline == "")? this.headline : data.headline
+    data.linkedin = (data.linkedin == "")? this.linkedlink : data.linkedin
+    data.rollno = (data.rollno == "")? this.roll : data.rollno
+    console.warn(data)
+    this.user.submit_user_profile_details(data,this.user_id).then((res) => {
       console.log(res)
+      if(res['success'] == true){
+        this.router.navigateByUrl('views/profile')
+      }
     })
   }
 
@@ -50,12 +62,21 @@ export class EditProfileComponent implements OnInit {
       console.warn(this.allDetails)
       console.warn(this.headline, this.bio, this.ee, this.gitlink, this.linkedlink, this.roll, this.user_since)
     }, (error) => {
-      alert("There is some error check console")
+      // alert("There is some error check console")
+      router.navigateByUrl('users/create-profile')
       console.error(error)
     })
    }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.uauth.get_user_data().then((res) => {
+      this.user_id = res['data']['id']
+      console.warn(this.user_id)
+    })
+
+    if(this.cookie.get('Role') == 'Coor'){
+      this.isCoor = true
+    }
   }
 
   logout(){

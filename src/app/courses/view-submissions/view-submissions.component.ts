@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { FeedApiCallsService } from 'src/app/services/feed-api-calls.service';
 import { UserAuthService } from 'src/app/services/user-auth.service';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-view-submissions',
@@ -54,6 +55,23 @@ export class ViewSubmissionsComponent implements OnInit {
         //this.isCoor = true
       })
     }    
+  }
+
+  showsub(data){
+    console.warn(data)
+    Swal.fire({
+      title: 'Submission Details',
+      html:
+      '<br>' + data.body + '<br><br>' +
+      'Link1 : ' + data.external_url_1 + '<br><br>' +
+      'Link2 : ' + data.external_url_2 + '<br><br>' +
+      'Marks : ' + data.marks ,
+      showCancelButton: true
+    })
+  }
+
+  Edit(sub_id){
+    console.warn(sub_id)
   }
 
   logout(){

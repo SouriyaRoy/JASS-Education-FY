@@ -36,9 +36,9 @@
                 <a style="text-decoration: none;" routerLink="../../../views/post-create"><button
                         class="d-flex btn btn-success">Create Post</button></a>
             </div>&nbsp;
-            <!-- <div>
+            <div>
           <button class="d-flex btn btn-outline-success" (click)="logout()">Logout</button>
-        </div> -->
+        </div>
         </div>
     </div>
 </nav>
@@ -68,12 +68,9 @@
         <div class="topic__footer">
             <div class="topic__footer-likes">
                 <div>
-                    <a><button class="btn btn-success">Upvote</button></a>
-                    <span>137</span>
-                </div>
-                <div>
-                    <a><button class="btn btn-danger">Downvote</button></a>
-                    <span>02</span>
+                    <i class="fa fa-arrow-up" style="font-size: 30px; color: green;" (click)="Vote(1, item.data.reply.up, item.data.reply.down, item.data.reply.id)"></i>&nbsp;&nbsp;&nbsp;
+                    <span id="upvote" style="font-size: 20px;">{{item.data.reply.up - item.data.reply.down}}</span>&nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-arrow-down" style="font-size: 30px; color: red;" (click)="Vote(0, item.data.reply.up, item.data.reply.down, item.data.reply.id)"></i>
                 </div>
             </div>
             <div class="topic__footer-share">

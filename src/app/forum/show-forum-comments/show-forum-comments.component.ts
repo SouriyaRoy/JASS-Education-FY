@@ -91,6 +91,27 @@ export class ShowForumCommentsComponent implements OnInit {
     },(error) => { console.error(error)})
   }
 
+  upclick = 1; downclick = 1;
+  async Vote(data, up, down, reply_id){
+    console.warn(up, down)
+    if(data == 1 && (this.upclick == 1 || this.upclick == 0)){
+      this.upclick++;
+      console.log(document.getElementById("upvote").innerHTML = ((up+1)-down).toString())
+      await this.feed.reply_vote(1, reply_id).then((res) => {
+        console.warn(res)
+      })
+      //console.log(this.upvote)
+    }else if(data ==0 && (this.downclick == 1 || this.downclick == 0)){
+      this.downclick++;
+      console.log(document.getElementById("upvote").innerHTML = (up-(down+1)).toString())
+      // this.downvote++;
+      await this.feed.reply_vote(0, reply_id).then((res) => {
+        console.warn(res)
+      })
+      //console.log(this.upvote)
+    }
+  }
+
   logout(){
     this.uauth.user_logout().then((result) => {
       if(result['success'] == true){

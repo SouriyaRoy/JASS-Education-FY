@@ -6,11 +6,12 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MatButtonModule } from '@angular/material/button';
-import { ChooseComponent } from './choose/choose.component'
+import { ChooseComponent } from './choose/choose.component';
+import { CreateProfileComponent } from './create-profile/create-profile.component'
 
 
 @NgModule({
-  declarations: [LoginComponent, SignupComponent, ChooseComponent],
+  declarations: [LoginComponent, SignupComponent, ChooseComponent, CreateProfileComponent],
   imports: [
     CommonModule,
     UsersRoutingModule,

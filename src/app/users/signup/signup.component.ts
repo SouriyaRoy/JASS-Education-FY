@@ -37,11 +37,12 @@ export class SignupComponent implements OnInit {
     if(data.security_ans=="")
       data.security_ans=null;
 
-    this.user.send_registration_data(data).subscribe((receive) => {
+    this.user.send_registration_data(data).subscribe((receive) => { //TODO : promise convert
       console.log(receive)
       if(receive['success']==true){
         this.cookieService.set('Test',receive['data']['JWT'])
-        this.router.navigateByUrl('forum/feed')
+        this.cookieService.set('Role','User')
+        this.router.navigateByUrl('users/create-profile')
       }else{
         document.getElementById('signup').innerHTML = "Registration Failed"
       }

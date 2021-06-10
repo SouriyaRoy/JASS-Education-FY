@@ -11,15 +11,24 @@ import { UserserviceService } from 'src/app/services/userservice.service';
 })
 export class ProfileComponent implements OnInit {
 
-  user_data
+  user_data; isCoor; user_name;
 
   constructor(private uauth : UserAuthService, private router : Router, private cookie : CookieService, private user : UserserviceService) { }
 
   async ngOnInit(): Promise<void> {
-    this.user.get_user_profile_details().then((res) => {
+    await this.user.get_user_profile_details().then((res) => {
       // console.warn(res)
       this.user_data = res
+      console.warn(this.user_data)
     })
+    await this.uauth.get_user_data().then((res) => {
+      // console.log(res)
+      this.user_name = res
+      console.warn(this.user_name)
+    })
+    if(this.cookie.get('Role') == 'Coor'){
+      this.isCoor = true
+    }
   }
 
   logout(){

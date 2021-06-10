@@ -113,7 +113,6 @@ export class ShowPostComponent implements OnInit {
   async Vote(data){
     if(data == 1 && (this.upclick == 1 || this.upclick == 0)){
       this.upclick++;
-      this.downclick--;
       this.upvote++;
       await this.feed.post_vote(1, this.identity).then((res) => {
         console.warn(res)
@@ -121,7 +120,6 @@ export class ShowPostComponent implements OnInit {
       //console.log(this.upvote)
     }else if(data ==0 && (this.downclick == 1 || this.downclick == 0)){
       this.downclick++;
-      this.upclick--;
       this.downvote++;
       await this.feed.post_vote(0, this.identity).then((res) => {
         console.warn(res)

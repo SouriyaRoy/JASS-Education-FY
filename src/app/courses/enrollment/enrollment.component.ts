@@ -63,16 +63,27 @@ export class EnrollmentComponent implements OnInit {
   }
 
   async DeleteSubject(subject_id){ //TODO : insert sweetalert for confirmation
-    await this.feed.unenroll_subject(subject_id).then((res) => {
-      this.router.navigateByUrl('forum/home', { skipLocationChange: true }).then(() => {
-        this.router.navigate(['courses/enroll']);
-    }); 
-    },(error) => {
-      Swal.fire(
-        'Cannot Delete the Subject',
-        'Operation not Done',
-        'info'
-      )
+    Swal.fire({
+      title: 'DELETE?',
+      text: 'You will not be able to recover this data!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if(result.value){
+        this.feed.unenroll_subject(subject_id).then((res) => {
+          this.router.navigateByUrl('forum/home', { skipLocationChange: true }).then(() => {
+            this.router.navigate(['courses/enroll']);
+        }); 
+        },(error) => {
+          Swal.fire(
+            'Cannot Delete the Subject',
+            'Operation not Done',
+            'info'
+          )
+        })
+      }
     })
   }
 }

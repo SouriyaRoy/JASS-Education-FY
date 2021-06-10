@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
       }
     }, (error) => {
       console.error(error)
-      document.getElementById('error_message').innerHTML = "Please check and try again"
+      document.getElementById('error_message').innerHTML = "Please check and try again" //TODO : transcribe error message
     })
   }
 
